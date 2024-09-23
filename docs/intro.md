@@ -2,46 +2,22 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# O que esperar do meu material?
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Este site tem como foco materiais gerais de tecnologia que considero uteis no meu dia a dia,
+podendo ser utilizado como referência para os demais, como você. Me baseio principalmente no 
+estilo de organização dos livros "cookbook" da Oreilly, ex: Java Cookbook, Kotlin cookbook, 
+Terraform Cookbook, etc. 
 
-## Getting Started
+Os principais topicos que pretendo abordar são: Java, Kotlin, JVM, AWS e Kubernetes. São as principais
+tecnologias que trabalho atualmente.
 
-Get started by **creating a new site**.
+### Não é um curso
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+Ressalto que não se trata de um curso, tutorial ou algo similar. Não darei contexto prévio para alguns 
+assuntos. Explicarei o problema, suas nuances e suas possíveis soluções.
 
-### What you'll need
+Meu intuito é ter uma base para futuras consultas, serei o mais curto e grosso possível, sem enrolações 
+ou encheção de linguiça.
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
-
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+### Dito isso, espero que goste do meu trabalho!
