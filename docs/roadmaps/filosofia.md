@@ -2,7 +2,7 @@
 sidebar_position: 6
 ---
 
-# Apreço pela vida e o conhecimento
+# Estudos - apreço pela vida e o conhecimento
 
 ### Material de estudo
 
