@@ -2,6 +2,6 @@
 sidebar_position: 1
 ---
 
-# Java Memory - Heap
+# Java Mission Control
 
 Em desenvolvimento...

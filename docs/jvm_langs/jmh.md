@@ -2,6 +2,6 @@
 sidebar_position: 1
 ---
 
-# Java Memory - Heap
+# Java Microbenchmark Harness
 
 Em desenvolvimento...
