@@ -4,7 +4,12 @@ sidebar_position: 1
 
 # Cert - AWS Solutions Architect Associate
 
-### Materiais de estudo
+### Experiência
+
+A prova tem como foco a identificação de serviços, você vai se dar bem se conseguir
+decorar palavras-chave dos serviços da AWS.
+
+### Materiais que utilizei
 - [(Curso/ACloudGuru) AWS Certified Solutions Architect - Associate](https://learn.acloud.guru/course/aws-certified-solutions-architect-associate/dashboard)  
 O curso aborda todos os pontos necessários, também contém laboratórios, mini provas e simulados excelentes.
 
