@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Plataformas de estudo
 
-Onde e com quem você aprende é muito importante, selecionar um bom material é uma tarefa fundamental. 
+Onde, como e com quem você aprende é muito importante, selecionar um bom material é uma tarefa fundamental. 
 Estudar Java com o curso X pode ser totalmente diferente de estudar Java com o curso Y. 
 Não aprendemos só o conteúdo bruto de um material, mas também a forma que o autor pensa e analisa
 os pontos que ele aborda, e isso pode ser bom ou ruim.
