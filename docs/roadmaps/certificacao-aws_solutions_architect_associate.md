@@ -4,6 +4,16 @@ sidebar_position: 1
 
 # Cert - AWS Solutions Architect Associate
 
+:::info
+
+Irei mostrar aqui exatamente os materiais que utilizei. 
+Em adição vou deixar outros materiais que você pode seguir caso seja mais 
+conveniente para seu contexto. 
+
+Deixarei bem claro a diferença dos que utilizei x os que recomendo.
+
+:::
+
 ### Materiais de estudo
 - [(Curso/ACloudGuru) AWS Certified Solutions Architect - Associate](https://learn.acloud.guru/course/aws-certified-solutions-architect-associate/dashboard)  
 O curso aborda todos os pontos necessários, também contém laboratórios, mini provas e simulados excelentes.
@@ -22,12 +32,14 @@ Se pudesse voltar no tempo e selecionar um novo roteiro, seria este:
 - [(Curso/AWS SkillBuilder) Architecting Path](https://www.credly.com/organizations/amazon-web-services/collections/customer-learning-programs/badge_templates)
 - [(Simulado/Udemy) AWS Certified Solutions Architect Associate Practice Exams](https://www.udemy.com/course/aws-certified-solutions-architect-associate-amazon-practice-exams-saa-c03)
 
-### Dicas
+:::tip
 
-- Palavras-chave: A dica mestre é que se trata de uma prova de identificação de serviços e não na 
-solução de problemas com eles (como a Professional). A melhor forma de fazer isso é utilizando palavras-chave. 
-Todas as questões terão palavras-chave, seu trabalho é localizá-las e responder com o serviço que mais 
-condiz com elas. 
-Ex: Fulano precisa de um serviço de **MENSAGERIA** que seja **SERVELESS**, 
-Cicrano precisa de um serviço de **BANCO DE DADOS** no formato de **DOCUMENTO**, etc. 
+Palavras-chave: A dica mestre é que se trata de uma prova de identificação de serviços e não na
+solução de problemas com eles (como a Professional). A melhor forma de fazer isso é utilizando palavras-chave.
+Todas as questões terão palavras-chave, seu trabalho é localizá-las e responder com o serviço que mais
+condiz com elas.
+Ex: Fulano precisa de um serviço de **MENSAGERIA** que seja **SERVELESS**,
+Cicrano precisa de um serviço de **BANCO DE DADOS** no formato de **DOCUMENTO**, etc.
 As questões não vão muito disso.
+
+:::
