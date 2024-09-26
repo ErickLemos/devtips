@@ -38,6 +38,5 @@ Todas as questões terão palavras-chave, seu trabalho é localizá-las e respon
 condiz com elas.
 Ex: Fulano precisa de um serviço de **MENSAGERIA** que seja **SERVELESS**,
 Cicrano precisa de um serviço de **BANCO DE DADOS** no formato de **DOCUMENTO**, etc.
-As questões não vão muito disso.
 
 :::
