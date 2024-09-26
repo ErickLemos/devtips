@@ -12,8 +12,10 @@ Dentro dos cursos que encontrei/fiz, esse foi quem mais cobriu os pontos necess�
 - [(Simulados/Udemy) AWS Certified Solutions Architect Professional Practice Exam](https://www.udemy.com/course/aws-solutions-architect-professional-practice-exams-sap-c02)
 
 ### Materias que não recomendo
+
 - [(Simulado/Udemy) Practice Exam AWS Certified Solutions Architect Professional](https://www.udemy.com/course/practice-exam-aws-certified-solutions-architect-professional/)  
-Utilizei ele para minha primeira tentativa, não abordou o contéudo necessário.
+Fica atrás em qualidade dos simulados que recomendei, também achei algumas questões confusas. 
+
 
 - [Curso da AClouGuru para a certificação em questão](https://learn.acloud.guru/course/aws-certified-solutions-architect-professional/dashboard).  
 Dentro da comunidade da plataforma, todos reclamam deste curso, e não é à toa, ele é realmente
