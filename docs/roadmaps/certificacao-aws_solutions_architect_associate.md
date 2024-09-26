@@ -4,16 +4,6 @@ sidebar_position: 1
 
 # Cert - AWS Solutions Architect Associate
 
-:::info
-
-Irei mostrar aqui exatamente os materiais que utilizei. 
-Em adição vou deixar outros materiais que você pode seguir caso seja mais 
-conveniente para seu contexto. 
-
-Deixarei bem claro a diferença dos que utilizei x os que recomendo.
-
-:::
-
 ### Materiais de estudo
 - [(Curso/ACloudGuru) AWS Certified Solutions Architect - Associate](https://learn.acloud.guru/course/aws-certified-solutions-architect-associate/dashboard)  
 O curso aborda todos os pontos necessários, também contém laboratórios, mini provas e simulados excelentes.
@@ -22,8 +12,8 @@ O curso aborda todos os pontos necessários, também contém laboratórios, mini
 
 ACloudGuru é uma plataforma que não recomendo assinar atualmente, são poucos os cursos que realmente dão sentido 
 a assinatura anual (caso consiga a assinatura mensal com promoção e faça o curso em um mês, é de pensar no caso). Desde sua aquisição 
-pela PluralSight a qualidade vem caindo constantemente, um exemplo é o curso para a Professional, ele não 
-abordou nem a metade do necessário, e se o utilizasse como base com certeza não passaria na prova.
+pela PluralSight a qualidade vem caindo constantemente, um exemplo é o curso para a Professional que não 
+aborda nem a metade do necessário para a prova.
 
 
 Se pudesse voltar no tempo e selecionar um novo roteiro, seria este:
@@ -35,10 +25,10 @@ Se pudesse voltar no tempo e selecionar um novo roteiro, seria este:
 
 ### Dicas
 
-:::tip
+:::tip Palavras-chave
 
-Palavras-chave: A dica mestre é que se trata de uma prova de identificação de serviços e não na
-solução de problemas com eles (como a Professional). A melhor forma de fazer isso é utilizando palavras-chave.
+A dica mestre é que se trata de uma prova de identificação de serviços (e não na
+solução de problemas com eles como a Professional). A melhor forma de fazer isso é utilizando palavras-chave.
 Todas as questões terão palavras-chave, seu trabalho é localizá-las e responder com o serviço que mais
 condiz com elas.
 Ex: Fulano precisa de um serviço de **MENSAGERIA** que seja **SERVELESS**,

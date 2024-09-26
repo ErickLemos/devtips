@@ -2,22 +2,19 @@
 sidebar_position: 1
 ---
 
-# O que esperar do meu material?
+# O que esperar deste material?
 
-Este site tem como foco materiais gerais de tecnologia que considero uteis no meu dia a dia,
-podendo ser utilizado como referência para os demais, como você. Me baseio principalmente no 
-estilo de organização dos livros "cookbook" da Oreilly, ex: Java Cookbook, Kotlin cookbook, 
-Terraform Cookbook, etc. 
+Muitas vezes já me perguntaram como eu estudo, onde estudo, como foi fazer certificação X ou Y, e até mesmo
+se faço roteiro/plano de estudos sobre assuntos X/Y para outros. E é por conta disso que nasce esse projeto.
 
-Os principais topicos que pretendo abordar são: Java, Kotlin, JVM, AWS e Kubernetes. São as principais
-tecnologias que trabalho atualmente.
 
-### Não é um curso
+Este site tem como foco expor um pouco sobre meus estudos, experiências e conhecimentos em tecnologia.
+Não espere aqui tutoriais ou algo similar, meu objetivo é demonstrar especificamente o que eu faço 
+e fiz para adquirir conhecimento X ou Y, fazer prova X ou Y. Você deve utilizar como exemplo, e não seguir
+cegamente.
 
-Ressalto que não se trata de um curso, tutorial ou algo similar. Não darei contexto prévio para alguns 
-assuntos. Explicarei o problema, suas nuances e suas possíveis soluções.
+Fora isso, também vou utilizar para armazenar algumas técnicas e dicas utéis que aprendi
+com o decorrer da minha carreira.
 
-Meu intuito é ter uma base para futuras consultas, serei o mais curto e grosso possível, sem enrolações 
-ou encheção de linguiça.
 
-### Dito isso, espero que goste do meu trabalho!
+#### Dito isso, espero que goste do meu trabalho!
