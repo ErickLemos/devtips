@@ -7,7 +7,7 @@ sidebar_position: 1
 ### Experiência
 
 A prova tem como foco a identificação de serviços, você vai se dar bem se conseguir
-decorar palavras-chave dos serviços da AWS.
+decorar palavras-chave dos serviços da AWS, falo um pouco mais disso nas "Dicas".
 
 ### Materiais que utilizei
 - [(Curso/ACloudGuru) AWS Certified Solutions Architect - Associate](https://learn.acloud.guru/course/aws-certified-solutions-architect-associate/dashboard)  
