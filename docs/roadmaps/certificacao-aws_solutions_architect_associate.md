@@ -32,6 +32,9 @@ Se pudesse voltar no tempo e selecionar um novo roteiro, seria este:
 - [(Curso/AWS SkillBuilder) Architecting Path](https://www.credly.com/organizations/amazon-web-services/collections/customer-learning-programs/badge_templates)
 - [(Simulado/Udemy) AWS Certified Solutions Architect Associate Practice Exams](https://www.udemy.com/course/aws-certified-solutions-architect-associate-amazon-practice-exams-saa-c03)
 
+
+### Dicas
+
 :::tip
 
 Palavras-chave: A dica mestre é que se trata de uma prova de identificação de serviços e não na
