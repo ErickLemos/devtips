@@ -6,6 +6,6 @@ sidebar_position: 2
 
 Em desenvolvimento...
 
-### Selecionando GC
+### Selecionando o GC
 
 ### Tempo de pausa e intervalo

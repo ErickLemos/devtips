@@ -9,8 +9,11 @@ Estudar Java com o curso X pode ser totalmente diferente de estudar Java com o c
 Também não aprendemos só o conteúdo bruto de um material, mas também a forma que o autor pensa e analisa
 os pontos que ele aborda, e isso pode ser bom ou ruim.
 
-É necessário estudar de forma eficiente, no pior dos casos, isso vai lhe poupar tempo.
-Com isso em mente, essas são as plataformas que mais me agradaram:
+Felizmente, para sua sorte, posso lhe recomendar algumas coisas! Frequentemente estou vasculhando os confins da 
+internet atrás dos tesouros do ensino. No meio de tanta informação (inútil ou quase inútil) encontrar um bom material 
+é como estar em tempos medievais e acabar desvendando um pergaminho antigo cheio de conhecimento.
+
+Esses são alguns dos meus achados:
 
 - [O'Reilly Digital Learning](https://learning.oreilly.com/) (PAGA) - se sua preferência são livros ou um conteúdo mais avançado.
 - [PluralSight](https://www.pluralsight.com/) (PAGA) - melhor plataforma de cursos em vídeo que encontrei até o momento.
