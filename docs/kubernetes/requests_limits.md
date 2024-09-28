@@ -2,6 +2,6 @@
 sidebar_position: 1
 ---
 
-# Requests e Limits
+# Requests, Limits e QOS
 
 em desenvolvimento...
