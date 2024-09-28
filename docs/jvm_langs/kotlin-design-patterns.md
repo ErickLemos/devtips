@@ -31,7 +31,7 @@ O seu modelo de construtor remove a necessidade de Builders como vemos no Java,
 isso ocorre de duas formas: valores padrões e referência.
 
 Veja o seguinte exemplo:
-```shell
+```kotlin
 
 class Example(
     val value01: String,
@@ -65,7 +65,7 @@ Singletons são classes que possuem apenas uma única instância.
 Podemos solucionar este problema utilizando os "objects", [veja um pouco mais
 sobre eles](https://kotlinlang.org/docs/object-declarations.html#object-declarations-overview)
 
-```shell
+```kotlin
 
 object SingletonExample {
     fun printLn(value: String) {
@@ -88,7 +88,7 @@ Example(10, 10, 10) -> ExampleCopia(10, 11, 10).
 Uma forma simples de chegar a esse resultado é utilizar o método ".copy" integrado
 nas "data class".
 
-````shell
+````kotlin
 
 val example = ExampleCopy(
     value01 = 10,
