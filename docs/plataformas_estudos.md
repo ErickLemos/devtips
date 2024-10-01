@@ -15,6 +15,8 @@ internet atrás dos tesouros do ensino. No meio de tanta informação (inútil o
 
 Esses são alguns dos meus achados:
 
+## Principais
+
 - [O'Reilly Digital Learning](https://learning.oreilly.com/) (PAGA) - se sua preferência são livros ou um conteúdo mais avançado.
 - [PluralSight](https://www.pluralsight.com/) (PAGA) - melhor plataforma de cursos em vídeo que encontrei até o momento.
 - [MOOC.fi Courses](https://mooc.fi/en) - cursos diversos de alta qualidade oferecidos pela universidade finlandesa de Helsinki.
@@ -28,25 +30,32 @@ Como é uma plataforma aberta, a qualidade vai variar bastante de autor para aut
 
 :::
 
+## Google
+
+- [Google Tech Writing](https://developers.google.com/tech-writing) - manual da Google para escrita técnica.
+- [Google Machine Learning](https://developers.google.com/machine-learning) - material da Google sobre Machine Learning.
+- [Google Design Spring](https://designsprintkit.withgoogle.com/) - manual de design de sprints.
+
+## Outros
+
+- [ApiSec University](https://www.apisecuniversity.com/#courses) - cursos voltados para segurança de aplicações.
+- [Gradle/DPE University](https://dpeuniversity.gradle.com/app) - plataforma oficial do gradle.
+- [MongoDB Academy](https://learn.mongodb.com/) - plataforma oficial do MongoDB.
+
+## Site úteis
+
+- [Refactoring Guru](https://refactoring.guru/) - padrões de design.
+
+## Algumas plataformas exóticas
+
+- [SantaFe Institute - Complexity Explorer](https://www.complexityexplorer.org/) - cursos sobre complexidade, uma área de pesquisa voltada 
+a compreensão dos "sistemas complexos".
+
+
+
 ## Plataformas que não recomendo
 
 - Alura - conteúdo muito superficial.
 - Linux Foundation - conteúdo superficial, desatualizado e de má qualidade.
 - ACloudGuru - Perdeu bastante a qualidade após a aquisição pela PluralSight, são poucos os cursos
-que ainda são bons na plataforma.
-
-## Algumas plataformas exóticas
-
-Às vezes me deparo com algumas plataformas "exóticas" que contém cursos que vão desde como 
-escrever melhor suas documentações até a área de pesquisa sobre complexidade "da vida, universo e tudo mais".
-
-- [SantaFe Institute - Complexity Explorer](https://www.complexityexplorer.org/) - cursos sobre complexidade, uma área de pesquisa voltada 
-a compreensão dos "sistemas complexos".
-
-- [Google Tech Writing](https://developers.google.com/tech-writing) - manual da Google para escrita técnica.
-
-- [Google Machine Learning](https://developers.google.com/machine-learning) - material da Google sobre Machine Learning.
-
-- [Google Design Spring](https://designsprintkit.withgoogle.com/) - manual de design de sprints.
-
-- [ApiSec University](https://www.apisecuniversity.com/#courses) - cursos voltados para segurança de aplicações.
+  que ainda são bons na plataforma.

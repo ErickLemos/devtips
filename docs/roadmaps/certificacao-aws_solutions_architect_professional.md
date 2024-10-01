@@ -6,7 +6,7 @@ sidebar_position: 2
 
 ### Experiência
 
-A fama de ser uma prova brutal é verdade! Não há dicas e truques que você possa aplicar aqui,
+A fama de ser uma prova brutal é verdade! Não há dicas ou truques que você possa aplicar aqui,
 é estudar, ter experiência e paciência. Ela vai te levar ao extremo (durma bem no dia anterior)!
 
 ### Materiais que utilizei

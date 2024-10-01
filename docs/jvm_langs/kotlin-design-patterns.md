@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Kotlin Design Patterns
+# Kotlin - Design Patterns
 
 Alguns dos designs patterns que aprendemos no Java são diferentes quando 
 aplicados ao Kotlin. Por conta do seu design de linguagem, o Kotlin reduz 
@@ -104,8 +104,11 @@ val exampleCopy = example.copy(
 
 obs: Note que este método só está disponível para "data class".
 
-## Structural Patterns
 
-### Decorator
+:::danger em desenvolvimento
 
-### Adapter
+Structural Patterns
+- decorator
+- adapter
+
+:::

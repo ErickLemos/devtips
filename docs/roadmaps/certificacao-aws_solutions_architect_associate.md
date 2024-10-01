@@ -6,8 +6,8 @@ sidebar_position: 1
 
 ### Experiência
 
-A prova tem como foco a identificação de serviços, você vai se dar bem se conseguir
-decorar palavras-chave dos serviços da AWS, falo um pouco mais disso nas "Dicas".
+A prova tem como foco a identificação dos serviços, você vai se dar bem se conseguir
+decorar palavras-chave dos serviços da AWS, falo um pouco mais na seção "Dicas".
 
 ### Materiais que utilizei
 - [(Curso/ACloudGuru) AWS Certified Solutions Architect - Associate](https://learn.acloud.guru/course/aws-certified-solutions-architect-associate/dashboard)  
@@ -15,10 +15,10 @@ O curso aborda todos os pontos necessários, também contém laboratórios, mini
 
 ### Materiais que seriam meu segundo plano
 
-ACloudGuru é uma plataforma que não recomendo assinar atualmente, são poucos os cursos que realmente dão sentido 
-a assinatura anual (caso consiga a assinatura mensal com promoção e faça o curso em um mês, é de pensar no caso). Desde sua aquisição 
-pela PluralSight a qualidade vem caindo constantemente, um exemplo é o curso para a Professional que não 
-aborda nem a metade do necessário para a prova.
+Não recomendo assinar a ACloudGuru atualmente, são poucos os cursos que valem o preço da assinatura 
+(caso consiga a assinatura mensal com promoção e faça o curso em um mês, é de pensar no caso). 
+A qualidade caiu bastante desde a aquisição pela PluralSight, muitos cursos foram praticamente abandonados, 
+um exemplo é o curso para a Professional que não aborda nem a metade do necessário para a prova.
 
 
 Se pudesse voltar no tempo e selecionar um novo roteiro, seria este:
@@ -32,11 +32,12 @@ Se pudesse voltar no tempo e selecionar um novo roteiro, seria este:
 
 :::tip Palavras-chave
 
-A dica mestre é que se trata de uma prova de identificação de serviços (e não na
-solução de problemas com eles como a Professional). A melhor forma de fazer isso é utilizando palavras-chave.
-Todas as questões terão palavras-chave, seu trabalho é localizá-las e responder com o serviço que mais
-condiz com elas.
+Se trata de uma prova de identificação de serviços (e não de solução de problemas, como a Professional). 
+A melhor forma de responder às questões é utilizando palavras-chave. Todas as questões terão palavras-chave, 
+seu trabalho é localizá-las e responder com o serviço que mais condiz com elas.
+
+
 Ex: Fulano precisa de um serviço de **MENSAGERIA** que seja **SERVELESS**,
-Cicrano precisa de um serviço de **BANCO DE DADOS** no formato de **DOCUMENTO**, etc.
+Cicrano precisa de um serviço de **BANCO DE DADOS** que aceite o formato de **DOCUMENTO**, etc.
 
 :::

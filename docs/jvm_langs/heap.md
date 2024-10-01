@@ -4,8 +4,9 @@ sidebar_position: 2
 
 # Java Memory Heap
 
-Em desenvolvimento...
+:::danger em desenvolvimento
 
-### Definindo uso de memória
+- definindo uso de memória
+- habilitando o NUMA
 
-### Utilizando o NUMA
+:::

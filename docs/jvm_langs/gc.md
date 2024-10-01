@@ -4,8 +4,10 @@ sidebar_position: 2
 
 # Garbage Collector
 
-Em desenvolvimento...
+:::danger em desenvolvimento
 
-### Selecionando o GC
+- selecionando o GC
+- tempo de pausa e intervalo 
+- alterando tamanho das regiões do G1GC
 
-### Tempo de pausa e intervalo
+:::
