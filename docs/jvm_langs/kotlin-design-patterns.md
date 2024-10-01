@@ -5,7 +5,7 @@ sidebar_position: 1
 # Kotlin - Design Patterns
 
 Alguns dos designs patterns que aprendemos no Java são diferentes quando 
-aplicados ao Kotlin. Por conta do seu design de linguagem, o Kotlin reduz 
+aplicados no Kotlin. Por conta do seu design de linguagem, o Kotlin reduz 
 a complexidade da implementação e até remove a necessidade de algumas soluções.
 
 :::info
@@ -34,9 +34,9 @@ Veja o seguinte exemplo:
 ```kotlin
 
 class Example(
-    val value01: String,
-    val value02: Int = 0,
-    val value03: Boolean = false
+    var value01: String,
+    var value02: Int = 0,
+    var value03: Boolean = false
 )
 
 # Utilizando
@@ -52,6 +52,42 @@ val example02 = Example(
 
 - Valores não declarados são preenchidos com os valores padrões. 
 - É possível alterar a ordem dos parâmetros.
+
+#### EXTRA - Fluent Setters
+
+Você também pode obter um resultado similar ao que temos no Java utilizando o
+que chamamos de "Fluent Setters", veja um exemplo:
+
+```kotlin
+
+class Example(
+    var value01: String = "",
+    var value02: Int = 0,
+    var value03: Boolean = false
+) {
+    fun value01(value: String) = apply {
+        value01 = value
+    }
+
+    fun value02(value: Int) = apply {
+        value02 = value
+    }
+
+    fun value03(value: Boolean) = apply {
+        value03 = value
+    }
+}
+
+// utilizando: 
+
+val exampleFluentSetter = Example()
+            .value01("")
+            .value02(1)
+            .value03(false)
+
+```
+
+- O "apply" retorna o objeto atual, isso permite ter uma implementação similar ao Builder comum.
 
 ---
 ### Singleton

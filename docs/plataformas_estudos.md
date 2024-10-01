@@ -26,7 +26,7 @@ Esses são alguns dos meus achados:
 
 :::info e a udemy?
 
-Como é uma plataforma aberta, a qualidade vai variar bastante de autor para autor.
+Como se trata de uma plataforma aberta, a qualidade vai variar bastante de autor para autor.
 
 :::
 
