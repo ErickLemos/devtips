@@ -75,7 +75,7 @@ const config: Config = {
     footer: {
       style: 'dark',
       links: [],
-      copyright: `Copyright © ${new Date().getFullYear()} DevTips, Inc. Built with Docusaurus.`,
+      copyright: `Desenvolvido e mantido por Erick Lemos`,
     },
     prism: {
       theme: prismThemes.github,

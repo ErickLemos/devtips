@@ -1,8 +1,11 @@
 ---
+title: AWS Solutions Architect Associate
 sidebar_position: 1
+category: roadmap
+date: 01-10-2024
 ---
 
-# Cert - AWS Solutions Architect Associate
+# Certificação - AWS Solutions Architect Associate
 
 ### Experiência
 

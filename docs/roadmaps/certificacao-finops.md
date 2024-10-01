@@ -1,8 +1,11 @@
 ---
+title: FinOps Practitioner
 sidebar_position: 3
+category: roadmap
+date: 01-10-2024
 ---
 
-# Cert - FinOps Practitioner
+# Certificação - FinOps Practitioner
 
 ### Experiência
 

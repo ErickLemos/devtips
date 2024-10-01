@@ -1,8 +1,7 @@
 ---
+title: Plataformas de estudo
 sidebar_position: 2
 ---
-
-# Plataformas de estudo
 
 Onde, como e com quem você aprende é muito importante, selecionar um bom material é uma tarefa fundamental. 
 Estudar Java com o curso X pode ser totalmente diferente de estudar Java com o curso Y, a qualidade pode variar. 

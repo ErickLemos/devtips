@@ -1,8 +1,11 @@
 ---
+title: AWS Solutions Architect Professional
 sidebar_position: 2
+category: roadmap
+date: 01-10-2024
 ---
 
-# Cert - AWS Solutions Architect Professional
+# Certificação - AWS Solutions Architect Professional
 
 ### Experiência
 

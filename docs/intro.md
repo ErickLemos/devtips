@@ -1,8 +1,7 @@
 ---
+title: O que esperar deste material?
 sidebar_position: 1
 ---
-
-# O que esperar deste material?
 
 Este site tem como foco expor um pouco sobre meus estudos, experiências e conhecimentos.
 Meu objetivo aqui é demonstrar o que fiz para adquirir conhecimento X, fazer prova Y, etc.
