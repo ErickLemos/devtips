@@ -23,7 +23,7 @@ sidebar_position: 2
 
 :::info qual algoritmo gc escolher?
 
-G1GC e ZGC são os algoritmos mais novos, lidam com o heap utilizando técnicas e estratégias mais avançadas do que
+G1GC e ZGC são os algoritmos mais novos, eles lidam com o heap utilizando técnicas e estratégias mais avançadas do que
 o SerialGC e ParallelGC. São recomendados para aplicações que possuem requisitos de tempo (aplicações Rest, por exemplo),
 mas podem beneficiar outros tipos de aplicações.
 
