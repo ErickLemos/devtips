@@ -18,10 +18,10 @@ Esses são alguns dos meus achados:
 
 - [O'Reilly Digital Learning](https://learning.oreilly.com/) (PAGA) - se sua preferência são livros ou um conteúdo mais avançado.
 - [PluralSight](https://www.pluralsight.com/) (PAGA) - melhor plataforma de cursos em vídeo que encontrei até o momento.
-- [MOOC.fi Courses](https://mooc.fi/en) - cursos diversos de alta qualidade oferecidos pela universidade finlandesa de Helsinki.
+- [MOOC.fi Courses](https://mooc.fi/en) - cursos diversos de alta qualidade oferecidos pela universidade finlandesa de Helsinki. Ex: FullStack Open, DevOps With Kubernetes, etc.
 - [AWS SkillBuilder](https://skillbuilder.aws/) - plataforma oficial da AWS para ensino, possui badges gratuitos.
 - [Lightbend Academy](https://akkademy.akka.io/learn) - recomendo fortemente os cursos do path: Reactive Architecture.
-- [MinnaLearn](https://courses.minnalearn.com/?show=individuals) - possui um excelente curso de introdução a IA: Elements of AI e Building AI.
+- [MinnaLearn](https://courses.minnalearn.com/?show=individuals) - possui excelentes cursos de introdução a IA: Elements of AI e Building AI.
 
 :::info e a udemy?
 

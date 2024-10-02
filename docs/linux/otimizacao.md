@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# CPU Scheduler
+# Otimizando performance
 
 :::danger em desenvolvimento
 
