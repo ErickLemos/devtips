@@ -70,6 +70,11 @@ const config: Config = {
           label: 'material',
         },
         {to: '/blog', label: 'blog', position: 'left'},
+        {
+          href: 'https://www.linkedin.com/in/ericklemoscosta/',
+          label: 'Linkedin',
+          position: 'right',
+        },
       ],
     },
     footer: {

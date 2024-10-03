@@ -35,9 +35,46 @@ Você pode conferir mais detalhes na [documentação oficial](https://docs.oracl
 
 :::
 
-:::danger em desenvolvimento
+## Tempo de pausa
 
-- tempo de pausa e intervalo 
-- alterando tamanho das regiões do G1GC
+Para informar ao GC quanto tempo ele deve levar em cada coleta, utilize:
+
+```shell
+-XX:MaxGCPauseTimeMillis=MILISEGUNDOS 
+```
+
+:::warning
+
+Este parâmetro vai alterar como o GC se comporta, então utilize com cuidado.
 
 :::
+
+
+## Alterando tamanho das regiões do G1GC
+
+Por padrão o G1GC "quebra" a mémoria em várias regiões, essa estratégia permite o GC trabalhar em cima de uma região 
+sem afetar outra. Para alterar o tamanho da região, utilize:
+
+```shell
+-XX:G1HeapRegionSize=TAMANHO
+```
+
+## GC Threads
+
+JVM realiza um ótimo trabalho gerenciando os Threads do GC, mas é possível alterar essas configurações para obter um
+melhor desempenho para sua aplicação.
+
+Para número de threads paralelos, utilize:
+```shell
+-XX:ParallelGCThreads=n
+```
+
+Para número de threads paralelos para a fase de marcação, utilize:
+```shell
+-XX:ConcGCThreads=n
+```
+
+## Referências
+
+- [Oracle Oficial Documentation](https://www.oracle.com/technical-resources/articles/java/g1gc.html)
+- JVM Performance Engineering: Inside OpenJDK and the HotSpot Java Virtual Machine by Monica Beckwith

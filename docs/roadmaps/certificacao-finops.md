@@ -9,7 +9,7 @@ date: 01-10-2024
 
 ### Experiência
 
-Dentre minhas certificações, a FinOps Practitioner é "café com leite". Única dificuldade da prova é 
+Dentre minhas certificações, a FinOps Practitioner é a "café com leite". Única dificuldade da prova é 
 o tempo, e só isso. A propria FinOps foundation já lhe dá todo material para fazer a prova, não é monitorada
 e você possui várias tentativas. 
 
