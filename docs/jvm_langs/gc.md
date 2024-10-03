@@ -46,7 +46,8 @@ Para informar ao GC quanto tempo ele deve levar em cada coleta, utilize:
 
 :::warning
 
-Este parâmetro vai alterar como o GC se comporta, então utilize com cuidado.
+Este parâmetro vai alterar diretamente como o GC se comporta, podendo levar a melhora ou piora do desempenho.
+Utilize com cuidado e mantenha uma suíte de testes para validar suas alterações.
 
 :::
 
