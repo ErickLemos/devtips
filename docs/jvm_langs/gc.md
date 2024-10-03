@@ -35,6 +35,7 @@ Você pode conferir mais detalhes na [documentação oficial](https://docs.oracl
 
 :::
 
+---
 ## Tempo de pausa
 
 Para informar ao GC quanto tempo ele deve levar em cada coleta, utilize:
@@ -49,7 +50,7 @@ Este parâmetro vai alterar como o GC se comporta, então utilize com cuidado.
 
 :::
 
-
+---
 ## Alterando tamanho das regiões do G1GC
 
 Por padrão o G1GC "quebra" a mémoria em várias regiões, essa estratégia permite o GC trabalhar em cima de uma região 
@@ -59,6 +60,7 @@ sem afetar outra. Para alterar o tamanho da região, utilize:
 -XX:G1HeapRegionSize=TAMANHO
 ```
 
+---
 ## GC Threads
 
 JVM realiza um ótimo trabalho gerenciando os Threads do GC, mas é possível alterar essas configurações para obter um
@@ -74,6 +76,7 @@ Para número de threads paralelos para a fase de marcação, utilize:
 -XX:ConcGCThreads=n
 ```
 
+---
 ## Referências
 
 - [Oracle Oficial Documentation](https://www.oracle.com/technical-resources/articles/java/g1gc.html)
