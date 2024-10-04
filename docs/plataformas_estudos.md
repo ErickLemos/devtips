@@ -51,8 +51,6 @@ Como se trata de uma plataforma aberta, a qualidade vai variar bastante de autor
 - [SantaFe Institute - Complexity Explorer](https://www.complexityexplorer.org/) - cursos sobre complexidade, uma área de pesquisa voltada 
 a compreensão dos "sistemas complexos".
 
-
-
 ## Plataformas que não recomendo
 
 - Alura - conteúdo muito superficial.
