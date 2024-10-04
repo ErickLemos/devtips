@@ -5,12 +5,10 @@ sidebar_position: 2
 # Garbage Collector
 
 Limpeza de dados inúteis é a principal função do GC, porém, essa operação pode causar danos severos a performance geral da aplicação.
+Selecionar o coletor de lixo apropriado é indispensável, caso não faça, a JVM seguirá o processo do Java Ergonomics, selecionando um coletor automaticamente.
 
 
-Selecionar o coletor de lixo apropriado para sua aplicação é indispensável, caso não faça, a JVM seguirá o processo do Java Ergonomics, assim como na definição de uso de memória.
-
-
-Para selecionar um GC, temos as seguintes opções:
+Podemos selecionar os seguintes GCs:
 
 ```shell
 
