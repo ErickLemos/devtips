@@ -58,8 +58,9 @@ Utilize com cuidado e mantenha uma suíte de testes para validar suas alteraçõ
 ---
 ## Alterando tamanho das regiões do G1GC
 
-Por padrão o G1GC "quebra" a mémoria em várias regiões, essa estratégia permite o GC trabalhar em cima de uma região 
-sem afetar outra. Para alterar o tamanho da região, utilize:
+Por padrão o G1GC "quebra" a mémoria em várias regiões, essa estratégia permite o GC paralelizar seu trabalho, atuando sobre uma região sem afetar outra. 
+
+Para alterar o tamanho da região, utilize:
 
 ```shell
 -XX:G1HeapRegionSize=TAMANHO
