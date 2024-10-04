@@ -37,7 +37,8 @@ mínimo do heap, mas sim o tamanho máximo para heaps inferiores a 200Mb (estran
 Numa é uma tecnologia que visa reduzir a latência do acesso da CPU à mémoria. 
 Felizmente, Java possui suporte a essa tecnologia. 
 
-Verificando se o NUMA esta habilitado:
+
+Antes de habilitarmos o NUMA, precisamos verificar se a maquina atual possui suporte:
 ```shell
 numactl --hardware
 ```
@@ -59,7 +60,7 @@ Não, a grande maioria das distribuições linux já vem com o numactl incluso.
 
 :::
 
-Por fim, você pode utilizar a seguinte tag para habilitar o NUMA:
+Então você pode habilitar o NUMA com a tag:
 ```shell
 -XX:+UseNUMA
 ```
