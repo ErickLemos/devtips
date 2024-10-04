@@ -31,7 +31,7 @@ Para a maioria dos casos utilize o G1GC ou ZGC, eles são mais novos e possuem f
 Também são as principais recomendações para aplicações que possuem requisitos de tempo (onde as operações devem estar na casa dos milissegundos. Aplicações Rest, por exemplo).
 
 São várias as técnicas aplicadas, mas a mais relevante é a regionalização, onde o GC "quebra" a mémoria em várias regiões. 
-Essa quebra permite o GC pausar apenas regiões especificas quando precisar realizar a coleta de lixo, evitando pausas STW e 
+Essa quebra permite o GC pausar apenas regiões especificas quando precisar realizar a coleta de lixo, evitando pausas STW completas e 
 melhorando a coleta paralela. 
 
 Minha recomendação é iniciar com o G1GC e alterar caso sinta necessidade. Apesar de mais novo o ZGC possui um ecossistema mais complexo e por consequência, mais difícil de gerenciar.
