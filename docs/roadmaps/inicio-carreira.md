@@ -6,10 +6,47 @@ date: 04-10-2024
 ---
 
 O início de qualquer coisa tende ser confuso, não temos visibilidade do que vamos ter em frente e facilmente nos 
-desapontamos quando batemos no primeiro obstáculo. 
-
+desapontamos quando batemos no primeiro obstáculo.
 Então montei esse roadmap visando as pessoas que estão iniciando seus estudos/carreira na área, mostrando a direção
-e iluminando o caminho que você pode seguir.
+e iluminando o caminho que você pode seguir.  
+
+Fiz este roadmap pensando no início da minha carreira e não tem como não lembrar das minhas queridas professoras 
+Pryscilla e Otilia, então desde já, gostaria de deixar meus profundos agradecimentos.
+
+## Primeiramente, um papo sobre nós
+
+Até o momento não encontrei nenhum roadmap que além de falar sobre questões técnicas e interpessoais, falasse também
+sobre a evolução do ser. Então deixo este tópico para abordar este ponto.
+
+### Motivação e autoconfiança
+
+Motivação e autoconfiança para fazer coisas e me superar foram dificuldades no início de carreira, não acreditar que 
+sou capaz ou me comparar, achando que sempre estou atrás, me afetaram bastante. 
+Felizmente já superei tudo isso, e hoje independentemente do desafio, eu sei que vou conseguir concluir. 
+Se alguém já fez, eu consigo fazer. Se ninguém nunca fez, então é uma excelente oportunidade de fazer e me gabar depois :D!
+
+Acredito que cada um irá trilhar um caminho diferente até encontrar a solução para esses problemas, então não posso lhe 
+dar uma receita de bolo para isso. Apenas posso lhe dizer que se você não fizer, ninguém vai fazer por você (clichê de sempre).
+
+### Pressão externa e a culpa
+
+Nem todo mundo nasce herdeiro, nem todo mundo tem boas condições de vida, no final, só nos resta o estudo e o aperfeiçoamento
+do conhecimento como arma para lutar contra tudo isso. Querendo ou não, sua carreira é sua vida, ela quem irá definir 
+seu futuro. Não sou a pessoa que diz que dinheiro é tudo, mas não há como negar, ele quem vai condicionar a sua vida.
+É um ditado de todo adulto: "deveria ter estudo mais", isso revela uma triste situação que você tem que evitar.
+
+Não sinta medo de evoluir, muitos de nós estamos desmotivados, pois simplesmente não acreditamos que seremos capazes de atingir
+ponto X, ser tão bons quanto o Fulano, ou que simplesmente não temos condições como outras pessoas. 
+No decorrer da minha carreira muitas vezes senti medo em bater de frente/competir com outras pessoas 
+que "seriam melhores que eu" (no contexto social, em resumo, mais ricas, com mais dinheiro, mais condições).
+Para quem vem de escola pública, sabe bem o antigo conto do aluno de particular que chega com a blusinha de "a vaga é minha"
+em vestibulares (infelizmente é algo que uma voadora não resolve). Mas no final, aqui entre nós, não são lá essas coisas 
+não (são ruins, na verdade, ruins de doer a vista). Espero um dia criar uma blusa com: "Se colocar 10 deles, não dá um 
+dos nossos".
+
+Então não sinta medo ou vergonha, pelo contrário, bata no peito. A sua evolução e sua motivação é muito mais bonita aos 
+olhos do que a de alguém que sempre teve tudo de mão beijada. Qual seria a graça de ver um personagem atingir seu potêncial
+máximo no primeiro episódio?
 
 ## O que é esperado de um dev iniciante?
 
@@ -71,10 +108,10 @@ são poucos os que vão até o fim.
 Oferecido pela Universidade de Helsinki (da Finlândia), temos o excelente curso FullStack Open:
 - [Univeristy of Helsinki - FullStack Open](https://fullstackopen.com/ptbr/)
 
-Este curso aborda tudo que um desenvolvedor precisa para criar aplicações. A qualidade do curso é excelente, sem dúvida
-alguma súpera todo e qualquer curso oferecido no Brasil atualmente (seja pago ou gratuito), só vi alguns materiais se
-equiparam a este curso. Mas o que mais me surpreende é ele ser gratuito, já vi faculdades e cursos acima de 10/20 mil reais
-que não oferecem nem metade do material.
+Este curso aborda tudo que um desenvolvedor precisa para criar aplicações, ele também abordará todos os outros pontos que citei. 
+A qualidade do curso é excelente, sem dúvida alguma súpera todo e qualquer curso oferecido no Brasil atualmente 
+(seja pago ou gratuito), só vi alguns materiais que se equiparam a este curso. Mas o que mais me surpreende é ele ser gratuito, 
+já vi faculdades e cursos acima de 10/20 mil reais que não oferecem nem metade do material.
 
 Porém, realizá-lo não é tarefa fácil, vai cobrar de você uma dedicação fora do comum. Tome como um desafio que será no 
 final bastante recompensador.
