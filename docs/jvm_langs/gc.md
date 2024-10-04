@@ -4,7 +4,13 @@ sidebar_position: 2
 
 # Garbage Collector
 
-## Selecionando GC
+Limpeza de dados inúteis é a principal função do GC, porém, essa operação pode causar danos severos a performance geral da aplicação.
+
+
+Selecionar o coletor de lixo apropriado para sua aplicação é indispensável, caso não faça, a JVM seguirá o processo do Java Ergonomics, assim como na definição de uso de memória.
+
+
+Para selecionar um GC, temos as seguintes opções:
 
 ```shell
 
@@ -21,14 +27,16 @@ sidebar_position: 2
 -XX:UseZGC
 ```
 
-:::info qual algoritmo gc escolher?
+#### Qual gc escolher?
 
-Para a maioria dos casos utilize o G1GC ou ZGC, eles são os GCs mais novos e possuem técnicas e estratégias mais avançadas para lidar com o heap.
-Também são as principais recomendações para aplicações que possuem requisitos de tempo (aplicações Rest, por exemplo. Mas podem beneficiar outros tipos de aplicações também).
+Para a maioria dos casos utilize o G1GC ou ZGC, eles são os GCs mais novos e possuem formas mais avançadas e performáticas de lidar com o heap.
+Também são as principais recomendações para aplicações que possuem requisitos de tempo (onde as operações devem estar na casa dos milissegundos. Aplicações Rest, por exemplo).
 
 São várias as técnicas aplicadas, mas a mais relevante é a regionalização, onde o GC "quebra" a mémoria em várias regiões. 
 Essa quebra permite o GC pausar apenas regiões especificas quando precisar realizar a coleta de lixo, evitando pausas STW e 
-melhorando a coleta paralela.
+melhorando a coleta paralela. 
+
+Minha recomendação é iniciar com o G1GC e alterar caso sinta necessidade. Apesar de mais novo o ZGC possui um ecossistema mais complexo e por consequência, mais difícil de gerenciar.
 
 Você pode conferir mais detalhes na [documentação oficial](https://docs.oracle.com/en/java/javase/17/gctuning/available-collectors.html)
 
