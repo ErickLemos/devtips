@@ -6,9 +6,12 @@ sidebar_position: 2
 
 ## Definindo uso de memória
 
-Por padrão o java não irá utilizar toda a mémoria disponível, nem mesmo metade disso, e sim seguirá o processo do 
+Por padrão o java não irá utilizar toda a mémoria disponível, nem mesmo metade disso, mas sim seguirá o processo do 
 [Java Ergonomics](https://docs.oracle.com/en/java/javase/22/gctuning/ergonomics.html). 
-Temos dois modos para definir o valor de memória que sua aplicação deve utilizar, são eles:
+Por esse motivo é de suma importância definirmos manualmente a quantidade de memória que queremos que a JVM utilize.
+
+
+Temos dois modos para definir a quantidade de memória que sua aplicação deve utilizar, são eles:
 
 Modo estático:
 ```shell
