@@ -13,7 +13,7 @@ e iluminando o caminho que você pode seguir.
 
 ## O que é esperado de um dev iniciante?
 
-Antes de mostrar o roadmap, precisamos primeiro definir o nosso objetivo, o ponto que queremos chegar. Para mim, um 
+Antes de mostrar o roadmap precisamos primeiro definir o nosso objetivo, o ponto que queremos chegar. Para mim, um 
 dev iniciante (um bom dev iniciante) deve ter as seguintes características:
 
 - ter domínio completo da lógica de programação.
