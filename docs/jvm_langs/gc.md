@@ -23,12 +23,11 @@ sidebar_position: 2
 
 :::info qual algoritmo gc escolher?
 
-G1GC e ZGC são os algoritmos mais novos, eles lidam com o heap utilizando técnicas e estratégias mais avançadas do que
-o SerialGC e ParallelGC. São recomendados para aplicações que possuem requisitos de tempo (aplicações Rest, por exemplo),
-mas podem beneficiar outros tipos de aplicações.
+Para a maioria dos casos utilize o G1GC ou ZGC, eles são os GCs mais novos e possuem técnicas e estratégias mais avançadas para lidar com o heap.
+Também são as principais recomendações para aplicações que possuem requisitos de tempo (aplicações Rest, por exemplo. Mas podem beneficiar outros tipos de aplicações também).
 
 São várias as técnicas aplicadas, mas a mais relevante é a regionalização, onde o GC "quebra" a mémoria em várias regiões. 
-Essa quebra permite o GC pausar apenas regiões especificas quando precisar realizar a coleta, evitando pausas STW e 
+Essa quebra permite o GC pausar apenas regiões especificas quando precisar realizar a coleta de lixo, evitando pausas STW e 
 melhorando a coleta paralela.
 
 Você pode conferir mais detalhes na [documentação oficial](https://docs.oracle.com/en/java/javase/17/gctuning/available-collectors.html)
