@@ -37,8 +37,8 @@ mínimo do heap, mas sim o tamanho máximo para heaps inferiores a 200Mb (estran
 ---
 ## Habilitando NUMA
 
-Numa é uma tecnologia que visa reduzir a latência do acesso da CPU à mémoria. 
-Felizmente, Java possui suporte a essa tecnologia. 
+Em resumo, Numa é uma tecnologia que visa reduzir a latência do acesso da CPU à mémoria. 
+Felizmente, Java possui suporte a essa tecnologia e podemos tirar proveito para conseguir mais velocidade para nossas aplicações.
 
 
 Antes de habilitarmos o NUMA, precisamos verificar se a maquina atual possui suporte:
