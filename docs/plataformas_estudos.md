@@ -40,6 +40,7 @@ Como se trata de uma plataforma aberta, a qualidade vai variar bastante de autor
 - [ApiSec University](https://www.apisecuniversity.com/#courses) - cursos voltados para segurança de aplicações.
 - [Gradle/DPE University](https://dpeuniversity.gradle.com/app) - plataforma oficial do gradle.
 - [MongoDB Academy](https://learn.mongodb.com/) - plataforma oficial do MongoDB.
+- [DataCamp](https://www.datacamp.com/) (Gratis/Paga) - excelente plataforma de ensino de ciência de dados.
 
 ## Site úteis
 
