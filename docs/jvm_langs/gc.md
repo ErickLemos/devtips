@@ -27,7 +27,7 @@ Podemos selecionar os seguintes GCs:
 
 #### Qual gc escolher?
 
-Para a maioria dos casos utilize o G1GC ou ZGC, eles são os GCs mais novos e possuem formas mais avançadas e performáticas de lidar com o heap.
+Para a maioria dos casos utilize o G1GC ou ZGC, eles são mais novos e possuem formas mais avançadas e performáticas de lidar com o heap.
 Também são as principais recomendações para aplicações que possuem requisitos de tempo (onde as operações devem estar na casa dos milissegundos. Aplicações Rest, por exemplo).
 
 São várias as técnicas aplicadas, mas a mais relevante é a regionalização, onde o GC "quebra" a mémoria em várias regiões. 
