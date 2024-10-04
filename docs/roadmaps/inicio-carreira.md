@@ -93,7 +93,7 @@ A grande maioria dos cursos são em texto e ao usar o Google Chrome você pode u
 :::
 
 Por fim, você pode conferir a página "plataformas de estudo", lá deixo outras plataformas interessantes que você pode
-utilizar como referência.
+utilizar.
 
 ---
 ## Mercado de trabalho
