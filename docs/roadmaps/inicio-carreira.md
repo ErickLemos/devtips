@@ -97,7 +97,7 @@ utilizar como referência.
 ## Mercado de trabalho
 
 Se fosse resumir o que é o mercado de trabalho, eu diria: "O inferno na terra".  
-Não vou romantizar e prometer a você uma grande campo de rosas, e sim lhe armar para esse combate.
+Não vou romantizar e prometer a você um grande mar de rosas, e sim lhe armar para esse combate.
 
 ### Linkedin
 
