@@ -1,5 +1,5 @@
 ---
-title: Inicio de carreira
+title: Início de carreira
 sidebar_position: 10
 category: roadmap
 date: 04-10-2024
