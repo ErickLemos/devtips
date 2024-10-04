@@ -25,7 +25,7 @@ Podemos selecionar os seguintes GCs:
 -XX:UseZGC
 ```
 
-#### Qual gc escolher?
+### Qual GC escolher?
 
 Para a maioria dos casos utilize o G1GC ou ZGC, eles são mais novos e possuem formas mais avançadas e performáticas de lidar com o heap.
 Também são as principais recomendações para aplicações que possuem requisitos de tempo (onde as operações devem estar na casa dos milissegundos. Aplicações Rest, por exemplo).
