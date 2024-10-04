@@ -98,7 +98,7 @@ com este roadmap, mas conhecimento nunca é demais! Deixo essa escolha com você
 
 :::
 
-### Expandindo o conhecimento 
+### O verdadeiro desafio 
 
 Agora entra o ponto que queria chegar, onde as coisas realmente vão ficar difíceis. 
 Não fique com medo, pense bem, se é fácil para você é fácil para todo mundo. 
