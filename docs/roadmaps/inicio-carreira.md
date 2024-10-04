@@ -10,7 +10,7 @@ desapontamos quando batemos no primeiro obstáculo.
 Então montei esse roadmap visando as pessoas que estão iniciando seus estudos/carreira na área, mostrando a direção
 e iluminando o caminho que você pode seguir.  
 
-Fiz este roadmap pensando no início da minha carreira e não tem como não lembrar das minhas queridas professoras 
+Fiz este roadmap pensando no início da minha carreira, e não tem como não lembrar das minhas queridas professoras 
 Pryscilla e Otilia, então desde já, gostaria de deixar meus profundos agradecimentos.
 
 ## Primeiramente, um papo sobre nós
