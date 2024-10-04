@@ -34,7 +34,7 @@ São várias as técnicas aplicadas, mas a mais relevante é a regionalização,
 Essa quebra permite o GC pausar apenas regiões especificas quando precisar realizar a coleta de lixo, evitando pausas STW completas e 
 melhorando a coleta paralela. 
 
-Minha recomendação é iniciar com o G1GC e alterar caso sinta necessidade. Apesar de mais novo o ZGC possui um ecossistema mais complexo e por consequência, mais difícil de gerenciar.
+Minha recomendação é iniciar com o G1GC e alterar caso sinta necessidade. Apesar de mais novo, o ZGC possui um ecossistema mais complexo e por consequência, mais difícil de gerenciar.
 
 Você pode conferir mais detalhes na [documentação oficial](https://docs.oracle.com/en/java/javase/17/gctuning/available-collectors.html)
 
