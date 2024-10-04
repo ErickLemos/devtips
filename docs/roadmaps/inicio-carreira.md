@@ -83,7 +83,7 @@ final bastante recompensador.
 
 ### Educação continua
 
-A universidade de Helsinki não possui só o FullStack Open de curso gratuito, mas sim uma coleção em sua plataforma:
+A universidade de Helsinki não possui só o FullStack Open de curso gratuito, mas sim uma coleção variada em sua plataforma:
 - [MOOC.fi](https://mooc.fi/en) - plataforma de cursos abertos da Universidade de Helsinki.
 
 :::tip dificuldade com o inglês?
