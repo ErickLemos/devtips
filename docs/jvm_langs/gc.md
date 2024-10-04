@@ -40,7 +40,6 @@ Minha recomendação é iniciar com o G1GC e alterar caso sinta necessidade. Ape
 
 Você pode conferir mais detalhes na [documentação oficial](https://docs.oracle.com/en/java/javase/17/gctuning/available-collectors.html)
 
-:::
 
 ---
 ## Tempo de pausa
