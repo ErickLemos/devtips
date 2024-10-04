@@ -29,6 +29,7 @@ dev iniciante (um bom dev iniciante) deve ter as seguintes características:
 - conhecer um pouco sobre modelos de aplicações, como aplicações Rest.
 - entender, mesmo que superficialmente, a construção e manutenção de testes unitários.
 - entender, mesmo que superficialmente, rotinas de CI/CD.
+- - entender, mesmo que superficialmente, a computação em nuvem.
 
 ## Como atender esses requisitos?
 
