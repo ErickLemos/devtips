@@ -111,8 +111,8 @@ pelo menos) sobre seu trabalho, carreira e fins de ciclo (uma gíria corporativo
 
 topicos sendo desenvolvidos:
 - amor ao primeiro CNPJ
-- nem tudo é culpa sua
-- você tem culpa no cartório
+- nem tudo é culpa sua - a síndrome do impostor
+- você tem culpa no cartório - a falsa síndrome do impostor
 - desenvolver não é divertido
 - como se destacar
 - como identificar vagas ruins
