@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 4
 ---
 
 # Garbage Collector
@@ -8,6 +8,8 @@ Limpeza de objetos não utilizados é a principal função do GC, porém, essa o
 Selecionar o coletor de lixo apropriado é indispensável, caso não faça, a JVM seguirá o processo do [Java Ergonomics](https://docs.oracle.com/en/java/javase/22/gctuning/ergonomics.html)
 selecionando um coletor automaticamente.
 
+
+## Selecionando o GC
 
 Podemos selecionar os seguintes GCs:
 
@@ -80,7 +82,7 @@ Para número de threads paralelos, utilize:
 -XX:ParallelGCThreads=n
 ```
 
-:::info
+:::info impacto
 
 Esses threads serão utilizados na fase de coleta, aumentá-los irá melhorar os tempos do GC em troca de maior uso 
 da CPU.
@@ -92,7 +94,7 @@ Para número de threads paralelos para a fase de marcação, utilize:
 -XX:ConcGCThreads=n
 ```
 
-:::info
+:::info impacto
 
 Esses threads serão utilizados na fase de marcação (onde o GC marca os objetos que continuam sendo utilizados, aqueles
 que não são marcados, serão removidos). Aumentá-los irá melhorar o desempenho da sua aplicação em trocar de maior uso 
