@@ -4,8 +4,9 @@ sidebar_position: 2
 
 # Garbage Collector
 
-Limpeza de dados inúteis é a principal função do GC, porém, essa operação pode causar danos severos a performance geral da aplicação.
-Selecionar o coletor de lixo apropriado é indispensável, caso não faça, a JVM seguirá o processo do Java Ergonomics, selecionando um coletor automaticamente.
+Limpeza de objetos não utilizados é a principal função do GC, porém, essa operação pode causar danos severos ao desempenho geral da aplicação.
+Selecionar o coletor de lixo apropriado é indispensável, caso não faça, a JVM seguirá o processo do [Java Ergonomics](https://docs.oracle.com/en/java/javase/22/gctuning/ergonomics.html)
+selecionando um coletor automaticamente.
 
 
 Podemos selecionar os seguintes GCs:
@@ -25,16 +26,18 @@ Podemos selecionar os seguintes GCs:
 -XX:UseZGC
 ```
 
-#### Qual gc escolher?
+#### Qual GC escolher?
 
-Para a maioria dos casos utilize o G1GC ou ZGC, eles são os GCs mais novos e possuem formas mais avançadas e performáticas de lidar com o heap.
-Também são as principais recomendações para aplicações que possuem requisitos de tempo (onde as operações devem estar na casa dos milissegundos. Aplicações Rest, por exemplo).
+Para a maioria dos casos utilize o G1GC ou ZGC, eles são os GCs mais novos e possuem formas mais avançadas e performáticas
+de lidar com o heap. Também são as principais recomendações para aplicações que possuem requisitos de tempo (onde as operações 
+devem estar na casa dos milissegundos. Aplicações Rest, por exemplo).
 
 São várias as técnicas aplicadas, mas a mais relevante é a regionalização, onde o GC "quebra" a mémoria em várias regiões. 
 Essa quebra permite o GC pausar apenas regiões especificas quando precisar realizar a coleta de lixo, evitando pausas STW e 
 melhorando a coleta paralela. 
 
-Minha recomendação é iniciar com o G1GC e alterar caso sinta necessidade. Apesar de mais novo o ZGC possui um ecossistema mais complexo e por consequência, mais difícil de gerenciar.
+Minha recomendação é iniciar com o G1GC e alterar caso sinta necessidade. Apesar de mais novo o ZGC possui um ecossistema 
+mais complexo e por consequência, mais difícil de gerenciar.
 
 Você pode conferir mais detalhes na [documentação oficial](https://docs.oracle.com/en/java/javase/17/gctuning/available-collectors.html)
 
@@ -59,6 +62,7 @@ Utilize com cuidado e mantenha uma suíte de testes para validar suas alteraçõ
 ## Alterando tamanho das regiões do G1GC
 
 Por padrão o G1GC "quebra" a mémoria em várias regiões, essa estratégia permite o GC paralelizar seu trabalho, atuando sobre uma região sem afetar outra. 
+Dependendo da natureza da sua aplicação, aumentar ou diminuir pode melhorar o desempenho do GC. 
 
 Para alterar o tamanho da região, utilize:
 
@@ -69,21 +73,29 @@ Para alterar o tamanho da região, utilize:
 ---
 ## GC Threads
 
-JVM realiza um ótimo trabalho gerenciando os Threads do GC, mas é possível alterar essas configurações para obter um
-melhor desempenho para sua aplicação.
+JVM realiza um ótimo trabalho gerenciando os Threads do GC, mas é possível alterar essas configurações.
 
 Para número de threads paralelos, utilize:
 ```shell
 -XX:ParallelGCThreads=n
 ```
 
+:::info
+
+Esses threads serão utilizados na fase de coleta, aumentá-los irá melhorar os tempos do GC em troca de maior uso 
+da CPU.
+
+:::
+
 Para número de threads paralelos para a fase de marcação, utilize:
 ```shell
 -XX:ConcGCThreads=n
 ```
 
----
-## Referências
+:::info
 
-- [Oracle Oficial Documentation](https://www.oracle.com/technical-resources/articles/java/g1gc.html)
-- JVM Performance Engineering: Inside OpenJDK and the HotSpot Java Virtual Machine by Monica Beckwith
+Esses threads serão utilizados na fase de marcação (onde o GC marca os objetos que continuam sendo utilizados, aqueles
+que não são marcados, serão removidos). Aumentá-los irá melhorar o desempenho da sua aplicação em trocar de maior uso 
+da CPU.
+
+:::
