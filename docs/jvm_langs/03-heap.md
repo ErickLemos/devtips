@@ -69,10 +69,26 @@ Então você pode habilitar o NUMA com a tag:
 ```
 
 ---
+## String Deduplication
+
+A deduplicação é uma feature da JVM que evita o armazenamento de objetos String iguais, assim, reduzindo o uso de mémoria
+da sua aplicação.
+
+Você pode habilitar a deduplicação de string utilizando a tag:
+```shell
+-XX:+UseStringDeduplication
+```
+
+:::warning
+
+Habilitar a deduplicação irá diminuir o uso de mémoria da sua aplicação, em contrapartida, irá aumentar o uso de CPU.
+
+:::
+
+---
 :::danger em desenvolvimento
 
 - Java Large Pages
-- String Deduplication
 - Head Dump e Head Dump Path
 - Resize Policy
 
