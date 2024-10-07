@@ -28,18 +28,17 @@ Podemos selecionar os seguintes GCs:
 -XX:UseZGC
 ```
 
+### Qual GC escolher?
 #### Qual GC escolher?
 
-Para a maioria dos casos utilize o G1GC ou ZGC, eles são os GCs mais novos e possuem formas mais avançadas e performáticas
-de lidar com o heap. Também são as principais recomendações para aplicações que possuem requisitos de tempo (onde as operações 
-devem estar na casa dos milissegundos. Aplicações Rest, por exemplo).
+Para a maioria dos casos utilize o G1GC ou ZGC, eles são mais novos e possuem formas mais avançadas e performáticas de lidar com o heap.
+Também são as principais recomendações para aplicações que possuem requisitos de tempo (onde as operações devem estar na casa dos milissegundos. Aplicações Rest, por exemplo).
 
 São várias as técnicas aplicadas, mas a mais relevante é a regionalização, onde o GC "quebra" a mémoria em várias regiões. 
-Essa quebra permite o GC pausar apenas regiões especificas quando precisar realizar a coleta de lixo, evitando pausas STW e 
+Essa quebra permite o GC pausar apenas regiões especificas quando precisar realizar a coleta de lixo, evitando pausas STW completas e 
 melhorando a coleta paralela. 
 
-Minha recomendação é iniciar com o G1GC e alterar caso sinta necessidade. Apesar de mais novo o ZGC possui um ecossistema 
-mais complexo e por consequência, mais difícil de gerenciar.
+Minha recomendação é iniciar com o G1GC e alterar caso sinta necessidade. Apesar de mais novo, o ZGC possui um ecossistema mais complexo e por consequência, mais difícil de gerenciar.
 
 Você pode conferir mais detalhes na [documentação oficial](https://docs.oracle.com/en/java/javase/17/gctuning/available-collectors.html)
 
@@ -64,7 +63,6 @@ Utilize com cuidado e mantenha uma suíte de testes para validar suas alteraçõ
 ## Alterando tamanho das regiões do G1GC
 
 Por padrão o G1GC "quebra" a mémoria em várias regiões, essa estratégia permite o GC paralelizar seu trabalho, atuando sobre uma região sem afetar outra. 
-Dependendo da natureza da sua aplicação, aumentar ou diminuir pode melhorar o desempenho do GC. 
 
 Para alterar o tamanho da região, utilize:
 
