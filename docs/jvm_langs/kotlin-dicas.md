@@ -12,5 +12,6 @@ sidebar_position: 2
 - extensions
 - constants
 - varargs
+- require function
 
 :::

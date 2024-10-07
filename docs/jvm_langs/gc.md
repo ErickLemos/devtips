@@ -4,12 +4,11 @@ sidebar_position: 4
 
 # Garbage Collector
 
+## Selecionando o GC
+
 Limpeza de objetos não utilizados é a principal função do GC, porém, essa operação pode causar danos severos ao desempenho geral da aplicação.
 Selecionar o coletor de lixo apropriado é indispensável, caso não faça, a JVM seguirá o processo do [Java Ergonomics](https://docs.oracle.com/en/java/javase/22/gctuning/ergonomics.html)
 selecionando um coletor automaticamente.
-
-
-## Selecionando o GC
 
 Podemos selecionar os seguintes GCs:
 
@@ -29,7 +28,6 @@ Podemos selecionar os seguintes GCs:
 ```
 
 ### Qual GC escolher?
-#### Qual GC escolher?
 
 Para a maioria dos casos utilize o G1GC ou ZGC, eles são mais novos e possuem formas mais avançadas e performáticas de lidar com o heap.
 Também são as principais recomendações para aplicações que possuem requisitos de tempo (onde as operações devem estar na casa dos milissegundos. Aplicações Rest, por exemplo).
@@ -97,5 +95,12 @@ Para número de threads paralelos para a fase de marcação, utilize:
 Esses threads serão utilizados na fase de marcação (onde o GC marca os objetos que continuam sendo utilizados, aqueles
 que não são marcados, serão removidos). Aumentá-los irá melhorar o desempenho da sua aplicação em trocar de maior uso 
 da CPU.
+
+:::
+
+---
+:::danger em desenvolvimento
+
+- Desabilitar o GC explicito
 
 :::

@@ -67,3 +67,13 @@ Então você pode habilitar o NUMA com a tag:
 ```shell
 -XX:+UseNUMA
 ```
+
+---
+:::danger em desenvolvimento
+
+- Java Large Pages
+- String Deduplication
+- Head Dump e Head Dump Path
+- Resize Policy
+
+:::
