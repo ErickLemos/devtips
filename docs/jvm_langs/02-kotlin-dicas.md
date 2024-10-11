@@ -121,7 +121,7 @@ tempo de execução:
 println(Constants.VALOR002)
 
 // se transformada em algo similar a:
-println("valor_002") // <-- removendo qualquer acesso pelo valor da constante
+println("valor_002") // <-- removendo qualquer forma de acesso pelo valor integral da constante
 
 ```
 
