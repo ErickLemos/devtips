@@ -77,7 +77,7 @@ fun main() {
 Você já deve ter se perguntado qual a diferença de uma const para uma variável comum e por qual motivo devo utilizar?
 A resposta é: forma de acesso e seu impacto no desempenho.
 
-Seja o seguinte exemplo:
+Veja o seguinte exemplo:
 
 ```kotlin
 
