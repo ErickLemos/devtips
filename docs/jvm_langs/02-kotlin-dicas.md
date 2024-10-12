@@ -6,8 +6,10 @@ sidebar_position: 2
 
 ## Closure functions
 
-Dentro do paradigma orientado objetos, armazenamos o estado dentro do objeto.
-Mas também podemos armazenar estados dentro de funções (paradigma funcional), essas são as closures, veja um exemplo:
+Dentro do paradigma orientado objetos armazenamos o estado dentro do objeto.
+E no paradigma funcional? Podemos armazenar em funções? Sim! Bizarro, mas sim!
+
+Essas são as closures, veja um exemplo:
 
 ```kotlin
 
@@ -52,14 +54,14 @@ example.use {
 ---
 ## Call Suffix - Trailing Lambda
 
-Você já deve se deparado com essa syntax:
+Você já deve ter se deparado com essa syntax:
 ```kotlin
 
 method(valor) { print... } <-- Call Suffix
 
 ```
 
-Para criar um exemplo similar basta definirmos o último parâmetro do método como uma função:
+São as "call suffix", e para criar um exemplo similar basta definirmos o último parâmetro do método como uma função:
 
 ```kotlin
 fun method(valor: String, function: (String) -> Unit) {
@@ -108,11 +110,12 @@ public final class org.example.Constants {
   private org.example.Constants();
   public final java.lang.String getVALOR001(); <-- e aqui, seu método get 
 
+# Note também que o VALOR002 foi definido como publico e estático,
+# não tendo nenhum metodo intermediário.
+
 ```
 
-Note também que o VALOR002 foi definido como publico e estático, não tendo nenhum método intermediário. 
-
-É muito provável que a JVM aproveite a natureza imutável e estática do VALOR002 para aplicar otimizações de "inline" em
+Também é provável que a JVM aproveite a natureza imutável e estática do VALOR002 para aplicar otimizações "inline" em
 tempo de execução:
 
 ```kotlin
@@ -120,10 +123,35 @@ tempo de execução:
 // levando a linha:
 println(Constants.VALOR002)
 
-// se transformada em algo similar a:
+// ser transformada em algo similar a:
 println("valor_002") // <-- removendo qualquer forma de acesso pelo valor integral da constante
 
 ```
+
+---
+## Type Alias
+
+Type Alias é um recurso que nos permite criarmos "alias" (similar ao que temos no linux). 
+Um "alias", em resumo, é uma forma de fazer com que um "algo" chamado "X", também possa ser chamado por A, B, C, D, etc.
+
+Veja o seguinte exemplo:
+
+```kotlin
+
+typealias Cpf = String
+typealias Endereco = String
+typealias Nome = String
+
+fun main() {
+    val cpf: Cpf = ""
+    val endereco: Endereco = ""
+    val nome: Nome = ""
+}
+
+```
+ 
+Note que não criei nenhuma nova classe, todos eles são apenas formas extras de chamar o objeto String. 
+Esse recurso pode ser bastante utíl para criação de DSLs.
 
 ---
 :::danger em desenvolvimento
@@ -135,10 +163,8 @@ println("valor_002") // <-- removendo qualquer forma de acesso pelo valor integr
 - onEach vs forEach
 - sequences
 - require e check
-- type alias
 - operator overloading
 - extensions
-- const
 - varargs
 - inline functions
 
