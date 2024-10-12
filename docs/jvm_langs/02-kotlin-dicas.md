@@ -4,6 +4,91 @@ sidebar_position: 2
 
 # Kotlin - Dicas e truques
 
+---
+## Constantes - const
+
+Você já deve ter se perguntado qual a diferença de uma const para uma variável comum e por qual motivo devo utilizar?
+A resposta é: forma de acesso e seu impacto no desempenho.
+
+Veja o seguinte exemplo:
+
+```kotlin
+
+object Constants {
+    val VALOR001 = "valor_001"
+    const val VALOR002 = "valor_002"
+}
+
+fun main() {
+    println(Constants.VALOR001)
+    println(Constants.VALOR002)
+}
+
+```
+
+Se compilarmos essa classe, veremos que o kotlin irá transformar qualquer acesso ao VALOR001 em uma chamada via 
+"get method", **tornando seu acesso mais pesado**.
+
+Para verificar esse comportamento mais de perto, podemos analisar o código gerado:
+
+```shell
+javap -p Constants.class
+
+Compiled from "Main.kt"
+public final class org.example.Constants {
+  public static final org.example.Constants INSTANCE;
+  private static final java.lang.String VALOR001; <-- note aqui, foi definido como "private"
+  public static final java.lang.String VALOR002;
+  private org.example.Constants();
+  public final java.lang.String getVALOR001(); <-- e aqui, seu método get 
+
+# Note também que o VALOR002 foi definido como publico e estático,
+# não tendo nenhum metodo intermediário.
+
+```
+
+Também é provável que a JVM aproveite a natureza imutável e estática do VALOR002 para aplicar otimizações "inline" em
+tempo de execução:
+
+```kotlin
+
+// levando a linha:
+println(Constants.VALOR002)
+
+// ser transformada em algo similar a:
+println("valor_002") // <-- removendo qualquer forma de acesso pelo valor integral da constante
+
+```
+
+Pelo simples fato de não haver um método nesse processo, faz com que o fluxo seja mais rápido. 
+
+
+:::tip então tenho que remover todos os gets e sets? 
+
+Podemos pensar, já que métodos get e set são prejudiciais, então um código orientado a objetos é extremamente lento, certo?
+Não, a boa notícia é que você não precisa deixar de lado seus gets e sets, por padrão, a JVM realiza uma otimização em 
+tempo de execução chamada "inline". Essa otimização visa remover os métodos gets e sets simples por uma referência direta:
+
+```kotlin
+
+// levando esse código:
+objeto.setMethod(valor)
+
+// ser substituido por esse:
+objeto.method = valor
+
+```
+
+Legal, né? Tenha em mente que essa otimização acontecerá independente se o atributo for privado ou publico, só existe um 
+único mecanismo real de encapsulamento na JVM, que são os módulos.
+
+Por fim, o que fizemos aqui foi só agilizar esse processo com as contantes.
+
+:::
+
+
+
+---
 ## Closure functions
 
 Dentro do paradigma orientado objetos armazenamos o estado dentro do objeto.
@@ -71,61 +156,6 @@ fun method(valor: String, function: (String) -> Unit) {
 fun main() {
     method("Hello World") { println(it) }
 }
-```
-
----
-## Constantes - const
-
-Você já deve ter se perguntado qual a diferença de uma const para uma variável comum e por qual motivo devo utilizar?
-A resposta é: forma de acesso e seu impacto no desempenho.
-
-Seja o seguinte exemplo:
-
-```kotlin
-
-object Constants {
-    val VALOR001 = "valor_001"
-    const val VALOR002 = "valor_002"
-}
-
-fun main() {
-    println(Constants.VALOR001)
-    println(Constants.VALOR002)
-}
-
-```
-
-Quando compilamos esse código o kotlin transforma qualquer acesso ao VALOR001 em uma chamada via "get method", 
-**tornando seu acesso mais pesado**. 
-Podemos tirar a prova disso analisando o código gerado:
-
-```shell
-javap -p Constants.class
-
-Compiled from "Main.kt"
-public final class org.example.Constants {
-  public static final org.example.Constants INSTANCE;
-  private static final java.lang.String VALOR001; <-- note aqui, foi definido como "private"
-  public static final java.lang.String VALOR002;
-  private org.example.Constants();
-  public final java.lang.String getVALOR001(); <-- e aqui, seu método get 
-
-# Note também que o VALOR002 foi definido como publico e estático,
-# não tendo nenhum metodo intermediário.
-
-```
-
-Também é provável que a JVM aproveite a natureza imutável e estática do VALOR002 para aplicar otimizações "inline" em
-tempo de execução:
-
-```kotlin
-
-// levando a linha:
-println(Constants.VALOR002)
-
-// ser transformada em algo similar a:
-println("valor_002") // <-- removendo qualquer forma de acesso pelo valor integral da constante
-
 ```
 
 ---
