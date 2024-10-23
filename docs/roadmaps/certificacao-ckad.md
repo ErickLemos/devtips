@@ -31,6 +31,8 @@ e um Kubestronaut. Testado e aprovado por alguém que tirou a certificação.
 - [OPCIONAL - (Curso/Univerisy of Helsinki) DevOps with Kubernetes](https://devopswithkubernetes.com/) - 
     Um reforço para fixar os conceitos ou caso ainda não se sinta pronto.
 
+- [Labs: KodeKloud Kubernetes Challenges](https://kodekloud.com/courses/kubernetes-challenges/) - Uma coletânea do exercícios.
+
 - [Labs: KillerCoda](https://killercoda.com/) - 
     Outra plataforma com excelentes laboratórios, porém mais simples do que os da KodeKloud.
 
