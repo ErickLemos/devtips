@@ -1,6 +1,6 @@
 ---
 title: AWS Solutions Architect Professional
-sidebar_position: 2
+sidebar_position: 3
 category: roadmap
 date: 01-10-2024
 ---

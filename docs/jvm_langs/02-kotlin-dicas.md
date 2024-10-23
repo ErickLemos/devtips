@@ -65,8 +65,8 @@ Pelo simples fato de não haver um método nesse processo, faz com que o fluxo s
 
 :::tip então tenho que remover todos os gets e sets? 
 
-Podemos pensar, já que métodos get e set são prejudiciais, então um código orientado a objetos é extremamente lento, certo?
-Não, a boa notícia é que você não precisa deixar de lado seus gets e sets, por padrão, a JVM realiza uma otimização em 
+Podemos pensar: já que métodos get e set são prejudiciais, então um código orientado a objetos é extremamente lento, certo?
+Não, a boa notícia é que você não precisa deixar de lado seus gets e sets, por padrão a JVM realiza uma otimização em 
 tempo de execução chamada "inline". Essa otimização visa remover os métodos gets e sets simples por uma referência direta:
 
 ```kotlin

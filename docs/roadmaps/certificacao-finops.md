@@ -1,6 +1,6 @@
 ---
 title: FinOps Practitioner
-sidebar_position: 3
+sidebar_position: 4
 category: roadmap
 date: 01-10-2024
 ---

@@ -1,6 +1,6 @@
 ---
 title: AWS Solutions Architect Associate
-sidebar_position: 1
+sidebar_position: 2
 category: roadmap
 date: 01-10-2024
 ---
