@@ -19,7 +19,7 @@ Modo estático:
 -Xmx4g # tamanho máximo, até onde irá expandir
 ```
 
-Modo dinâmico:
+Modo percentual:
 ```shell
 -XX:InitialRAMPercentage=10 # tamanho inicial
 -XX:MaxRAMPercentage=70 # tamanho máximo, até onde irá expandir
