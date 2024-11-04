@@ -5,11 +5,6 @@ sidebar_position: 6
 # Armadilhas e dicas gerais
 
 ---
-## MultiThread
-
-
-
----
 ## WildCard imports e Sugar Syntax
 
 Veja o seguinte trecho de código:
