@@ -86,6 +86,24 @@ Habilitar a deduplicação irá diminuir o uso de mémoria da sua aplicação, e
 :::
 
 ---
+## AlwaysPreTouch
+
+A JVM aloca o heap na memória virtual em vez da memória física, então, gradualmente ela irá alocar as paginas na memória física. 
+Podemos alterar esse comportamento forçando o Java a alocar o heap diretamente na memória física, para isso utilizamos a tag:
+
+```shell
+-XX:+AlwaysPreTouch
+```
+
+:::danger melhoria de desempenho em troca de tempo de inicialização
+
+Utilizar o parâmetro "AlwaysPreTouch" irá melhorar o desempenho da sua aplicação, em contrapartida, o tempo de inicialização 
+pode ser severamente afetado. Um bom uso para esse parâmetro é utilizar ele em testes de estresse, onde antecipadamente,
+logo na inicialização, replicamos o cenário produtivo onde a JVM já alocou todo o heap na memória física.
+
+:::
+
+---
 :::danger em desenvolvimento
 
 - Java Large Pages
@@ -93,3 +111,4 @@ Habilitar a deduplicação irá diminuir o uso de mémoria da sua aplicação, e
 - Resize Policy
 
 :::
+
