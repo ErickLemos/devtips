@@ -7,18 +7,18 @@ sidebar_position: 6
 ---
 ## Visualizar compilações
 
-Para visualizar as compilações, utilizamos:
+Para visualizar as compilações, utilize:
 ```shell
 -XX:+PrintCompilation
 ```
 
-Para obter mais detalhes, utilizamos:
+Para obter mais detalhes, utilize:
 ```shell
 -XX:+UnlockDiagnosticVMOptions
 -XX:+LogCompilation
 ```
 Esta opção fará que a JVM gere um arquivo XML com detalhes mais profundos dos eventos de compilação. Para facilitar sua
-leitura, utilize a ferramenta: JIT Watch.
+leitura utilize a ferramenta: JIT Watch.
 
 ---
 ## Reserved Code Cache
