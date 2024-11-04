@@ -2,7 +2,12 @@
 sidebar_position: 6
 ---
 
-# Armadilhas do Java/Kotlin
+# Armadilhas e dicas gerais
+
+---
+## MultiThread
+
+
 
 ---
 ## WildCard imports e Sugar Syntax
