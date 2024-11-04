@@ -69,7 +69,7 @@ Então você pode habilitar o NUMA com a tag:
 ```
 
 ---
-## String Deduplication
+## Deduplicação de objetos string
 
 A deduplicação é uma feature da JVM que evita o armazenamento de objetos String iguais, assim, reduzindo o uso de mémoria
 da sua aplicação.
@@ -86,7 +86,7 @@ Habilitar a deduplicação irá diminuir o uso de mémoria da sua aplicação, e
 :::
 
 ---
-## AlwaysPreTouch
+## Memória virtual e física - AlwaysPreTouch
 
 A JVM aloca o heap na memória virtual em vez da memória física, então, gradualmente ela irá alocar as paginas na memória física. 
 Podemos alterar esse comportamento forçando o Java a alocar o heap diretamente na memória física, para isso utilizamos a tag:
