@@ -3,6 +3,7 @@ sidebar_position: 6
 ---
 
 # Just Time Compilation
+JIT é um dos subsistemas da JVM, ele é responsável por otimizar e compilar seu programa em código nativo/máquina.
 
 ---
 ## Visualizar compilações
