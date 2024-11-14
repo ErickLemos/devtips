@@ -42,9 +42,19 @@ Não há necessidade de alterar esse comportamento, mas caso queira experimentar
 -XX:UseAVX=n
 ```
 
-Consulte a documentação oficial do JDK utilizado para verificar quais são os conjuntos disponíveis. 
+Consulte a documentação oficial do JDK utilizado para verificar quais são os conjuntos disponíveis.
 
+---
+## Curiosidades
 
+:::tip bytecodes e seu peso
+
+Alguns tipos de bytecode são mais fáceis de serem otimizados e são normalmente otimizados com antecedência, bytecodes de
+operações aritméticas são um exemplo.
+
+:::
+
+---
 :::danger em desenvolvimento
 
 - thresholds
