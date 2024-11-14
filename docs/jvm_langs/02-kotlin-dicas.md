@@ -60,33 +60,7 @@ println("valor_002") // <-- removendo qualquer forma de acesso pelo valor integr
 
 ```
 
-Pelo simples fato de não haver um método nesse processo, faz com que o fluxo seja mais rápido. 
-
-
-:::tip então tenho que remover todos os gets e sets? 
-
-Podemos pensar: já que métodos get e set são prejudiciais, então um código orientado a objetos é extremamente lento, certo?
-Não, a boa notícia é que você não precisa deixar de lado seus gets e sets, por padrão a JVM realiza uma otimização em 
-tempo de execução chamada "inline". Essa otimização visa remover os métodos gets e sets simples por uma referência direta:
-
-```kotlin
-
-// levando esse código:
-objeto.setMethod(valor)
-
-// ser substituido por esse:
-objeto.method = valor
-
-```
-
-Legal, né? Tenha em mente que essa otimização acontecerá independente se o atributo for privado ou publico, só existe um 
-único mecanismo real de encapsulamento na JVM, que são os módulos.
-
-Por fim, o que fizemos aqui foi só agilizar esse processo com as contantes.
-
-:::
-
-
+Pelo simples fato de não haver um método nesse processo, faz com que o fluxo seja mais rápido.
 
 ---
 ## Closure functions
