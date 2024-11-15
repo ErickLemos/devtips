@@ -4,28 +4,27 @@ sidebar_position: 3
 
 # Java Memory Heap
 
-## Definindo uso de memória
+Java Memory Heap é um dos subsistemas gerenciados pela JVM, a sua função é gerir o uso de memória da JVM.
 
-Por padrão o java não irá utilizar toda a mémoria disponível, nem mesmo metade disso, mas sim seguirá o processo do 
+## Definindo o tamanho de heap
+
+Por padrão o java não **irá utilizar toda a mémoria disponível**, nem mesmo metade disso, mas sim seguirá o processo do 
 [Java Ergonomics](https://docs.oracle.com/en/java/javase/22/gctuning/ergonomics.html). 
-Por esse motivo é de suma importância definirmos manualmente a quantidade de memória que queremos que a JVM utilize.
+Por esse motivo é de **suma importância definirmos manualmente a quantidade de memória que queremos que a JVM utilize, caso 
+contrário, vamos acabar pagando por recursos que nunca serão utilizados.**
 
-
-Temos dois modos para definir a quantidade de memória que sua aplicação deve utilizar, são eles:
-
-Modo estático:
+Podemos definir o tamanho do heap utilizando os seguintes parâmetros:
 ```shell
+# primeiro modo - estático:
 -Xms512m # tamanho inicial
 -Xmx4g # tamanho máximo, até onde irá expandir
-```
 
-Modo percentual:
-```shell
+# segundo modo - por percentual:
 -XX:InitialRAMPercentage=10 # tamanho inicial
 -XX:MaxRAMPercentage=70 # tamanho máximo, até onde irá expandir
 ```
 
-:::warning XX:MinRAMPercentage - um erro de nomenclatura
+:::danger XX:MinRAMPercentage - um erro de nomenclatura
 
 Há outro parâmetro chamado -XX:MinRAMPercentage, que apesar do seu nome, não tem a função de definir o tamanho
 mínimo do heap, mas sim o tamanho máximo para heaps inferiores a 200Mb (estranho, eu sei).
