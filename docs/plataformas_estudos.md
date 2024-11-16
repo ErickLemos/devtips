@@ -4,8 +4,8 @@ sidebar_position: 2
 ---
 
 Um bom material vai além do conteúdo bruto e certificados inchados com várias horas que não significam nada (só que você
-tem muito tempo para jogar fora), além de qualidade, também devemos observar a linha de raciocino, a forma de ensino e a 
-credibilidade do autor/autores. Queremos aprender com quem está no topo e com quem realmente sabe (e não com quem acha ou
+tem muito tempo para jogar fora). Além de qualidade, também devemos observar a linha de raciocino, a forma de ensino e a 
+credibilidade do autor/autores. Queremos aprender com quem está no topo, com quem realmente sabe (e não com quem acha ou
 finge que sabe).
 
 Há muita informação na internet, podemos ficar confuso em distinguir o que é ruim, bom, ótimo e o que é excepcional. 
