@@ -3,7 +3,7 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'Erick Lemos - DevTips',
+  title: 'Cabra da TI',
   tagline: 'a',
   favicon: 'img/cabradati.svg',
 

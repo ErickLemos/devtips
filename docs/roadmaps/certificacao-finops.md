@@ -5,7 +5,7 @@ category: roadmap
 date: 01-10-2024
 ---
 
-# Certificação - FinOps Practitioner
+# FinOps Practitioner
 
 ### Experiência
 
@@ -17,6 +17,7 @@ Sendo bem sincero aqui, é uma certificação extremamente fácil, e acho muito 
 sobre pessoas se preparando para ela (meu erro é não saber encher linguiça). Não vou me dar ao trabalho de mentir
 para você com um roadmap sem sentido, tá tudo lá, é fazer o curso e após isso a prova.
 
+---
 ### Dicas
 
 :::tip DE GRATIS!!!

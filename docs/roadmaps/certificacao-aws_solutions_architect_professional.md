@@ -5,7 +5,7 @@ category: roadmap
 date: 01-10-2024
 ---
 
-# Certificação - AWS Solutions Architect Professional
+# AWS Solutions Architect Professional
 
 ### Experiência
 
@@ -14,20 +14,20 @@ A fama de ser uma prova brutal é verdade! Não há dicas ou truques que você p
 
 ### Materiais que utilizei
 
-- [(Curso/Udemy) Ultimate AWS Certified Solutions Architect Professional 2024 - Stephane Maarek](https://www.udemy.com/course/aws-solutions-architect-professional/)  
+- **[(Curso/Udemy) Ultimate AWS Certified Solutions Architect Professional 2024 - Stephane Maarek](https://www.udemy.com/course/aws-solutions-architect-professional/)**: 
 Dentro dos cursos que encontrei/fiz, esse foi quem mais cobriu os pontos necessários da prova.
 
-- [(Simulados/Udemy) AWS Certified Solutions Architect Professional Practice Exam](https://www.udemy.com/course/aws-solutions-architect-professional-practice-exams-sap-c02)
+- **[(Simulados/Udemy) AWS Certified Solutions Architect Professional Practice Exam](https://www.udemy.com/course/aws-solutions-architect-professional-practice-exams-sap-c02)**
 
 ### Materias que não recomendo
 
-- [(Simulado/Udemy) Practice Exam AWS Certified Solutions Architect Professional](https://www.udemy.com/course/practice-exam-aws-certified-solutions-architect-professional/)  
-Fica atrás em qualidade dos simulados que recomendei, também achei algumas questões confusas. 
+- **[(Simulado/Udemy) Practice Exam AWS Certified Solutions Architect Professional](https://www.udemy.com/course/practice-exam-aws-certified-solutions-architect-professional/)**: 
+Fica atrás em qualidade dos simulados que recomendei, também achei algumas questões confusas.
 
-
-- [Curso da AClouGuru para a certificação em questão](https://learn.acloud.guru/course/aws-certified-solutions-architect-professional/dashboard).  
+- **[Curso da AClouGuru para a certificação em questão](https://learn.acloud.guru/course/aws-certified-solutions-architect-professional/dashboard)**: 
 Deixa muito a desejar no conteúdo. Há várias reclamações na comunidade da plataforma.
 
+---
 ### Dicas
 
 :::tip SIMULADOS

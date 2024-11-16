@@ -15,24 +15,25 @@ para revisar todas as questões novamente (ou a maioria). Por exemplo, consegui 
 
 ### Materiais que utilizei
 
-**[(Curso/Udemy) Kubernetes Certified Application Developer (CKAD) with Tests](https://www.udemy.com/course/certified-kubernetes-application-developer)** - 
+- **[(Curso/Udemy) Kubernetes Certified Application Developer (CKAD) with Tests](https://www.udemy.com/course/certified-kubernetes-application-developer)**: 
 Principal curso para a prova, além de abordar todos os pontos necessários, também disponibiliza exercícios práticos.
 
-**[(Livro/Oreilly) Certified Kubernetes Application Developer (CKAD) Study Guide, 2nd Edition](https://www.oreilly.com/library/view/certified-kubernetes-application/9781098152857/)** - 
+- **[(Livro/Oreilly) Certified Kubernetes Application Developer (CKAD) Study Guide, 2nd Edition](https://www.oreilly.com/library/view/certified-kubernetes-application/9781098152857/)**: 
 Caso prefira leitura em vez de curso em vídeo, também é excelente para relembrar pontos abordados no curso citado acima.
 
-**[OPCIONAL - (Curso/Univerisy of Helsinki) DevOps with Kubernetes](https://devopswithkubernetes.com/)** - 
+- **[OPCIONAL - (Curso/Univerisy of Helsinki) DevOps with Kubernetes](https://devopswithkubernetes.com/)**: 
 Reforço para fixar os conceitos, caso ainda não se sinta pronto para a prova.
 
-**[Labs: KodeKloud Kubernetes Challenges](https://kodekloud.com/courses/kubernetes-challenges/)** - 
+- **[Lab: KodeKloud Kubernetes Challenges](https://kodekloud.com/courses/kubernetes-challenges/)**: 
 Uma coletânea de exercícios oferecidos pela KodeKloud.
 
-**[Labs: KillerCoda](https://killercoda.com/)** - 
+- **[Lab: KillerCoda](https://killercoda.com/)**: 
 Excelentes laboratórios, porém mais simples que os oferecidos pela KodeKloud.
 
-**[Simulados: Killer Shell](https://killer.sh/)** - 
+- **[Simulado: Killer Shell](https://killer.sh/)**: 
 Você ganhará duas tentativas ao comprar a prova. Recomendo realizar os simulados apenas quando realmente estiver pronto.
 
+---
 ### Dicas
 
 :::tip Saiba navegar pela documentação

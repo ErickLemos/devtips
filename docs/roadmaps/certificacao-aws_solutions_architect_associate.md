@@ -5,7 +5,7 @@ category: roadmap
 date: 01-10-2024
 ---
 
-# Certificação - AWS Solutions Architect Associate
+# AWS Solutions Architect Associate
 
 ### Experiência
 
@@ -13,7 +13,7 @@ A prova tem como foco a identificação dos serviços, você vai se dar bem se c
 decorar palavras-chave dos serviços da AWS, falo um pouco mais na seção "Dicas".
 
 ### Materiais que utilizei
-- [(Curso/ACloudGuru) AWS Certified Solutions Architect - Associate](https://learn.acloud.guru/course/aws-certified-solutions-architect-associate/dashboard)  
+- **[(Curso/ACloudGuru) AWS Certified Solutions Architect - Associate](https://learn.acloud.guru/course/aws-certified-solutions-architect-associate/dashboard)**: 
 O curso aborda todos os pontos necessários, também contém laboratórios, mini provas e simulados excelentes.
 
 ### Materiais que seriam meu segundo plano
@@ -26,11 +26,11 @@ um exemplo é o curso para a Professional que não aborda nem a metade do necess
 
 Se pudesse voltar no tempo e selecionar um novo roteiro, seria este:
 
-- [(Curso/Udemy) Ultimate AWS Certified Solutions Architect Associate SAA-C03](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03)
-- [(Curso/AWS SkillBuilder) Architecting Path](https://www.credly.com/organizations/amazon-web-services/collections/customer-learning-programs/badge_templates)
-- [(Simulado/Udemy) AWS Certified Solutions Architect Associate Practice Exams](https://www.udemy.com/course/aws-certified-solutions-architect-associate-amazon-practice-exams-saa-c03)
+- **[(Curso/Udemy) Ultimate AWS Certified Solutions Architect Associate SAA-C03](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03)**
+- **[(Curso/AWS SkillBuilder) Architecting Path](https://www.credly.com/organizations/amazon-web-services/collections/customer-learning-programs/badge_templates)**
+- **[(Simulado/Udemy) AWS Certified Solutions Architect Associate Practice Exams](https://www.udemy.com/course/aws-certified-solutions-architect-associate-amazon-practice-exams-saa-c03)**
 
-
+---
 ### Dicas
 
 :::tip Palavras-chave
