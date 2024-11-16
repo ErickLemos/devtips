@@ -3,7 +3,11 @@ sidebar_position: 6
 ---
 
 # Just Time Compilation
-JIT é um dos subsistemas da JVM, ele é responsável por otimizar e compilar seu programa em código nativo/máquina.
+
+JIT Compiler é um dos subsistemas gerenciados da JVM, sua principal função é otimizar e compilar o bytecode em tempo de 
+execução. Internamente a JVM irá metrificar e selecionar quais métodos e classes são aptos a sofrerem otimizações (o mecanismo 
+HotSpot é responsável por essa analíse), essas otimizações se tornarão cada vez mais agressivas (esse fluxo de otimização
+também é conhecido como Tiered Compilation), restando apenas instruções assembly no final de tudo.
 
 ---
 ## Visualizar compilações
