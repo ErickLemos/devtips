@@ -18,7 +18,7 @@ Será o caminho mais curto e fácil que pode optar.
 :::tip exemplo - Java 9 e instruções PAUSE
 
 Java 9 foi a primeira versão a receber o [JEP 285](https://openjdk.org/jeps/285), que visa resolver melhorar o polling 
-ativo dos threads, cenário onde um thread bloqueia um recurso, e as outras threads ficam esperando sua vez, levando essas 
+ativo dos threads, cenário onde um thread bloqueia um recurso e as outras threads ficam esperando sua vez, levando essas 
 mesmas threads realizar uma pesquisa continua para verificar se a sua vez chegou. O problema é que essa pesquisa acaba 
 consumindo recursos de CPU e energia.
 
