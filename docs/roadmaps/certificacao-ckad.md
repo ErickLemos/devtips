@@ -7,19 +7,13 @@ date: 22-10-2024
 
 # Certified Kubernetes Application Developer
 
-### Experiência 
+### Experiência
 
-É uma prova "divertida". Diferente do que ouvi, não a considero difícil e o tempo não é algo tão preocupante (terminei a
-prova com 50-60m faltantes).
+Não é uma prova difícil, apesar de afirmarem que sim, o conteúdo geral da prova não vai além do que temos dentro dos 
+simulados da Killer.sh. O tempo também não é um problema, se estiver bem preparado, pode terminar ela com tempo suficiente 
+para revisar todas as questões novamente (ou sua maioria). Por exemplo, consegui finalizá-la com 60 minutos de 2 horas.
 
 ### Materiais que utilizei
-
-:::info credibilidade
-
-Este plano de aprendizado específico foi montado com base no que recolhi de duas pessoas: um especialista da Red Hat 
-e um Kubestronaut. Testado e aprovado por alguém que tirou a certificação.
-
-:::
 
 - [(Curso/Udemy) Kubernetes Certified Application Developer (CKAD) with Tests](https://www.udemy.com/course/certified-kubernetes-application-developer) - 
     Acredito que seja o principal e um dos melhores para essa certificação. Fora o curso em si, você ganha acesso à plataforma
