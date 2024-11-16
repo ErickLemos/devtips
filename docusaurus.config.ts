@@ -60,7 +60,7 @@ const config: Config = {
       defaultMode: 'dark',
     },
     navbar: {
-      title: 'DevTips',
+      title: 'Cabra da TI',
       logo: {
         alt: 'devtips logo',
         src: 'img/cabradati.svg',
