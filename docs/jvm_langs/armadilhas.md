@@ -39,7 +39,7 @@ import org.example.api.*
 
 ```
 
-Você considera-o menos performático? Algumas pessoas dirão que sim, afinal, estou a importar tudo que está dentro do pacote
+Você considera-o menos performático? Algumas pessoas dirão que sim, afinal, estou importando tudo que está dentro do pacote
 "api"! Porém, isso não é verdade, não há problema nenhum aqui.
 
 Java assim como outras linguagens possuem recursos estéticos chamados "Syntactic Sugars" ou "Sugar Syntax", como o nome
