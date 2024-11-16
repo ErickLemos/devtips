@@ -14,7 +14,7 @@ Dediquei muito tempo para encontrar algumas pepitas de ouro do conhecimento, sã
 ## Principais
 
 - [O'Reilly Digital Learning](https://learning.oreilly.com/) (PAGA) - conteúdo excepcional, livros é seu principal foco.
-- [PluralSight](https://www.pluralsight.com/) (PAGA) - seu foco é cursos em vídeo.
+- [PluralSight](https://www.pluralsight.com/) (PAGA)
 - [MOOC.fi Courses](https://mooc.fi/en) - plataforma oferecida pela universidade finlandesa de Helsinki.
 - [AWS SkillBuilder](https://skillbuilder.aws/) - plataforma oficial da AWS, possui badges gratuitos.
 - [Lightbend Academy](https://akkademy.akka.io/learn) - recomendo fortemente os cursos do path: Reactive Architecture.
