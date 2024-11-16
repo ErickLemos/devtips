@@ -10,7 +10,7 @@ date: 22-10-2024
 ### Experiência
 
 Não é uma prova difícil, apesar de afirmarem que sim. O conteúdo geral da prova não vai além do que temos dentro dos 
-simulados da Killer.sh. O tempo também não é um problema, se estiver bem preparado, pode terminar ela com tempo suficiente 
+simulados da Killer.sh. O tempo também não é um problema se estiver bem preparado, pode terminar ela com tempo suficiente 
 para revisar todas as questões novamente (ou a maioria). Por exemplo, consegui finalizá-la com 60 minutos (a prova tem duas horas).
 
 ### Materiais que utilizei
