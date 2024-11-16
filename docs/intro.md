@@ -3,9 +3,8 @@ title: O que esperar deste material?
 sidebar_position: 1
 ---
 
-Este site tem como foco expor um pouco sobre meus estudos, experiências e conhecimentos.
-Meu objetivo aqui é demonstrar o que fiz para adquirir conhecimento X, fazer prova Y, etc.
-Também utilizarei para armazenar algumas técnicas e dicas utéis que aprendi com o decorrer da minha carreira.
+Este site documenta meus estudos, experiências e conhecimentos, como foco em compartilhar um pouco da minha jornada em 
+adquirir habilidades específicas (ex: como me preparei para minhas certificações) e dicas úteis acumuladas ao longo da 
+minha carreira.
 
-
-#### Dito isso, espero que goste do meu trabalho!
+Espero que goste do meu trabalho!

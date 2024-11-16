@@ -3,22 +3,19 @@ title: Plataformas de estudo
 sidebar_position: 2
 ---
 
-Onde, como e com quem você aprende é muito importante, selecionar um bom material é uma tarefa fundamental. 
-Estudar Java com o curso X pode ser totalmente diferente de estudar Java com o curso Y, a qualidade pode variar. 
-Também não aprendemos só o conteúdo bruto de um material, mas também a forma que o autor pensa e analisa
-os pontos que ele aborda, e isso pode ser bom ou ruim.
+Um bom material vai além do conteúdo bruto e certificados inchados com várias horas que não significam nada (só que você
+tem muito tempo para jogar fora), além de qualidade, também devemos observar a linha de raciocino, a forma de ensino e a 
+credibilidade do autor/autores. Queremos aprender com quem está no topo e com quem realmente sabe (e não com quem acha ou
+finge que sabe).
 
-Felizmente, para sua sorte, posso lhe recomendar algumas coisas! Frequentemente estou vasculhando os confins da 
-internet atrás dos tesouros do ensino. No meio de tanta informação (inútil ou quase inútil) encontrar um bom material 
-é como estar em tempos medievais e acabar desvendando um pergaminho antigo cheio de conhecimento.
-
-Esses são alguns dos meus achados:
+Há muita informação na internet, podemos ficar confuso em distinguir o que é ruim, bom, ótimo e o que é excepcional. 
+Dediquei muito tempo para encontrar algumas pepitas de ouro do conhecimento, são elas:
 
 ## Principais
 
-- [O'Reilly Digital Learning](https://learning.oreilly.com/) (PAGA) - se sua preferência são livros ou um conteúdo mais avançado.
-- [PluralSight](https://www.pluralsight.com/) (PAGA) - melhor plataforma de cursos em vídeo que encontrei até o momento.
-- [MOOC.fi Courses](https://mooc.fi/en) - cursos diversos de alta qualidade oferecidos pela universidade finlandesa de Helsinki. Ex: FullStack Open, DevOps With Kubernetes, etc.
+- [O'Reilly Digital Learning](https://learning.oreilly.com/) (PAGA) - conteúdo excepcional, livros é seu principal foco.
+- [PluralSight](https://www.pluralsight.com/) (PAGA) - seu foco é cursos em vídeo.
+- [MOOC.fi Courses](https://mooc.fi/en) - plataforma oferecida pela universidade finlandesa de Helsinki.
 - [AWS SkillBuilder](https://skillbuilder.aws/) - plataforma oficial da AWS, possui badges gratuitos.
 - [Lightbend Academy](https://akkademy.akka.io/learn) - recomendo fortemente os cursos do path: Reactive Architecture.
 - [MinnaLearn](https://courses.minnalearn.com/?show=individuals) - possui excelentes cursos de introdução a IA: Elements of AI e Building AI.
