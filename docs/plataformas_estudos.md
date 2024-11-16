@@ -8,7 +8,7 @@ tem muito tempo para jogar fora). Além de qualidade, também devemos observar a
 credibilidade do autor/autores. Queremos aprender com quem está no topo, com quem realmente sabe (e não com quem acha ou
 finge que sabe).
 
-Há muita informação na internet, podemos ficar confuso em distinguir o que é ruim, bom, ótimo e o que é excepcional. 
+Há muita informação na internet, podemos ficar confusos em distinguir o que é ruim, bom, ótimo e o que é excepcional. 
 Dediquei muito tempo para encontrar algumas pepitas de ouro do conhecimento, são elas:
 
 ## Principais
