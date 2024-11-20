@@ -4,14 +4,13 @@ sidebar_position: 2
 
 # Kotlin - Design Patterns
 
-Alguns dos designs patterns que aprendemos no Java são diferentes quando
-aplicados no Kotlin. Por conta do seu design de linguagem, o Kotlin reduz
-a complexidade da implementação e até remove a necessidade de algumas soluções.
+Alguns dos designs patterns que aprendemos no Java são diferentes quando aplicados no Kotlin. Por conta do seu design de
+linguagem, o Kotlin reduz a complexidade da implementação e até remove a necessidade de algumas soluções.
 
 :::info
 
-Irei evitar explicar todos os conceitos por trás de cada Design Patterns,
-considero que você já tenha prévio conhecimento deles, seus usos e benefícios.
+Irei evitar explicar os conceitos por trás de cada Design Patterns, considero que você já tenha prévio conhecimento
+deles, seus usos e benefícios.
 
 :::
 
@@ -21,8 +20,8 @@ considero que você já tenha prévio conhecimento deles, seus usos e benefício
 
 ### Builder
 
-O modelo de construtor do Kotlin remove a necessidade de Builders comuns como vemos no Java,
-isso ocorre de duas formas: valores padrões e referência.
+O modelo de construtor do Kotlin remove a necessidade de Builders comuns como vemos no Java, isso ocorre de duas formas:
+valores padrões e referência.
 
 Veja o seguinte exemplo:
 
