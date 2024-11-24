@@ -2,7 +2,7 @@
 sidebar_position: 6
 ---
 
-# Just Time Compilation
+# Just In Time Compilation
 
 JIT Compiler é um dos subsistemas gerenciados da JVM, sua principal função é otimizar e compilar o bytecode em tempo de 
 execução. Internamente a JVM irá metrificar e selecionar quais métodos e classes são aptos a sofrerem otimizações (o mecanismo 
@@ -31,7 +31,7 @@ leitura utilize a ferramenta: JIT Watch.
 Code Cache é uma área do heap onde a JVM irá armazenar o código compilado. Seu tamanho é fixo, e por conta disso é possível
 que sua aplicação consiga enchê-lo, levando a problemas de desempenho, evitando que sua aplicação atinja seu potêncial máximo.
 
-Felizmente podemos alterar seu tamanho com a tag:
+Podemos alterar seu tamanho com a opção:
 ```shell
 -XX:ReservedCodeCacheSize=n
 ```

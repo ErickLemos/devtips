@@ -30,7 +30,7 @@ Como se trata de uma plataforma aberta, a qualidade vai variar bastante de autor
 
 - [Google Tech Writing](https://developers.google.com/tech-writing) - manual da Google para escrita técnica.
 - [Google Machine Learning](https://developers.google.com/machine-learning) - material da Google sobre Machine Learning.
-- [Google Design Spring](https://designsprintkit.withgoogle.com/) - manual de design de sprints.
+- [Google Design Sprint](https://designsprintkit.withgoogle.com/) - manual de design de sprints.
 
 ## Outros
 
