@@ -91,9 +91,8 @@ Limitações:
 - O construtor primário ainda é utilizado na construção do objeto, se houver algum atributo sem valor padrão, ele será
   solicitado.
 - Caso opte por alterar os atributos para nullables (permitindo que não sejam solicitados logo no construtor primário),
-  você precisará garantir que a classe não entre em estado inconsistente. Nesse caso, você pode também optar por uma
-  derivação
-  do Builder Pattern, o [Step Builder Pattern](https://java-design-patterns.com/patterns/step-builder).
+  você precisará garantir que a classe não entre em estado inconsistente. Nesse caso, você pode utilizar uma
+  derivação do Builder Pattern, o [Step Builder Pattern](https://java-design-patterns.com/patterns/step-builder).
 
 ---
 
@@ -116,7 +115,7 @@ object SingletonExample {
 
 ### Prototype
 
-Kotlin introduz nas Data Class o método: ".copy()". Sua função é copiar um objeto, também sendo possível alterar
+Kotlin introduz nas Data Class o método: ".copy()". Sua função é copiar um objeto, mas também é possível alterar
 atributos nesse processo.
 
 ````kotlin
@@ -133,7 +132,7 @@ val exampleCopy = example.copy(
 
 ````
 
-Note que:
+Limitações:
 
 - Até o momento, esse método só está disponível para "data class"
 
