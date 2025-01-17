@@ -10,7 +10,7 @@ HotSpot é responsável por essa analíse), essas otimizações se tornarão cad
 também é conhecido como Tiered Compilation), restando apenas instruções assembly no final de tudo.
 
 ---
-## Visualizar compilações
+## Visualizando compilações
 
 Para visualizar as compilações, utilize:
 ```shell
