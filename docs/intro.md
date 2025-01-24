@@ -7,7 +7,3 @@ Este site documenta meus estudos, experiências e conhecimentos. Com o foco em c
 como adquiri habilidades específicas (ex: como me preparei para minhas certificações) e dicas úteis.
 
 Espero que goste do meu trabalho!
-
-## Agradecimentos
-
-- Osni Oliveria - por me ajudar revisando este conteúdo.
