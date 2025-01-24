@@ -35,9 +35,15 @@ permitindo então que a JVM a invocasse diretamente.
 
 ---
 
+## Context Switch e seu impacto na performance
+
+
+
+---
+
 ## WildCard imports e Sugar Syntax
 
-Veja o seguinte trecho de código:
+Um assunto que divide opiniões no ecossistema Java, veja o seguinte trecho:
 
 ```kotlin
 
@@ -46,19 +52,26 @@ import org.example.api.*
 ```
 
 Você considera-o menos performático? Algumas pessoas dirão que sim, afinal, estou importando tudo que está dentro do
-pacote
-"api"! Porém, isso não é verdade, não há problema nenhum aqui.
+pacote "api"! Porém, isso não é verdade, não há nada sendo importado aqui!
 
-Java assim como outras linguagens possuem recursos estéticos chamados "Syntactic Sugars" ou "Sugar Syntax", como o nome
+Java assim como outras linguagens possuem recursos estéticos chamados "Syntactic Sugars" ou "Sugar Syntax". Como o nome
 aparenta, eles servem apenas para deixar o seu código mais bonito, **não causando nenhum impacto no desempenho da sua
 aplicação.**
 
-Isso apenas evita o desenvolvedor de escrever um syntax parecida com essa:
+Isso apenas evita o desenvolvedor de escrever um syntax parecida com essa (também chamado de "nome totalmente 
+qualificado"):
 
 ```kotlin
 fun main(): org.example.api.ClasseInterna {
 ....
 }
+```
+
+Podemos tirar a prova da inexistência dos imports analisando o bytecode da classe, para isso utilizamos o comando:
+```shell
+javap -p Constants.class
+# e também
+javap -c java.lang.Boolean
 ```
 
 :::info IDES e seus métodos de importação
