@@ -4,33 +4,27 @@ sidebar_position: 2
 
 # Kotlin - Design Patterns
 
-Alguns dos designs patterns que aprendemos no Java são diferentes quando 
-aplicados no Kotlin. Por conta do seu design de linguagem, o Kotlin reduz 
-a complexidade da implementação e até remove a necessidade de algumas soluções.
+Alguns dos designs patterns que aprendemos no Java são diferentes quando aplicados no Kotlin. Por conta do seu design de
+linguagem, o Kotlin reduz a complexidade da implementação e até remove a necessidade de algumas soluções.
 
 :::info
 
-Vou evitar explicar em profundidade cada Design Patterns.
-Considero que você já tenha conhecimento deles, seus usos e benefícios.
+Irei evitar explicar os conceitos por trás de cada Design Patterns, considero que você já tenha prévio conhecimento
+deles, seus usos e benefícios.
 
 :::
 
 ## Creational Patterns
 
 ---
+
 ### Builder
 
-#### Problema
-
-Precisamos facilitar a criação de uma classe com muitos parâmetros.
-
-#### Solução
-
-Diferente do Java, o Kotlin não precisa de nenhuma classe extra para isso. 
-O seu modelo de construtor remove a necessidade de Builders como vemos no Java, 
-isso ocorre de duas formas: valores padrões e referência.
+O modelo de construtor do Kotlin remove a necessidade de Builders comuns como vemos no Java, isso ocorre de duas formas:
+valores padrões e referência.
 
 Veja o seguinte exemplo:
+
 ```kotlin
 
 class Example(
@@ -40,7 +34,7 @@ class Example(
 )
 
 # Utilizando
-val example = Example("example1")
+val example01 = Example("example1")
 
 val example02 = Example(
     value03 = true,
@@ -50,13 +44,14 @@ val example02 = Example(
 
 ```
 
-- Valores não declarados são preenchidos com os valores padrões. 
-- É possível alterar a ordem dos parâmetros.
+Note que:
+
+- Valores não declarados são preenchidos com os valores padrões.
+- É possível alterar a ordem dos parâmetros, umas das principais funções esperadas no Builder Pattern.
 
 #### EXTRA - Fluent Setters
 
-Você também pode obter um resultado similar ao que temos no Java utilizando o
-que chamamos de "Fluent Setters", veja um exemplo:
+Também é possível obter um resultado similar (em syntax) ao que temos no Java utilizando os "Fluent Setters":
 
 ```kotlin
 
@@ -87,19 +82,24 @@ val exampleFluentSetter = Example()
 
 ```
 
-- O "apply" retorna o objeto atual, isso permite ter uma implementação similar ao Builder comum.
+Note que:
+
+- O "apply" retorna o objeto atual com o valor do atributo alterado.
+
+Limitações:
+
+- O construtor primário ainda é utilizado na construção do objeto, se houver algum atributo sem valor padrão, ele será
+  solicitado.
+- Caso opte por alterar os atributos para nullables (permitindo que não sejam solicitados logo no construtor primário),
+  você precisará garantir que a classe não entre em estado inconsistente. Nesse caso, você pode utilizar uma
+  derivação do Builder Pattern, o [Step Builder Pattern](https://java-design-patterns.com/patterns/step-builder).
 
 ---
+
 ### Singleton
 
-#### Problema
-
-Singletons são classes que possuem apenas uma única instância.
-
-#### Solução
-
-Podemos solucionar este problema utilizando os "objects", [veja um pouco mais
-sobre eles](https://kotlinlang.org/docs/object-declarations.html#object-declarations-overview)
+Kotlin adiciona o [object](https://kotlinlang.org/docs/object-declarations.html#object-declarations-overview), um novo
+tipo que substitui os Singletons comuns:
 
 ```kotlin
 
@@ -112,17 +112,11 @@ object SingletonExample {
 ```
 
 ---
+
 ### Prototype
 
-#### Problema
-
-Você gostaria de copiar objetos alterando atributos específicos. Ex:
-Example(10, 10, 10) -> ExampleCopia(10, 11, 10).
-
-#### Solução
-
-Uma forma simples de chegar a esse resultado é utilizar o método ".copy" integrado
-nas "data class".
+Kotlin introduz nas Data Class o método: ".copy()". Sua função é copiar um objeto, mas também é possível alterar
+atributos nesse processo.
 
 ````kotlin
 
@@ -138,12 +132,14 @@ val exampleCopy = example.copy(
 
 ````
 
-obs: Note que este método só está disponível para "data class".
+Limitações:
 
+- Até o momento, esse método só está disponível para "data class"
 
 :::danger em desenvolvimento
 
 Structural Patterns
+
 - decorator
 - adapter
 
