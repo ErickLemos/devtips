@@ -20,7 +20,7 @@ Será o caminho mais curto e fácil que pode optar.
 
 :::tip exemplo - Java 9 e instruções PAUSE
 
-Java 9 foi a primeira versão a receber o [JEP 285](https://openjdk.org/jeps/285), que visa resolver melhorar o polling
+Java 9 foi a primeira versão a receber o [JEP 285](https://openjdk.org/jeps/285), que visa melhorar o polling
 ativo dos threads, cenário onde um thread bloqueia um recurso e as outras threads ficam esperando sua vez, levando essas
 mesmas threads realizar uma pesquisa continua para verificar se a sua vez chegou. O problema é que essa pesquisa acaba
 consumindo recursos de CPU e energia.
@@ -37,7 +37,47 @@ permitindo então que a JVM a invocasse diretamente.
 
 ## Context Switch e seu impacto na performance
 
+Um thread precisa ser vinculado a uma CPU, mas esse vínculo não dura para sempre, tendo a possibilidade de ser enviado 
+para outra CPU. Esse processo é chamado de Context Switch, e é um grande inimigo de aplicativos performáticos.
 
+Aqui alguns motivos:
+
+- Toda vez que um context switch ocorre o thread precisa ser salvo e restaurado na nova CPU em que foi agendado, esse 
+processo por si só não é de graça, ele envolve a manipulação de estruturas de dados compartilhadas entre SO e JVM.
+
+
+- Além do custo de troca de CPU, há também a invalidação de algumas camadas de cache, tornando a execução inicial mais lenta
+por conta da enxurrada de falhas que as consultas de cache sofrerá. 
+
+- Esse processo é tão problemático que os sistemas operacionais possuem um tempo mínimo que um thread fica vinculado a um
+  CPU na tentativa de compensar os danos que o context switch causa. Mas o próprio tempo mínimo pode se tornar uma armadilha
+  em um cenário onde há vários threads brigando por tempo da CPU. 
+
+- Não bastando a queda, vem o coice! Quando as vulnerabilidades Meltdown e Spectre foram corrigidas, foi também anunciado
+  que as CPUs perderiam uma certa quantidade considerável de poder computacional. Adivinha quem é o culpado? Isso! 
+  Infelizmente a correção afetou diretamente o processo de context switch, tornando-o ainda mais pesado! 
+  [Veja mais detalhes](https://www.techrepublic.com/article/spectre-and-meltdown-explained-a-comprehensive-guide-for-professionals/).
+
+Compreender o evento do context switch é de extrema importância quando estamos trabalhando em ambientes com muitas threads,
+paralelismo e concorrência.
+
+E é claro, podemos verificar a quantidade de context switch ocorrendo no nosso sistema utilizando:
+```shell
+vmstat 1
+```
+
+:::tip custo exato
+
+Tomando como base o livro Java Concurrency in Practice (lançado em 2006), um context switch custa em média cinco a dez
+mil ciclos da CPU.
+
+:::
+
+:::tip O truque da LMAX
+
+Lidar tão bem com o context switch é um dos principais truques que estão por baixo do LMAX Disruptor.
+
+:::
 
 ---
 
