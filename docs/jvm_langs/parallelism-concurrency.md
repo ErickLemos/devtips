@@ -18,9 +18,9 @@ void main() throws InterruptedException {
 
 :::tip Daemon por padrão
 
-Virtual Threads são daemons por padrão, isso significa que a JVM não irá esperar sua conclusão, podendo ser encerrados
-abruptamente. No exemplo anterior utilizei o "join()" para esperar sua conclusão e a mensagem ser exibido, caso contrário
-seria possível que a aplicação fosse encerrada antes disso.
+Virtual Threads são daemons por padrão (utilizar o método "setDaemon" não terá efeito algum), isso significa que a JVM 
+não irá esperar sua conclusão, podendo ser encerrados abruptamente. No exemplo anterior utilizei o "join()" para esperar 
+sua conclusão e a mensagem ser exibido, caso contrário seria possível que a aplicação fosse encerrada antes disso.
 
 :::
 
@@ -53,7 +53,7 @@ System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "4");
 ```
 
 ---
-### Virtual Threads - defifindo tamanho do thread pool padrão
+## Virtual Threads - defifindo tamanho do thread pool padrão
 
 Podemos alterar o tamanho padrão do thread pool do virtual thread, para isso utilizamos a opção:
 ```shell
