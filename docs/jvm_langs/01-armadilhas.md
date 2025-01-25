@@ -37,16 +37,18 @@ permitindo então que a JVM a invocasse diretamente.
 
 ## Context Switch e seu impacto na performance
 
-Um thread precisa ser vinculado a uma CPU, mas esse vínculo não dura para sempre, tendo a possibilidade de ser enviado 
-para outra CPU. Esse processo é chamado de Context Switch, e é um grande inimigo de aplicativos performáticos.
+Um thread precisa ser vinculado a uma CPU, mas esse vínculo não é permanente, podendo ser transferido para outra CPU
+quando necessário (ação essa que o S.O é responsável). 
+Esse processo é chamado de Context Switch, e você constantemente ouvirá sobre ele como algo ruim apesar de estar envolvido
+no mecanismo de distribuição de carga.
 
-Aqui alguns motivos:
+Aqui alguns motivos dessa má fama:
 
 - Toda vez que um context switch ocorre o thread precisa ser salvo e restaurado na nova CPU em que foi agendado, esse 
-processo por si só não é de graça, ele envolve a manipulação de estruturas de dados compartilhadas entre SO e JVM.
+processo por si só não é de graça.
 
 
-- Além do custo de troca de CPU, há também a invalidação de algumas camadas de cache, tornando a execução inicial mais lenta
+- Além do custo da troca de CPU, há também a invalidação de algumas camadas de cache, tornando a execução inicial mais lenta
 por conta da enxurrada de falhas que as consultas de cache sofrerá. 
 
 - Esse processo é tão problemático que os sistemas operacionais possuem um tempo mínimo que um thread fica vinculado a um
