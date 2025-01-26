@@ -53,7 +53,7 @@ System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "4");
 ```
 
 ---
-## Virtual Threads - defifindo tamanho do thread pool padrão
+## Virtual Threads - definindo tamanho do thread pool padrão
 
 Podemos alterar o tamanho padrão do thread pool do virtual thread, para isso utilizamos a opção:
 ```shell
