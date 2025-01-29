@@ -103,6 +103,21 @@ utilize ferramentas como o Java Mission Control.
 
 ---
 
+## Thread dump via jcmd
+
+Há algumas formas de realizar, dentre as mais simples temos a via jcmd:
+```shell
+ jcmd ID_DO_PROCESSO Thread.dump_to_file -format=json threaddump.json 
+```
+
+:::tip
+
+Você pode conseguir o id do processo utilizando o comando "jps".
+
+:::
+
+---
+
 ## WildCard imports e Sugar Syntax
 
 Um assunto que divide opiniões no ecossistema Java, veja o seguinte trecho:
