@@ -82,6 +82,27 @@ Lidar bem com o context switch é um dos principais truques que estão por baixo
 
 ---
 
+## JPS e Jconsole - vendo processos Java existentes 
+
+Podemos listar os processos da JVM existentes utilizando:
+```shell
+jps
+```
+
+Podemos obter um pouco mais de detalhes sobre eles utilizando:
+```shell
+jconsole
+```
+
+:::info alternativas melhores
+
+Jps e jconsole são ferramentas básicas para uso diário, caso queira um nível maior de informações sobre os processos Java
+utilize ferramentas como o Java Mission Control.
+
+:::
+
+---
+
 ## WildCard imports e Sugar Syntax
 
 Um assunto que divide opiniões no ecossistema Java, veja o seguinte trecho:
