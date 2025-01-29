@@ -41,7 +41,7 @@ do Stephane ser excelente, ele não é o suficiente para passar, não cobre todo
 :::tip PACIÊNCIA
 
 Fora a questão técnica, esteja preparado para uma prova de paciência. Todas as questões são exageradamente grandes
-e as respostas não ficam atrás disso.
+e as respostas não ficam atrás.
 
 :::
 
@@ -54,10 +54,10 @@ com muitas integrações malucas e um problema no meio. Seu trabalho é solucion
   
 :::tip LEIA TUDO
 
-Para a grande maioria das questões, haverá várias alternativas "corretas", mas há a mais correta. No mundo real,
-elas podem ser implementadas e funcionarão, porém, serão menos eficientes para os requisitos apresentados na questão
-(caso os requisitos não sejam explicitamente ditos, siga o Well Architected).
-Tome cuidado com essas questões, leia todas as respostas.
+Para a grande maioria das questões haverá várias alternativas "corretas", mas há a mais correta.
+No mundo real, elas podem ser implementadas e funcionarão, porém, serão menos eficientes para os requisitos apresentados
+na questão(caso os requisitos não sejam explicitamente ditos, siga o Well Architected). Tome cuidado com essas questões,
+leia todas as respostas.
 
 :::
 
