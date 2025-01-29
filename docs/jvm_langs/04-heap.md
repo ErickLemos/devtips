@@ -9,8 +9,8 @@ Java Memory Heap é um dos subsistemas gerenciados pela JVM, sua função princi
 ## Definindo o tamanho de heap
 
 Quando não definimos explicitamente as configurações que a JVM deve seguir, ela fará sozinha, esse processo é chamado de
-[Java Ergonomics](https://docs.oracle.com/en/java/javase/22/gctuning/ergonomics.html). Veja como será definido o uso de
-mémoria por padrão:
+[Java Ergonomics](https://docs.oracle.com/en/java/javase/22/gctuning/ergonomics.html).
+Veja o que diz a documentação sobre os valores definidos para o uso de mémoria:
 
 ```text
 - Initial heap size of 1/64 of physical memory 
@@ -18,7 +18,8 @@ mémoria por padrão:
 ```
 
 Isso é bastante prejudicial em um ambiente conteinerizado, já que não iriamos utilizar todo o recurso que liberamos para
-o container. Então, para remediar esse problema, usamos os seguintes parâmetros:
+o container.
+Mas podemos sobrescrever esses valores utilizando:
 
 ```shell
 # primeiro modo - estático:
@@ -42,11 +43,10 @@ mínimo do heap, mas sim o tamanho máximo para heaps inferiores a 200Mb (estran
 
 ## Habilitando NUMA
 
-Em resumo, Numa é uma tecnologia que visa reduzir a latência do acesso da CPU à mémoria.
-Felizmente, Java possui suporte a essa tecnologia e podemos tirar proveito para conseguir mais velocidade para nossas
-aplicações.
+Em resumo, NUMA é uma tecnologia que visa reduzir a latência do acesso da CPU à mémoria.
+Felizmente, e Java possui suporte a essa tecnologia.
 
-Antes de habilitarmos o NUMA, precisamos verificar se a maquina atual possui suporte:
+Antes de habilitarmos o NUMA, precisamos verificar se a maquina atual (linux) possui suporte:
 
 ```shell
 numactl --hardware
@@ -64,25 +64,25 @@ node   0
   0:  10 
 ```
 
-:::tip preciso instalar o numactl?
-
-Não, a grande maioria das distribuições linux já vem com o numactl incluso.
-
-:::
-
 Então você pode habilitar o NUMA com a opção:
 
 ```shell
 -XX:+UseNUMA
 ```
 
+:::warning calma lá
+
+Não há milagres aqui, dependendo da aplicação você pode ter o efeito contrário ao habilitar o NUMA.
+Verifique o ajuste utilizando testes de desempenho.
+
+:::
+
 ---
 
 ## Deduplicação de objetos string
 
-A deduplicação é uma feature da JVM que evita o armazenamento de objetos String iguais, assim, reduzindo o uso de
-mémoria
-da sua aplicação.
+A deduplicação é uma feature da JVM que evita o armazenamento de objetos String iguais, reduzindo o uso de mémoria da 
+aplicação.
 
 Você pode habilitar a deduplicação de string utilizando a opção:
 
@@ -90,7 +90,7 @@ Você pode habilitar a deduplicação de string utilizando a opção:
 -XX:+UseStringDeduplication
 ```
 
-:::warning
+:::warning MÉMORIA VS CPU
 
 Habilitar a deduplicação irá diminuir o uso de mémoria da sua aplicação, em contrapartida, irá aumentar o uso de CPU.
 
@@ -100,9 +100,8 @@ Habilitar a deduplicação irá diminuir o uso de mémoria da sua aplicação, e
 
 ## Memória virtual e física - AlwaysPreTouch
 
-A JVM aloca o heap na memória virtual em vez da memória física, então, gradualmente alocará as paginas na memória
-física. Podemos alterar esse comportamento forçando o Java a alocar o heap diretamente na memória física, para isso
-utilizamos a opção:
+A JVM aloca inicialmente o heap na memória virtual, então gradualmente moverá as paginas para a memória física.
+Podemos alterar esse comportamento forçando o Java a alocar o heap diretamente na memória física:
 
 ```shell
 -XX:+AlwaysPreTouch
@@ -111,9 +110,9 @@ utilizamos a opção:
 :::danger melhoria de desempenho em troca de tempo de inicialização
 
 Utilizar o parâmetro "AlwaysPreTouch" irá melhorar o desempenho da sua aplicação, em contrapartida, o tempo de
-inicialização
-pode ser severamente afetado. Um bom uso para esse parâmetro é utilizar ele em testes de estresse, onde antecipadamente,
-logo na inicialização, replicamos o cenário produtivo onde a JVM já alocou todo o heap na memória física.
+inicialização pode ser severamente afetado.
+Um bom uso para esse parâmetro é utilizá-lo em testes de estresse, onde logo na inicialização, 
+replicamos o cenário em produção em que a JVM já alocou todo o heap na memória física.
 
 :::
 

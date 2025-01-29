@@ -5,6 +5,12 @@ published: false
 
 # Paralelismo e concorrência 
 
+:::danger em desenvolvimento
+
+Esta página está em desenvolvimento
+
+:::
+
 ## Virtual Threads - formas básicas de utilização
 
 ```java

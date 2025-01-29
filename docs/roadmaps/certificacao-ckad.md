@@ -11,7 +11,7 @@ date: 22-10-2024
 
 Não é uma prova difícil, apesar de afirmarem que sim. O conteúdo geral da prova não vai além do que temos dentro dos 
 simulados da Killer.sh. O tempo também não é um problema, se estiver bem preparado você pode terminar com tempo suficiente 
-para revisar todas as questões novamente (ou a maioria). Por exemplo, consegui finalizá-la com 60 minutos (a prova tem duas horas).
+para revisar todas as questões novamente (ou a maioria).
 
 ### Materiais que utilizei
 
@@ -38,16 +38,16 @@ Você ganhará duas tentativas ao comprar a prova. Recomendo realizar os simulad
 
 :::tip Saiba navegar pela documentação
 
-É permitido acessar a documentação no momento da prova. Será um diferencial se já tiver experiência com a mesma, principalmente
-como navegar, algumas páginas podem ser confusas a primeira vista.
+É permitido acessar a documentação no momento da prova.
+Será um diferencial se já tiver experiência com ela, principalmente como navegar e encontrar as paginas certas.
 
 :::
 
 :::tip Evite usar a documentação
 
-Como diria filosófo Relâmpago McQueen: "veloz como um foguete"! Você deve fazer tudo o mais rápido possível, evite ficar
-passeando na documentação sem necessidade, busque decorar a maior quantidade de soluções possíveis, ex: como criar probes,
-como definir e configurar security context, como usar um valor espécifico de um secret manager, etc.
+Você deve fazer tudo o mais rápido possível, evite ficar passeando na documentação sem necessidade, busque decorar a 
+maior quantidade de soluções possíveis, ex: como criar probes, como definir e configurar security context, como usar um 
+valor espécifico de um secret manager, etc.
 
 :::
 

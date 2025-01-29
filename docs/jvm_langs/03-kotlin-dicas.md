@@ -109,8 +109,8 @@ method(valor) { print... } <-- Call Suffix
 
 ```
 
-Essas são as "call suffix", também conhecidas como "trailing lambda". Kotlin permite tal syntax quando o ultímo
-parâmetro de um método for um lambda, veja um exemplo:
+Essas são as "call suffix" ou "trailing lambda".
+Você consegue reproduzir esse modelo colocando o ultímo parâmetro de um método como um lambda:
 
 ```kotlin
 fun method(valor: String, function: (String) -> Unit) {
@@ -147,42 +147,6 @@ Note que:
 - não criei nenhuma nova classe, todos eles são apenas formas extras de chamar o objeto String. Esse recurso pode ser
   bastante utíl para criação de DSLs.
 
-## Closure functions
-
-Dentro do paradigma orientado objetos armazenamos o estado dentro do objeto.
-E no paradigma funcional? Podemos armazenar em funções? Sim! Bizarro, mas sim!
-
-Essas são as closures, veja um exemplo:
-
-```kotlin
-
-fun counter(): () -> Int {
-    var i = 0
-    return { i++ }
-}
-
-fun main() {
-    val counterVal = counter()
-    println(counterVal())
-    println(counterVal())
-    println(counterVal())
-    println(counterVal())
-}
-
-```
-
-```text
-
-# SAIDA
-# 0
-# 1
-# 2
-# 3
-
-```
-
-- Desde que você mantenha a referência da função "counter" (counterVal) o estado será mantido.
-
 ---
 :::danger em desenvolvimento
 
@@ -197,5 +161,6 @@ fun main() {
 - extensions
 - varargs
 - inline functions
+- closure functions
 
 :::
