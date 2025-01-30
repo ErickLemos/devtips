@@ -82,6 +82,42 @@ Lidar bem com o context switch é um dos principais truques que estão por baixo
 
 ---
 
+## JPS e Jconsole - vendo processos Java existentes 
+
+Podemos listar os processos da JVM existentes utilizando:
+```shell
+jps
+```
+
+Podemos obter um pouco mais de detalhes sobre eles utilizando:
+```shell
+jconsole
+```
+
+:::info alternativas melhores
+
+Jps e jconsole são ferramentas básicas para uso diário, caso queira um nível maior de informações sobre os processos Java
+utilize ferramentas como o Java Mission Control.
+
+:::
+
+---
+
+## Thread dump via jcmd
+
+Há algumas formas de realizar, dentre as mais simples temos a via jcmd:
+```shell
+ jcmd ID_DO_PROCESSO Thread.dump_to_file -format=json threaddump.json 
+```
+
+:::tip
+
+Você pode conseguir o id do processo utilizando o comando "jps".
+
+:::
+
+---
+
 ## WildCard imports e Sugar Syntax
 
 Um assunto que divide opiniões no ecossistema Java, veja o seguinte trecho:
