@@ -161,6 +161,15 @@ O método de importação pode variar de acordo com sua IDE:
 
 :::
 
+---
+## Anotações informativas
+
+- @Immutable - para informar que o objeto é imutável
+- @ThreadSafe - para informar que o objeto é thread safe
+- @NotThreadSafe - para informar que o objeto não é thread safe
+- @Deprecated - para informar que algo está depreciado.
+- @FunctionalInterface - para informar que é uma interface funcional.
+
 ## Curiosidades
 
 :::tip motivo do nome bytecode
