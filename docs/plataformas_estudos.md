@@ -38,6 +38,7 @@ Como se trata de uma plataforma aberta, a qualidade vai variar bastante de autor
 - [Gradle/DPE University](https://dpeuniversity.gradle.com/app) - plataforma oficial do gradle.
 - [MongoDB Academy](https://learn.mongodb.com/) - plataforma oficial do MongoDB.
 - [DataCamp](https://www.datacamp.com/) (Gratis/Paga) - excelente plataforma de ensino de ciência de dados.
+- [NewRelic Academy](https://learn.newrelic.com/) - plataforma oficial da NewRelic (possui certificação básica gratuita).
 
 ## Site úteis
 
