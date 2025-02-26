@@ -48,6 +48,7 @@ Como se trata de uma plataforma aberta, a qualidade vai variar bastante de autor
 
 - [SantaFe Institute - Complexity Explorer](https://www.complexityexplorer.org/) - cursos sobre complexidade, uma área de pesquisa voltada 
 a compreensão dos "sistemas complexos".
+- [Wolfram U](https://www.wolfram.com/wolfram-u/) - cursos sobre várias áreas.
 
 ## Plataformas que não recomendo
 
