@@ -74,7 +74,7 @@ apenas altere o valor e durma bem as próximas noites.
 ## Configurando o Dockerfile
 
 Vou utilizar a [documentação oficial do spring sobre imagens docker](https://docs.spring.io/spring-boot/reference/packaging/container-images/dockerfiles.html#packaging.container-images.dockerfiles.cds) para configurar nosso Dockerfile com o cache CDS(Class 
-Data Sharing) habilito, isso vai ajudar a termos mais desempenho na inicialização da aplicação.
+Data Sharing) habilitado, isso vai ajudar a termos mais desempenho na inicialização da aplicação.
 
 ## Configurando o Kubernetes
 
