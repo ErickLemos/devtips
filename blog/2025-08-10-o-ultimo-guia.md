@@ -27,7 +27,7 @@ Também estarei utilizando as seguintes ferramentas:
 - JMC (Java Mission Control)
 - Grafana K6 (para testes de carga)
 
-## Criação e configurando da nossa aplicação
+## Criação e configuração da nossa aplicação
 
 Para criar a aplicação utilizarei o [Spring Start/Initializr](https://start.spring.io/). A aplicação contém as seguintes
 configurações:
