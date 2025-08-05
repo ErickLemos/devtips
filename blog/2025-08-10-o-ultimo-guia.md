@@ -168,3 +168,5 @@ readinessProbe:
 ```
 
 ## Configurando a JVM
+## Testando a AzulJDK e seu coletor C4
+## Testando o modo nativo
