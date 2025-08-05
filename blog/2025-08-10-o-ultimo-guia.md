@@ -131,6 +131,17 @@ Temos um ganho médio de mais ou menos 58% nesses casos.
 
 :::
 
+:::warning EXPERIMENTO: CDS + Lazy inicialization 
+
+Também testei como funciona o lazy mode do spring (spring.main.lazy-initialization=true), porém o resultado não mudou
+muito, girando em torno de 906ms para inicializar completamente (chegar no estado READY). Sem CDS e com lazy ele chegou 
+a 1.405s.
+
+Na teoria esse modo deveria melhorar considerávelmente a inicialização da aplicação, mas nos meus testes essa mudança não
+foi notada. Voltarei a analisar com mais profundidade este ponto.
+
+:::
+
 ## Configurando o Kubernetes
 
 ## Configurando a JVM
