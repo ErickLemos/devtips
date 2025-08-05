@@ -144,4 +144,27 @@ foi notada. Voltarei a analisar com mais profundidade este ponto.
 
 ## Configurando o Kubernetes
 
+### Configurando probes: liveness e readiness
+
+Como dito anteriormente, separamos os pobres em dois endpoints: readiness e liveness. Mas agora precisamos fazer com que
+o Kubernetes os identifique. Para isso vamos adicionar os seguintes probes do arquivo .yaml da nossa aplicação:
+```yaml
+livenessProbe:                                   
+  httpGet:                                       
+    port: 8080                                   
+    path: "/actuator/health/liveness"            
+  initialDelaySeconds: 1                         
+  failureThreshold: 3                            
+  periodSeconds: 3                               
+  timeoutSeconds: 3                              
+readinessProbe:                                  
+  httpGet:                                       
+    port: 8080                                   
+    path: "/actuator/health/readiness"           
+  initialDelaySeconds: 1                         
+  failureThreshold: 3                            
+  periodSeconds: 1                               
+  timeoutSeconds: 1                              
+```
+
 ## Configurando a JVM
