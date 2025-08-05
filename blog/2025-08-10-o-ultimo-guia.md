@@ -167,7 +167,17 @@ readinessProbe:
   timeoutSeconds: 1                              
 ```
 
-## Configurando a JVM
+## Configurando a JVM e otimizando a aplicação
+### Configurando ambiente de benchmark
+### Otimizando o uso de memoria
+### Utilizando NUMA
+### Otimizando o coletor de lixo e fine-tuning
+### Otimizando a serialização com Jackson Afterburner
+### Spring com e sem virtual threads
+### Spring com e sem Callable Dispatch
+### Testando a otimização de latência com HTTP/2
+
 ## Testando a AzulJDK e seu coletor C4
 ## Testando a AzulJDK Prime
 ## Testando o modo nativo
+### Otimizando ainda mais com o PGO
