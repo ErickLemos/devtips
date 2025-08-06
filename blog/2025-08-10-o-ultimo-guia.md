@@ -218,13 +218,6 @@ não resultou em nenhuma mudança significativa no resultado final, nem em colet
 
 :::
 
-### Experimentos falhos
-
-Esses foram alguns experimentos que não funcionaram tão bem nesse teste (talvez funcione para você):
-- definir o NewRatio=1, teoricamente isso deveria funcionar bem, mas neste exemplo não houve diferença alguma na solução com ou sem.
-- alterar o servidor para jetty ou undertown, teoricamente aqui também deveria sofrer um bom aumento, mas na pratico isso não mudou nada.
-- Utilizar o Jackson BlackBird para melhorar a performance do processo de serialização (a aplicação manteve o mesmo resultado).
-
 ### Otimizando a serialização com Jackson Afterburner
 
 Jackson esconde alguns segredos (e eu não entendo o pq), adiciona o blackbird no projeto, descemos o tempo de conclusão de
@@ -268,3 +261,14 @@ class ObjectMapperConfigCustomizer: Jackson2ObjectMapperBuilderCustomizer {
 ## Testando o modo nativo
 
 ### Otimizando ainda mais com o PGO
+
+### Experimentos falhos
+
+Esses foram alguns experimentos que não funcionaram tão bem nesse teste (talvez funcione para você):
+- definir o NewRatio=1, teoricamente isso deveria funcionar bem, mas neste exemplo não houve diferença alguma na solução com ou sem.
+- alterar o servidor para jetty ou undertown, teoricamente aqui também deveria sofrer um bom aumento, mas na pratico isso não mudou nada.
+- Utilizar o Jackson BlackBird para melhorar a performance do processo de serialização (a aplicação manteve o mesmo resultado).
+- Alterar o -XX:MaxGCPauseTimeMillis=MILISEGUNDOS entre 100ms e 300ms, não houve mudança significativa no resultado final e nem na latência das requisições.
+- Aumentar o tamanho do ForkJoin Pool do Spring (virtual threads) para 5 e para 10, não houve mudança nenhuma, apenas mal utilização dos recursos e alguns bloqueio: Monitor Class	Total Blocked Time	Maximum Blocked Time	Average Blocked Time	Std Dev Blocked Time	Distinct Threads	Count	Distinct Addresses
+  org.apache.coyote.AbstractProtocol$RecycledProcessors
+- Utilizar o Jlink para criação de um JVM minificada. Não houve grande diferença no desempenho final de inicialização.
