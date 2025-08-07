@@ -38,8 +38,8 @@ configurações:
 - Kotlin e Gradle Kotlin (O tutorial não se prende a linguagem, com Java o fluxo é o mesmo).
 - Spring Boot versão: 3.5.4.
 - Java 21 (localmente estarei utilizando o vendor Azul JDK).
-- Dependências do Spring: DevTools, Configuration processor, Actuator, Web, Prometheus (apenas uma preferência minha),
-  Validation e Data MongoDB.
+- Dependências do Spring: DevTools, Configuration processor, Actuator, Web, Prometheus (apenas uma preferência minha) e
+  Validation.
 
 ### Configurando os probes: liveness e readiness
 
@@ -55,6 +55,26 @@ Agora temos os novos probes para utilizarmos no kubernetes:
 
 - readiness: /actuator/health/readiness
 - liveness: /actuator/health/liveness
+
+Podemos utilizá-los no kubernetes da seguinte forma:
+```yaml
+livenessProbe:
+  httpGet:
+    port: 8080
+    path: "/actuator/health/liveness"
+  initialDelaySeconds: 1
+  failureThreshold: 3
+  periodSeconds: 3
+  timeoutSeconds: 3
+readinessProbe:
+  httpGet:
+    port: 8080
+    path: "/actuator/health/readiness"
+  initialDelaySeconds: 1
+  failureThreshold: 3
+  periodSeconds: 1
+  timeoutSeconds: 1                              
+```
 
 ### Modo de desligamento (shutdown)
 
@@ -90,25 +110,28 @@ management.endpoints.web.exposure.include=health,info,prometheus
 
 ## Configurando o Dockerfile com o Class Data Sharing
 
-Vou utilizar
-a [documentação oficial do spring sobre imagens docker](https://docs.spring.io/spring-boot/reference/packaging/container-images/dockerfiles.html#packaging.container-images.dockerfiles.cds)
-para configurar nosso Dockerfile com o cache CDS(Class
-Data Sharing) habilitado, isso vai ajudar a termos mais desempenho na inicialização da aplicação. O resultado fica
-mais ou menos assim:
+Vou utilizar a [documentação oficial do spring sobre imagens docker](https://docs.spring.io/spring-boot/reference/packaging/container-images/dockerfiles.html#packaging.container-images.dockerfiles.cds)para configurar nosso Dockerfile com o cache CDS(Class
+Data Sharing) habilitado, isso vai ajudar a termos mais desempenho na inicialização da aplicação. O resultado fica mais ou menos assim:
 
 ```dockerfile
 FROM gradle AS builder
 WORKDIR /builder
+
+COPY build.gradle.kts settings.gradle.kts ./
+COPY gradle ./gradle
+RUN gradle dependencies --no-daemon
+
 COPY . .
 RUN gradle build --no-daemon
 
-FROM bellsoft/liberica-openjre-debian:24-cds AS builder-cds
+FROM bellsoft/liberica-runtime-container:jdk-all-21-cds-musl AS builder-cds
 WORKDIR /builder
 COPY --from=builder /builder/build/libs/ultimoguia-1.0.jar application.jar
 RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted
 
-FROM bellsoft/liberica-openjre-debian:24-cds
+FROM bellsoft/liberica-runtime-container:jre-21-cds-musl
 WORKDIR /application
+EXPOSE 8080
 
 COPY --from=builder-cds /builder/extracted/dependencies/ ./
 COPY --from=builder-cds /builder/extracted/spring-boot-loader/ ./
@@ -116,7 +139,11 @@ COPY --from=builder-cds /builder/extracted/snapshot-dependencies/ ./
 COPY --from=builder-cds /builder/extracted/application/ ./
 
 RUN java -XX:ArchiveClassesAtExit=application.jsa -Dspring.context.exit=onRefresh -jar application.jar
-ENTRYPOINT ["java", "-XX:SharedArchiveFile=application.jsa", "-jar", "application.jar"]
+ENTRYPOINT [ \
+    "java", \
+    "-jar", \
+    "application.jar" \
+]
 ```
 
 :::info BENCHMARK: com e sem CDS
@@ -142,32 +169,6 @@ não
 foi notada. Voltarei a analisar com mais profundidade este ponto.
 
 :::
-
-## Configurando o Kubernetes
-
-### Configurando probes: liveness e readiness
-
-Como dito anteriormente, separamos os pobres em dois endpoints: readiness e liveness. Mas agora precisamos fazer com que
-o Kubernetes os identifique. Para isso vamos adicionar os seguintes probes do arquivo .yaml da nossa aplicação:
-
-```yaml
-livenessProbe:
-  httpGet:
-    port: 8080
-    path: "/actuator/health/liveness"
-  initialDelaySeconds: 1
-  failureThreshold: 3
-  periodSeconds: 3
-  timeoutSeconds: 3
-readinessProbe:
-  httpGet:
-    port: 8080
-    path: "/actuator/health/readiness"
-  initialDelaySeconds: 1
-  failureThreshold: 3
-  periodSeconds: 1
-  timeoutSeconds: 1                              
-```
 
 ## Configuções básicas da aplicação e JVM
 
