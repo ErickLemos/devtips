@@ -242,33 +242,27 @@ class ObjectMapperConfigCustomizer: Jackson2ObjectMapperBuilderCustomizer {
 }
 ````
 
-### Utilizando NUMA
+## Experimentando alternativas:
 
-### Utilizando o HugePages
+- AzulJDK Prime: queda de desempenho, o resultado final ficou em 00m02.2s. Houve também um aumento considerável de uso de
+  memoria (bateu 1GB que uso total, o nosso teste base até o momento estava em cerca de 400MB).
+![teste001](./imgs/memoria-teste-base.png)
+![teste001](./imgs/memoria-teste-azulprime.png)
 
-### Spring com e sem Callable Dispatch
+- Spring Webflux: aumento de desempenho, o teste foi concluido em 00m01.6sm, sempre mantendo a média de iterações superiores a
+  60 mil (ultimo teste apresentou 61258 mil iterações), antes a aplicação estava entre 56 a 58 mil.
+- Spring Native MVC: em andamento...
+- Spring Native Webflux: em andamento...
 
-### Testando a otimização de latência com HTTP/2
-
-### Testando outros servidores, bye bye Tomcat
-
-### Criando nossa propria JVM com Jlink
-
-## Testando a AzulJDK e seu coletor C4
-
-## Testando a AzulJDK Prime
-
-## Testando o modo nativo
-
-### Otimizando ainda mais com o PGO
 
 ### Experimentos falhos
 
 Esses foram alguns experimentos que não funcionaram tão bem nesse teste (talvez funcione para você):
-- definir o NewRatio=1, teoricamente isso deveria funcionar bem, mas neste exemplo não houve diferença alguma na solução com ou sem.
-- alterar o servidor para jetty ou undertown, teoricamente aqui também deveria sofrer um bom aumento, mas na pratico isso não mudou nada.
-- Utilizar o Jackson BlackBird para melhorar a performance do processo de serialização (a aplicação manteve o mesmo resultado).
+- definir o -XX:NewRatio=1, teoricamente isso deveria funcionar bem, mas neste exemplo não houve diferença alguma na solução com ou sem.
+- alterar o servidor para jetty ou undertown, teoricamente aqui também deveria sofrer um bom aumento, mas na pratica isso não mudou nada.
 - Alterar o -XX:MaxGCPauseTimeMillis=MILISEGUNDOS entre 100ms e 300ms, não houve mudança significativa no resultado final e nem na latência das requisições.
 - Aumentar o tamanho do ForkJoin Pool do Spring (virtual threads) para 5 e para 10, não houve mudança nenhuma, apenas mal utilização dos recursos e alguns bloqueio: Monitor Class	Total Blocked Time	Maximum Blocked Time	Average Blocked Time	Std Dev Blocked Time	Distinct Threads	Count	Distinct Addresses
   org.apache.coyote.AbstractProtocol$RecycledProcessors
 - Utilizar o Jlink para criação de um JVM minificada. Não houve grande diferença no desempenho final de inicialização.
+- Habilitar o NUMA fez com que a aplicação diminuisse seu desempenho.
+- Utilizar o Callable Async Request junto ao Virtual threads diminuiu o desempenho da aplicação, resultado final: 00m02.5s.
