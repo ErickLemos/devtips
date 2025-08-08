@@ -97,8 +97,6 @@ COPY --from=builder-cds /builder/extracted/application/ ./
 RUN java -XX:ArchiveClassesAtExit=application.jsa -Dspring.context.exit=onRefresh -jar application.jar
 ENTRYPOINT [ \
     "java", \
-    "-XX:+UseG1GC", \
-    "-XX:MaxRAMPercentage=70", \
     "-XX:SharedArchiveFile=application.jsa", \
     "-jar", \
     "application.jar" \
@@ -107,8 +105,7 @@ ENTRYPOINT [ \
 
 :::tip AOT Cache
 
-Caso esteja utilizando Java 24+, dê preferência a utilização do AOT Cache no lugar o CDS, mas também é possível utilizar
-os dois ao mesmo tempo.
+A partir do Java 24+ vamos ter um novo cache, o AOT Cache! Fica de olho nessa próxima alternativa.
 
 :::
 
@@ -121,9 +118,6 @@ Tempo total que a aplicação demora para inicializar totalmente (chegar no esta
 | Primeira   | 1.265s  | 0.803s        | 
 | Segunda    | 1.351s  | 0.859s        | 
 | Terceira   | 1.438s  | 0.723s        | 
-
-
-Temos um ganho médio de mais ou menos 58% nesses casos.
 
 :::
 
