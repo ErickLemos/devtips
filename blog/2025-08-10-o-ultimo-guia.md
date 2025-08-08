@@ -185,43 +185,6 @@ ENTRYPOINT [ \
 
 ## Configurando o Spring
 
-### Configurando healthcheck
-
-Por padrão o Spring configura o seu path de healthcheck de forma mista (/actuator/health), é útil para usos simples,
-porém podemos extrair um pouco mais dessa função habilitandoloc os additional
-probes ([liveness e readiness](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)):
-
-```text
-management.endpoints.web.exposure.include=health,info,prometheus
-management.endpoint.health.probes.enabled=true
-```
-
-Agora temos os novos probes para utilizarmos no kubernetes:
-
-- readiness: /actuator/health/readiness
-- liveness: /actuator/health/liveness
-
-Podemos utilizá-los no kubernetes da seguinte forma:
-
-```yaml
-livenessProbe:
-  httpGet:
-    port: 8080
-    path: "/actuator/health/liveness"
-  initialDelaySeconds: 1
-  failureThreshold: 3
-  periodSeconds: 3
-  timeoutSeconds: 3
-readinessProbe:
-  httpGet:
-    port: 8080
-    path: "/actuator/health/readiness"
-  initialDelaySeconds: 1
-  failureThreshold: 3
-  periodSeconds: 1
-  timeoutSeconds: 1                              
-```
-
 ### Modo de desligamento
 
 Existem duas formas de desligamento: immediate e graceful. Mas o que ocorre em cada um deles?
@@ -276,7 +239,47 @@ não resultou em nenhuma mudança significativa no resultado final, nem em colet
 
 ### Configurando observabilidade
 
+Nosso principal aliada na missão de atingir uma boa observabilidade será o actuator, então já prepara sua dependência:
+````text
+implementation("org.springframework.boot:spring-boot-starter-actuator")
+````
+
+#### healthcheck
+Podemos habilitar o endpoint de healthcheck com a seguinte propriedade:
+```text
+management.endpoints.web.exposure.include=health
+```
+
+E caso esteja utilizando o Kubernetes ou algum mecanismo que utilize os probes [liveness e readiness](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/), podemos habilitar esses
+probes com a propriedade:
+```text
+management.endpoint.health.probes.enabled=true
+```
+
+Agora é só alterar o manifesto do kubernetes para utilizar os probes:
+```yaml
+livenessProbe:
+  httpGet:
+    port: 8080
+    path: "/actuator/health/liveness"
+readinessProbe:
+  httpGet:
+    port: 8080
+    path: "/actuator/health/readiness"                              
+```
+
+```text
+management.endpoints.web.exposure.include=health,info,prometheus
+
+```
+
 #### métricas
+
+:::info
+Utilizarei o Prometheus apenas por preferência, consulte a documentação do Spring Boot para mais detalhes de outras implementações.
+:::
+
+
 
 #### tracing
 
@@ -288,7 +291,7 @@ não resultou em nenhuma mudança significativa no resultado final, nem em colet
 
 ### Otimizando a serialização com Jackson BlackBird
 
-Jackson esconde alguns segredos (e eu não entendo o pq), adiciona o blackbird no projeto, descemos o tempo de conclusão
+Jackson esconde alguns segredos (e eu n[liveness e readiness](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)ão entendo o pq), adiciona o blackbird no projeto, descemos o tempo de conclusão
 de
 1.9s para fixos 1.6s segundos, a taxa de respostas reportadas pelo K6 também são animadoras:
 sem o blackbird: iterações: 53792
