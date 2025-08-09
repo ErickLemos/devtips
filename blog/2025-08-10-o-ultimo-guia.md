@@ -244,6 +244,40 @@ Nosso principal aliada na missão de atingir uma boa observabilidade será o act
 implementation("org.springframework.boot:spring-boot-starter-actuator")
 ````
 
+Eu também configurei os seguintes componentes para nosso ambiente de teste:
+- Otel Collector
+- Prometheus - como servidor de métricas
+- Zipkin - como servidor de tracing
+
+E utilizarei o exporters do micrometer para enviar esses dados diretamente para o Otel Collector.
+
+:::tip Outra alternativa: OpenTelemetry Agent
+
+Utilizar o exporter do micrometer é uma das formas de garantir a comunicação com o Otel Collector, mas você também pode
+optar por utilizar o OpenTelemetry Agent. 
+
+Ele possui suporte nativo ao Actuator/Micrometer, basta adicionar a propriedade no seu ENTRYPOINT:
+
+```text
+-Dotel.instrumentation.micrometer.enabled=true
+```
+
+Que ele automaticamente irá injetar uma implementação da classe MeterRegistry no seu projeto. Nenhuma outra configuração
+será necessária e nem será preciso utilizar dependências "exporters".
+
+:::
+
+Para configurar a aplicação para enviar para o Otel Collector vamos precisar das seguintes dependências:
+```text
+implementation("io.micrometer:micrometer-registry-otlp")
+```
+
+E no arquivo de properties vamos adicionar as seguintes propriedades:
+```text
+management.otlp.metrics.export.url=${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/metrics
+```
+- OTEL_EXPORTER_OTLP_ENDPOINT: url do Otel Collector, no meu caso estarei utilizando o localhost
+
 #### healthcheck
 Podemos habilitar o endpoint de healthcheck com a seguinte propriedade:
 ```text
@@ -268,20 +302,24 @@ readinessProbe:
     path: "/actuator/health/readiness"                              
 ```
 
-```text
-management.endpoints.web.exposure.include=health,info,prometheus
-
-```
-
 #### métricas
 
-:::info
-Utilizarei o Prometheus apenas por preferência, consulte a documentação do Spring Boot para mais detalhes de outras implementações.
-:::
+Por padrão o actuator já exporta uma tonelada de métricas relacionada a aplicações que você pode conferir [aqui](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.supported).
+Você também pode visualizar as métricas sendo consumidas no prometheus acessando a url: http://localhost:9090 (três pontinhos na barra de pesquisa -> explore metrics).
 
+Também podemos criar métricas personalizadas utilizando o MeterRegistry:
+```kotlin
+// realize a injeção do MeterRegistry, algo como:
+@Autowired
+lateinit var meterRegistry: MeterRegistry
 
+// e então a utilize:
+meterRegistry.counter("notas_salvas").increment()
+```
 
 #### tracing
+
+Por padrão o spring já irá exportar o tracing 
 
 #### logs
 
