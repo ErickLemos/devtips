@@ -457,7 +457,8 @@ Em desenvolvimento...
 
 ## Jobs e scheduled tasks
 
-Em desenvolvimento...
+### Quartz
+### Spring Batch
 
 ## Cache
 
@@ -465,11 +466,17 @@ Em desenvolvimento...
 
 ## Comunicação entre serviços
 
-Em desenvolvimento...
+### Wiremock
+### Http Interfaces
 
 ## Resiliência
 
-Em desenvolvimento...
+### Circuit Breaker
+### Bulkhead
+### Rate Limiting
+### Retry
+### Time Limiting e Time Out
+### Fallback
 
 ## Experimentando
 
