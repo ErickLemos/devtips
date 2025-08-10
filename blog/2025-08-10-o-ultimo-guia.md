@@ -59,15 +59,49 @@ processo
 de otimização do JIT. Após a quarta tentativa o comportamento é normalizado e o resultado fica estável, com pouquíssimas
 variações.
 
+## Configurando o gradle
+
+### gradle.properties
+
+Primeiro passo aqui será configurar nossa ferramenta de build. Primeiro passo é criar nosso arquivo de configuração
+**gradle.properties** e nele que vamos adicionar as seguintes propriedades:
+
+```text
+org.gradle.parallel=true
+org.gradle.daemon=true
+org.gradle.caching=true
+org.gradle.configuration-cache=true
+org.gradle.jvmargs=-Xmx2048M
+```
+1. para habilitar o build paralelo.
+2. para habilitar o daemon (útil no desenvolvimento). 
+3. para habilitar o caching.
+4. para habilitar o configuration caching.
+5. para alterar o uso de mémoria (por padrão, 512MB).
+
+### gradle.build
+
+Agora vamos pular para o gradle build:
+
+```kotlin
+tasks.withType<Test>().configureEach {
+    maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    options.isFork = true
+}
+```
+1. habilitar o teste paralelo (recomendo colocar a metade de quantidade de core disponíveis, caso contrário seu pc vai gritar kk).
+2. usar o compilador em um processo separado.
+
 ## Configurando container e a JVM
 
 ### Dockerfile e CDS
 
-Vou utilizar
-a [documentação oficial do spring sobre imagens docker](https://docs.spring.io/spring-boot/reference/packaging/container-images/dockerfiles.html#packaging.container-images.dockerfiles.cds)
-para configurar nosso Dockerfile com o cache CDS(Class
-Data Sharing) habilitado, isso vai ajudar a termos mais desempenho na inicialização da aplicação. O resultado fica mais
-ou menos assim:
+Para a construção do container, vou utilizar o exemplo da [documentação oficial do spring](https://docs.spring.io/spring-boot/reference/packaging/container-images/dockerfiles.html#packaging.container-images.dockerfiles.cds).
+Aqui temos alguns recursos bem interessantes sendo utilizados, como a otimização em camadas para melhorar a eficiência
+do docker e o uso do Class Data Sharing para melhorar o tempo de inicialização da aplicação. O resultado ficou assim:
 
 ```dockerfile
 FROM gradle AS builder
@@ -103,12 +137,6 @@ ENTRYPOINT [ \
 ]
 ```
 
-:::tip AOT Cache
-
-A partir do Java 24+ vamos ter um novo cache, o AOT Cache! Fica de olho nessa próxima alternativa.
-
-:::
-
 :::info BENCHMARK: Class Data Sharing
 
 Tempo total que a aplicação demora para inicializar totalmente (chegar no estado READY):
@@ -121,34 +149,39 @@ Tempo total que a aplicação demora para inicializar totalmente (chegar no esta
 
 :::
 
-:::warning EXPERIMENTO: CDS + Lazy inicialization
+:::tip AOT Cache
 
-Também testei como funciona o lazy mode do spring (spring.main.lazy-initialization=true), porém o resultado não mudou
-muito, girando em torno de 906ms para inicializar. Sem CDS e com lazy ele chegou
-a 1.405s.
-
-Na teoria esse modo deveria melhorar considerávelmente a inicialização da aplicação, mas nos meus testes essa mudança
-não foi notada, muito provavelmente isso ocorre pelo tamanho da minha aplicação de exemplo.
+A partir do Java 24+ teremos novo cache, o AOT Cache! Fica de olho nessa próxima alternativa.
 
 :::
 
-:::warning EXPERIMENTO: JVM minificada com Jlink
+:::tip Lazy Initialization
 
-Utilizar o Jlink para criação de um JVM minificada. Não houve grande diferença no desempenho final de inicialização.
+Você também pode habilitar o modo lazy do spring para carregar os beans de forma preguiçosa, pode ser útil em grandes
+projetos:
+```text
+spring.main.lazy-initialization=true
+```
+
+:::
+
+:::tip JVM minificada com Jlink
+
+Outro recurso muito interessante do Java é a possibilidade de criar uma JVM Minificada utilizando o Jlink.
 
 :::
 
 ### Memória
 
-Por padrão a JVM vai utilizar apenas 2/5 da memoria total disponível, para ambientes containizados isso não é benefico.
-Podemos alterar esse valor com o parametro:
+Em ambientes conteinerizados devemos definir a quantidade de uso da mémoria, caso contrário o processo de [ergonômia do Java](https://docs.oracle.com/en/java/javase/21/gctuning/ergonomics.html)
+irá utilizar apenas 1/4 da memória total disponível. Podemos ajustar utilizando o parâmetro:
 
 ```text
 -XX:MaxRAMPercentage=70
 ```
 
-resultado:
 ```dockerfile
+# Dockerfile
 ENTRYPOINT [ \
     "java", \
     "-XX:MaxRAMPercentage=70", \
@@ -160,7 +193,8 @@ ENTRYPOINT [ \
 
 ### Coletor de lixo
 
-Vamos dar uma olhada em como cada coletor de lixo sai:
+Outro ponto de atenção é o coletor de lixo, nem sempre o coletor que será selecionado automáticamente é o melhor para
+nossa aplicação, veja como cada um se saiu no teste de carga na aplicação:
 
 |             | Tempo total (reqs) | Quantidade de coletas | Duração média de coletas | Tempo total em coletas |
 |-------------|--------------------|-----------------------|--------------------------|------------------------|
@@ -168,11 +202,11 @@ Vamos dar uma olhada em como cada coletor de lixo sai:
 | Parallel GC | 00m01.9s           | 252                   | 1,033ms                  | 260,314ms              |
 | G1GC        | 00m01.9s           | 137                   | 1,688ms                  | 231,283ms              |
 
-Como já era de se esperar, G1GC se deu muito melhor nos testes do que os demais, por esse motivo, vou dar continuidade
-utilizando-o.
+Como já era de se esperar, G1GC saiu na frente dos demais. Também temos outros coletores como ZGC, Shenandoah e o C4 da 
+Azul. Porém, vou desconsiderar para esta aplicação por conta das suas especifidades de uso, fica para um experimento futuro.
 
-resultado:
 ```dockerfile
+# Dockerfile
 ENTRYPOINT [ \
     "java", \
     "-XX:+UseG1GC", \
@@ -187,16 +221,15 @@ ENTRYPOINT [ \
 
 ### Modo de desligamento
 
-Existem duas formas de desligamento: immediate e graceful. Mas o que ocorre em cada um deles?
+O spring possui duas formas de desligamento: immediate e graceful. Mas o que muda entre eles?
 
-- immediate: quando a aplicação recebe o sinal para desligar pelo docker ou kubernetes ela irá desligar-se imediatamente
-  (obviamente), esse comportamento pode ser prejudicial, já que requisições que estariam sendo processadas nesse momento
-  irão ser encerradas.
-- graceful: quando a aplicação receber o sinal para desligar pelo docker ou kubernetes ela primeiro irá parar de receber
-  novas requisições (importante ter os probes liveness/readiness habilitados), termina todos as requisições pendentes
-  e então após isso ela desligar, tendo um comportamento mais resiliente.
+- immediate: quando a aplicação recebe o sinal de solicitação de desligamento (SIGTERM) pelo docker ou kubernetes, ela 
+  irá desligar-se imediatamente. Esse comportamento pode ser prejudicial para requisições que estariam sendo processadas
+  naquele momento.
+- graceful: quando a aplicação recebe o sinal de desligamento, ela, primeiro irá deixar de receber novas requisições (isso
+  será realizado pelo readiness probe), segundo ela terminará todas as requisições pendentes e então, por fim, irá desligar.
 
-Para habilitar o modo graceful, utilize:
+Com isso, fica obvio qual modo nós gostaríamos de ter, certo? Para habilitar o modo graceful, utilize:
 
 ```text
 server.shutdown=graceful
@@ -211,29 +244,24 @@ apenas altere o valor e durma bem as próximas noites.
 
 ### Virtual Threads
 
-Um excelente recurso do Spring Boot 3 são os virtual threads. Há uma boa promessa que eles podem nos ajudar em ambientes
-de grande throughput. No teste atual não houve diferença algum no resultado, mas houve uma quantidade consideravelmente
-menor
-de context switches, muito provavelmente pela forma com que o spring começou a gerenciar os theads, veja só:
-![Example banner](./imgs/threads-sem-virtual-threads.png)
-![Example banner](./imgs/threads-com-virtual-threads.png)
+Um excelente recurso que chegou no Spring Boot 3+ são os **virtual threads**. Além de melhorar o desempenho da aplicação, 
+também temos um melhor aproveitamento do uso dos threads, diminuição de context switches e blocks.
 
-Para conseguir notar a diferença eu aumentei a quantidade de requisições, de 100 mil para um milhão!
+Problemas vistos sem virtual threads:
+![virtual threads problem](./imgs/virtual-threads-001.png)
+![virtual threads problem](./imgs/virtual-threads-002.png)
+![virtual threads problem](./imgs/virtual-threads-004.png)
 
-Novamente temos um quantidade bastante inferior de context switches, e o desempenho entre com e sem os virtual threads
-fica:
-sem - 00m18.8s
-com - 00m18.3s
+Habilitando os virtual threads:
+![virtual threads problem](./imgs/virtual-threads-003.png)
+![virtual threads problem](./imgs/virtual-threads-005.png)
 
-Por conta da diferença dos contexts switches, vou seguir com a esta opção habilitada. Nosso checkpoint até o momento é
-que nossa
-aplicação está processando o teste em cerca de 00m01.9s.
 
-:::warning CALLABLE + Virtual Threads
+:::warning Cuidado: Pinning de CPU
 
-Outra alternativa de paralelização é a utilização do Callable nos Controllers, porém utilizar-lo junto com o virtual
-thread
-não resultou em nenhuma mudança significativa no resultado final, nem em coletas ou qualquer mecanismo interno da JVM.
+Pinning de CPU é um problema que ocorre quando o virtual thread monopoliza o thread de plataforma (carrier). Há algumas 
+causas comuns para esse problema: o uso de synchronized e métodos nativos (JNI). Caso não tenha notado nenhum benéficio 
+ao habilitar os virtual threads, confira se você não está sofrendo com esse problema.
 
 :::
 
@@ -249,12 +277,22 @@ Eu também configurei os seguintes componentes para nosso ambiente de teste:
 - Prometheus - como servidor de métricas
 - Zipkin - como servidor de tracing
 
-E utilizarei o exporters do micrometer para enviar esses dados diretamente para o Otel Collector.
+Utilizarei o exporters do micrometer para enviar esses dados diretamente para o Otel Collector:
+
+```text
+implementation("io.micrometer:micrometer-registry-otlp")
+```
+
+E no arquivo de properties vamos adicionar as seguintes propriedades:
+```text
+management.otlp.metrics.export.url=${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/metrics
+```
+- OTEL_EXPORTER_OTLP_ENDPOINT: url do Otel Collector, no meu caso estarei utilizando o localhost
 
 :::tip Outra alternativa: OpenTelemetry Agent
 
 Utilizar o exporter do micrometer é uma das formas de garantir a comunicação com o Otel Collector, mas você também pode
-optar por utilizar o OpenTelemetry Agent. 
+optar por utilizar o OpenTelemetry Agent.
 
 Ele possui suporte nativo ao Actuator/Micrometer, basta adicionar a propriedade no seu ENTRYPOINT:
 
@@ -266,17 +304,6 @@ Que ele automaticamente irá injetar uma implementação da classe MeterRegistry
 será necessária e nem será preciso utilizar dependências "exporters".
 
 :::
-
-Para configurar a aplicação para enviar para o Otel Collector vamos precisar das seguintes dependências:
-```text
-implementation("io.micrometer:micrometer-registry-otlp")
-```
-
-E no arquivo de properties vamos adicionar as seguintes propriedades:
-```text
-management.otlp.metrics.export.url=${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/metrics
-```
-- OTEL_EXPORTER_OTLP_ENDPOINT: url do Otel Collector, no meu caso estarei utilizando o localhost
 
 #### healthcheck
 Podemos habilitar o endpoint de healthcheck com a seguinte propriedade:
@@ -319,13 +346,70 @@ meterRegistry.counter("notas_salvas").increment()
 
 #### tracing
 
-Por padrão o spring já irá exportar o tracing 
+Aqui vamos precisar de mais dependências:
+```text
+implementation("io.micrometer:micrometer-tracing")
+implementation("io.micrometer:micrometer-tracing-bridge-otel")
+implementation("io.opentelemetry:opentelemetry-exporter-otlp")
+```
+
+Nos properties, configuramos a url do tracing:
+```text
+management.otlp.tracing.endpoint=${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/traces
+```
+
+Com esses dois pontos configurados a aplicação já deve exportar os dados para o Otel Collector. Você pode conferir a API
+do [micrometer tracing para mais detalhes](https://docs.micrometer.io/tracing/reference/) (recomendo dar uma olhada na api orientada a aspecto).
 
 #### logs
 
+O primeiro passo para trabalharmos bem com os logs é estrutura-los com algum padrão, o spring possui suporte integrado a
+três:
+- elastic Common Schema (ECS)
+- graylog Extended Log Format (GELF)
+- logstash
+
+Podemos adicionar valores fixos ao logs utilizando:
+```text
+logging.structured.json.add.application=${spring.application.name}
+```
+
+Alguns atributos serão incluídos automaticamente nos logs, exemplo:
+- valores do MDC.
+- traceId, caso utilize o Micrometer.
+- e spanId, caso utilize o Micrometer.
+
 #### auditoria
 
-#### http exchange
+Também temos um mecanismo de [auditoria integrado no spring](https://docs.spring.io/spring-boot/reference/actuator/auditing.html).
+Ele será usado por padrão quando utilizarmos o Spring Data Auditing e o Spring Security.
+
+Mas nesse caso precisamos realizar a implementação da interface AuditEventRepository, caso contrário ele irá utilizar o 
+InMemoryAuditEventRepository que é bastante limitado.
+
+Aqui um exemplo de uma implementação irreal (normalmente você irá desejar armazenar essas informações em um banco de dados):
+```kotlin
+@Component
+class AuditEventRepositoryImpl : AuditEventRepository {
+    companion object {
+        private val log: Logger = LoggerFactory.getLogger(this::class.java)
+    }
+    class NotaAuditEvent(type: String) : AuditEvent("", type, mapOf<String, Any>())
+
+    override fun add(event: AuditEvent) {
+        log.info("Adding audit event: $event")
+    }
+
+    override fun find(
+        principal: String?,
+        after: Instant?,
+        type: String?
+    ): List<AuditEvent?>? {
+        log.info("Finding audit events for principal: $principal, after: $after, type: $type")
+        return listOf(NotaAuditEvent(type ?: "NOTA_SALVA"))
+    }
+}
+```
 
 ### Otimizando a serialização com Jackson BlackBird
 
@@ -353,59 +437,3 @@ class ObjectMapperConfigCustomizer : Jackson2ObjectMapperBuilderCustomizer {
 
 }
 ````
-
-### Customizações
-
-#### Banner
-
-#### Build Info
-
-## Experimentos
-
-### AzulJdk Prime
-
-queda de desempenho, o resultado final ficou em 00m02.2s. Houve também um aumento considerável de uso de
-memoria (bateu 1GB que uso total, o nosso teste base até o momento estava em cerca de 400MB).
-![teste001](./imgs/memoria-teste-base.png)
-![teste001](./imgs/memoria-teste-azulprime.png)
-
-### Spring Webflux
-
-aumento de desempenho, o teste foi concluido em 00m01.6sm, sempre mantendo a média de iterações superiores a
-60 mil (ultimo teste apresentou 61258 mil iterações), antes a aplicação estava entre 56 a 58 mil.
-
-### Experimento falho: aumentar o NewRatio
-
-definir o -XX:NewRatio=1, teoricamente isso deveria funcionar bem, mas neste exemplo não houve diferença alguma na
-solução com ou sem.
-
-### Experimento falho: trocar de embedded server
-
-alterar o servidor para jetty ou undertown, teoricamente aqui também deveria sofrer um bom aumento, mas na pratica isso
-não mudou nada.
-
-### Experimento falho: Alterar o tempo médio de pausa do GC
-
-Alterar o -XX:MaxGCPauseTimeMillis=MILISEGUNDOS entre 100ms e 300ms, não houve mudança significativa no resultado final
-e nem na latência das requisições.
-
-### Experimento falho: Aumentar o ForkJoin Pool do Spring (virtual threads)
-
-Aumentar o tamanho do ForkJoin Pool do Spring (virtual threads) para 5 e para 10, não houve mudança nenhuma, apenas mal
-utilização dos recursos e alguns bloqueio: Monitor Class Total Blocked Time Maximum Blocked Time Average Blocked Time
-Std Dev Blocked Time Distinct Threads Count Distinct Addresses
-org.apache.coyote.AbstractProtocol$RecycledProcessors
-
-### Experimento falho: NUMA
-
-Habilitar o NUMA fez com que a aplicação diminuisse seu desempenho.
-
-### Experimento falho: Callable Async Request
-
-Utilizar o Callable Async Request junto ao Virtual threads diminuiu o desempenho da aplicação, resultado final:
-00m02.5s.
-
-### Experimento: CRAC
-
-- Spring Native MVC: em andamento...
-- Spring Native Webflux: em andamento...
