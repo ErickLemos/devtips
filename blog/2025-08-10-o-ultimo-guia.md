@@ -43,7 +43,7 @@ O código é bem simples, temos um controller que aceita um body e retorna o mes
 No meio dessa operação temos um log que serializa e exibe o valor do body recebido.
 
 Este projeto tem um repositório próprio onde você poderá consultar o resultado e
-testá-lo: [link do repo](http://google.com).
+testá-lo: [link do repo](https://github.com/ErickLemos/ultimoguia).
 
 ### Teste de carga utilizado
 
