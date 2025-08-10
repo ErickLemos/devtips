@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1000
-title: Problemas x soluções
+title: Docker e Kubernetes
 ---
+
 
 ## Aplicação spring não recebendo sinais SIGTERM
 
@@ -12,8 +13,8 @@ CMD ["sh", "-c", "java -jar app.jar"]
 CMD java -jar app.jar
 ```
 Essas duas formas podem apresentar problemas para repassar os sinais SIGTERM.
-Isso acontece porque essas abordagens iniciam um processo de shell como o processo principal (PID 1) do contêiner. 
-A maioria dos shells não repassa sinais do sistema (como o SIGTERM) para seus processos filhos. 
+Isso acontece porque essas abordagens iniciam um processo de shell como o processo principal (PID 1) do contêiner.
+A maioria dos shells não repassa sinais do sistema (como o SIGTERM) para seus processos filhos.
 Como resultado, a aplicação nunca é notificada á desligar.
 
 :::tip solução

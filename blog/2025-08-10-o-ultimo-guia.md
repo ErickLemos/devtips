@@ -440,3 +440,22 @@ class ObjectMapperConfigCustomizer : Jackson2ObjectMapperBuilderCustomizer {
 
 }
 ````
+
+## Configurando banco de dados
+
+Em desenvolvimento...
+
+## Configurando segurança: Oauth2
+
+Em desenvolvimento...
+
+## Configurando filas
+
+Em desenvolvimento...
+
+## Configurando comunicação entre serviços
+
+Em desenvolvimento...
+
+## Resiliência
+
