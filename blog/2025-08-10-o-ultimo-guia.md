@@ -17,8 +17,6 @@ Meu objetivo aqui é:
 - Utilizar os melhores recursos disponíveis do Kubernetes e Docker.
 - Não utilizar nada macabro, nada mirabolante, nada que você não veria em uma aplicação em produção.
 
-Espero que goste!
-
 <!-- truncate -->
 
 ## Projeto
@@ -219,6 +217,10 @@ ENTRYPOINT [ \
     "application.jar" \
 ]
 ```
+
+### Fine-tuning
+
+Em desenvolvimento...
 
 ## Configurando o Spring
 
