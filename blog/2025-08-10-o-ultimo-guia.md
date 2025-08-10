@@ -60,7 +60,7 @@ processo
 de otimização do JIT. Após a quarta tentativa o comportamento é normalizado e o resultado fica estável, com pouquíssimas
 variações.
 
-## Configurando o gradle
+## Gradle
 
 ### gradle.properties
 
@@ -96,7 +96,7 @@ tasks.withType<JavaCompile>().configureEach {
 1. habilitar o teste paralelo (recomendo colocar a metade de quantidade de core disponíveis, caso contrário seu pc vai gritar kk).
 2. usar o compilador em um processo separado.
 
-## Configurando container e a JVM
+## Container e JVM
 
 ### Dockerfile e CDS
 
@@ -270,7 +270,34 @@ ao habilitar os virtual threads, confira se você não está sofrendo com esse p
 
 :::
 
-### Configurando observabilidade
+### Otimizando a serialização com Jackson BlackBird
+
+Jackson esconde alguns segredos (e eu n[liveness e readiness](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)ão entendo o pq), adiciona o blackbird no projeto, descemos o tempo de conclusão
+de
+1.9s para fixos 1.6s segundos, a taxa de respostas reportadas pelo K6 também são animadoras:
+sem o blackbird: iterações: 53792
+com o blackbird: iterações: 58294
+
+gradle.txt
+
+```text
+implementation("com.fasterxml.jackson.module:jackson-module-blackbird")
+```
+
+classe de configuração:
+
+````kotlin
+@Configuration
+class ObjectMapperConfigCustomizer : Jackson2ObjectMapperBuilderCustomizer {
+
+    override fun customize(jacksonObjectMapperBuilder: Jackson2ObjectMapperBuilder) {
+        jacksonObjectMapperBuilder.modulesToInstall(BlackbirdModule())
+    }
+
+}
+````
+
+## Observabilidade
 
 Nosso principal aliada na missão de atingir uma boa observabilidade será o actuator, então já prepara sua dependência:
 ````text
@@ -310,7 +337,7 @@ será necessária e nem será preciso utilizar dependências "exporters".
 
 :::
 
-#### healthcheck
+### healthcheck
 Podemos habilitar o endpoint de healthcheck com a seguinte propriedade:
 ```text
 management.endpoints.web.exposure.include=health
@@ -334,7 +361,7 @@ readinessProbe:
     path: "/actuator/health/readiness"                              
 ```
 
-#### métricas
+### métricas
 
 Por padrão o actuator já exporta uma tonelada de métricas relacionada a aplicações que você pode conferir [aqui](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.supported).
 Você também pode visualizar as métricas sendo consumidas no prometheus acessando a url: http://localhost:9090 (três pontinhos na barra de pesquisa -> explore metrics).
@@ -349,7 +376,7 @@ lateinit var meterRegistry: MeterRegistry
 meterRegistry.counter("notas_salvas").increment()
 ```
 
-#### tracing
+### tracing
 
 Aqui vamos precisar de mais dependências:
 ```text
@@ -366,7 +393,7 @@ management.otlp.tracing.endpoint=${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:
 Com esses dois pontos configurados a aplicação já deve exportar os dados para o Otel Collector. Você pode conferir a API
 do [micrometer tracing para mais detalhes](https://docs.micrometer.io/tracing/reference/) (recomendo dar uma olhada na api orientada a aspecto).
 
-#### logs
+### logs
 
 O primeiro passo para trabalharmos bem com os logs é estrutura-los com algum padrão, o spring possui suporte integrado a
 três:
@@ -384,7 +411,7 @@ Alguns atributos serão incluídos automaticamente nos logs, exemplo:
 - traceId, caso utilize o Micrometer.
 - e spanId, caso utilize o Micrometer.
 
-#### auditoria
+### auditoria
 
 Também temos um mecanismo de [auditoria integrado no spring](https://docs.spring.io/spring-boot/reference/actuator/auditing.html).
 Ele será usado por padrão quando utilizarmos o Spring Data Auditing e o Spring Security.
@@ -416,54 +443,27 @@ class AuditEventRepositoryImpl : AuditEventRepository {
 }
 ```
 
-### Otimizando a serialização com Jackson BlackBird
-
-Jackson esconde alguns segredos (e eu n[liveness e readiness](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)ão entendo o pq), adiciona o blackbird no projeto, descemos o tempo de conclusão
-de
-1.9s para fixos 1.6s segundos, a taxa de respostas reportadas pelo K6 também são animadoras:
-sem o blackbird: iterações: 53792
-com o blackbird: iterações: 58294
-
-gradle.txt
-
-```text
-implementation("com.fasterxml.jackson.module:jackson-module-blackbird")
-```
-
-classe de configuração:
-
-````kotlin
-@Configuration
-class ObjectMapperConfigCustomizer : Jackson2ObjectMapperBuilderCustomizer {
-
-    override fun customize(jacksonObjectMapperBuilder: Jackson2ObjectMapperBuilder) {
-        jacksonObjectMapperBuilder.modulesToInstall(BlackbirdModule())
-    }
-
-}
-````
-
-## Configurando banco de dados
+## Banco de dados
 
 Em desenvolvimento...
 
-## Configurando segurança: Oauth2
+## Segurança
 
 Em desenvolvimento...
 
-## Configurando filas
+## Filas
 
 Em desenvolvimento...
 
-## Configurando jobs e scheduled tasks
+## Jobs e scheduled tasks
 
 Em desenvolvimento...
 
-## Configurando cache
+## Cache
 
 Em desenvolvimento...
 
-## Configurando comunicação entre serviços
+## Comunicação entre serviços
 
 Em desenvolvimento...
 
