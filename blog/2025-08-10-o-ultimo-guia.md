@@ -18,11 +18,9 @@ O foco deste tutorial é:
 
 <!-- truncate -->
 
-## Pré-requisitos
+## Projeto
 
-Este projeto tem um repositório próprio onde você poderá consultar o resultado e
-testá-lo: [link do repo](http://google.com).
-Também estarei utilizando as seguintes ferramentas:
+### Ferramentas utilizadas
 
 - Intellij IDEA
 - Docker
@@ -30,44 +28,208 @@ Também estarei utilizando as seguintes ferramentas:
 - JMC (Java Mission Control)
 - Grafana K6 (para testes de carga)
 
-## Criação e configuração da nossa aplicação
+### A aplicação
 
 Para criar a aplicação utilizarei o [Spring Start/Initializr](https://start.spring.io/). A aplicação contém as seguintes
 configurações:
 
 - Kotlin e Gradle Kotlin (O tutorial não se prende a linguagem, com Java o fluxo é o mesmo).
 - Spring Boot versão: 3.5.4.
-- Java 21 (localmente estarei utilizando o vendor Azul JDK).
-- Dependências do Spring: DevTools, Configuration processor, Actuator, Web, Prometheus (apenas uma preferência minha),
-  Validation e Data MongoDB.
+- Java 21 LTS.
+- Dependências do Spring: DevTools, Configuration processor, Actuator, Web, Prometheus (apenas uma preferência minha) e
+  Validation.
 
-### Configurando os probes: liveness e readiness
+O código é bem simples, temos um controller que aceita um body e retorna o mesmo objeto alterando o valor do titulo.
+No meio dessa operação temos um log que serializa e exibe o valor do body recebido.
 
-Por padrão o Spring configura o seu path de healthcheck de forma mista (/actuator/health), é útil para usos simples,
-porém podemos extrair um pouco mais dessa função habilitandoloc os additional
-probes ([liveness e readiness](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)):
+Este projeto tem um repositório próprio onde você poderá consultar o resultado e
+testá-lo: [link do repo](http://google.com).
+
+### Teste de carga utilizado
+
+O teste de carga utilizado para medir o desempenho da aplicação consiste em dez rajadas de 100 mil requisições com o
+intervalo de cinco segundos entre cada uma. O objetivo é:
+
+- verificar a capacidade de como cada solução se comporta em um ambiente de estresse.
+- Verificar como o GC se comporta.
+- Verificar como o JIT se comporta.
+
+Podemos notar um padrão ao aplicar esse teste, da primeira a terceira tentativa, a aplicação visivelmente está em
+processo
+de otimização do JIT. Após a quarta tentativa o comportamento é normalizado e o resultado fica estável, com pouquíssimas
+variações.
+
+## Configurando o gradle
+
+### gradle.properties
+
+Primeiro passo aqui será configurar nossa ferramenta de build. Primeiro passo é criar nosso arquivo de configuração
+**gradle.properties** e nele que vamos adicionar as seguintes propriedades:
 
 ```text
-management.endpoint.health.probes.enabled=true
+org.gradle.parallel=true
+org.gradle.daemon=true
+org.gradle.caching=true
+org.gradle.configuration-cache=true
+org.gradle.jvmargs=-Xmx2048M
+```
+1. para habilitar o build paralelo.
+2. para habilitar o daemon (útil no desenvolvimento). 
+3. para habilitar o caching.
+4. para habilitar o configuration caching.
+5. para alterar o uso de mémoria (por padrão, 512MB).
+
+### gradle.build
+
+Agora vamos pular para o gradle build:
+
+```kotlin
+tasks.withType<Test>().configureEach {
+    maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    options.isFork = true
+}
+```
+1. habilitar o teste paralelo (recomendo colocar a metade de quantidade de core disponíveis, caso contrário seu pc vai gritar kk).
+2. usar o compilador em um processo separado.
+
+## Configurando container e a JVM
+
+### Dockerfile e CDS
+
+Para a construção do container, vou utilizar o exemplo da [documentação oficial do spring](https://docs.spring.io/spring-boot/reference/packaging/container-images/dockerfiles.html#packaging.container-images.dockerfiles.cds).
+Aqui temos alguns recursos bem interessantes sendo utilizados, como a otimização em camadas para melhorar a eficiência
+do docker e o uso do Class Data Sharing para melhorar o tempo de inicialização da aplicação. O resultado ficou assim:
+
+```dockerfile
+FROM gradle AS builder
+WORKDIR /builder
+
+COPY build.gradle.kts settings.gradle.kts ./
+COPY gradle ./gradle
+RUN gradle dependencies --no-daemon
+
+COPY . .
+RUN gradle build --no-daemon
+
+FROM bellsoft/liberica-runtime-container:jdk-all-21-cds-musl AS builder-cds
+WORKDIR /builder
+COPY --from=builder /builder/build/libs/ultimoguia-1.0.jar application.jar
+RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted
+
+FROM bellsoft/liberica-runtime-container:jdk-21-cds-musl
+WORKDIR /application
+EXPOSE 8080
+
+COPY --from=builder-cds /builder/extracted/dependencies/ ./
+COPY --from=builder-cds /builder/extracted/spring-boot-loader/ ./
+COPY --from=builder-cds /builder/extracted/snapshot-dependencies/ ./
+COPY --from=builder-cds /builder/extracted/application/ ./
+
+RUN java -XX:ArchiveClassesAtExit=application.jsa -Dspring.context.exit=onRefresh -jar application.jar
+ENTRYPOINT [ \
+    "java", \
+    "-XX:SharedArchiveFile=application.jsa", \
+    "-jar", \
+    "application.jar" \
+]
 ```
 
-Agora temos os novos probes para utilizarmos no kubernetes:
+:::info BENCHMARK: Class Data Sharing
 
-- readiness: /actuator/health/readiness
-- liveness: /actuator/health/liveness
+Tempo total que a aplicação demora para inicializar totalmente (chegar no estado READY):
 
-### Modo de desligamento (shutdown)
+| Tentativas | Java 21 | Java 21 + CDS |
+|------------|---------|---------------|
+| Primeira   | 1.265s  | 0.803s        | 
+| Segunda    | 1.351s  | 0.859s        | 
+| Terceira   | 1.438s  | 0.723s        | 
 
-Existem duas formas de desligamento: immediate e graceful. Mas o que ocorre em cada um deles?
+:::
 
-- immediate: quando a aplicação recebe o sinal para desligar pelo docker ou kubernetes ela irá desligar-se imediatamente
-  (obviamente), esse comportamento pode ser prejudicial, já que requisições que estariam sendo processadas nesse momento
-  irão ser encerradas.
-- graceful: quando a aplicação receber o sinal para desligar pelo docker ou kubernetes ela primeiro irá parar de receber
-  novas requisições (importante ter os probes liveness/readiness habilitados), termina todos as requisições pendentes
-  e então após isso ela desligar, tendo um comportamento mais resiliente.
+:::tip AOT Cache
 
-Para habilitar o modo graceful, utilize:
+A partir do Java 24+ teremos novo cache, o AOT Cache! Fica de olho nessa próxima alternativa.
+
+:::
+
+:::tip Lazy Initialization
+
+Você também pode habilitar o modo lazy do spring para carregar os beans de forma preguiçosa, pode ser útil em grandes
+projetos:
+```text
+spring.main.lazy-initialization=true
+```
+
+:::
+
+:::tip JVM minificada com Jlink
+
+Outro recurso muito interessante do Java é a possibilidade de criar uma JVM Minificada utilizando o Jlink.
+
+:::
+
+### Memória
+
+Em ambientes conteinerizados devemos definir a quantidade de uso da mémoria, caso contrário o processo de [ergonômia do Java](https://docs.oracle.com/en/java/javase/21/gctuning/ergonomics.html)
+irá utilizar apenas 1/4 da memória total disponível. Podemos ajustar utilizando o parâmetro:
+
+```text
+-XX:MaxRAMPercentage=70
+```
+
+```dockerfile
+# Dockerfile
+ENTRYPOINT [ \
+    "java", \
+    "-XX:MaxRAMPercentage=70", \
+    "-XX:SharedArchiveFile=application.jsa", \
+    "-jar", \
+    "application.jar" \
+]
+```
+
+### Coletor de lixo
+
+Outro ponto de atenção é o coletor de lixo, nem sempre o coletor que será selecionado automáticamente é o melhor para
+nossa aplicação, veja como cada um se saiu no teste de carga na aplicação:
+
+|             | Tempo total (reqs) | Quantidade de coletas | Duração média de coletas | Tempo total em coletas |
+|-------------|--------------------|-----------------------|--------------------------|------------------------|
+| Serial GC   | 00m02.6s           | 416                   | 1,090ms                  | 453,498ms              |
+| Parallel GC | 00m01.9s           | 252                   | 1,033ms                  | 260,314ms              |
+| G1GC        | 00m01.9s           | 137                   | 1,688ms                  | 231,283ms              |
+
+Como já era de se esperar, G1GC saiu na frente dos demais. Também temos outros coletores como ZGC, Shenandoah e o C4 da 
+Azul. Porém, vou desconsiderar para esta aplicação por conta das suas especifidades de uso, fica para um experimento futuro.
+
+```dockerfile
+# Dockerfile
+ENTRYPOINT [ \
+    "java", \
+    "-XX:+UseG1GC", \
+    "-XX:MaxRAMPercentage=70", \
+    "-XX:SharedArchiveFile=application.jsa", \
+    "-jar", \
+    "application.jar" \
+]
+```
+
+## Configurando o Spring
+
+### Modo de desligamento
+
+O spring possui duas formas de desligamento: immediate e graceful. Mas o que muda entre eles?
+
+- immediate: quando a aplicação recebe o sinal de solicitação de desligamento (SIGTERM) pelo docker ou kubernetes, ela 
+  irá desligar-se imediatamente. Esse comportamento pode ser prejudicial para requisições que estariam sendo processadas
+  naquele momento.
+- graceful: quando a aplicação recebe o sinal de desligamento, ela, primeiro irá deixar de receber novas requisições (isso
+  será realizado pelo readiness probe), segundo ela terminará todas as requisições pendentes e então, por fim, irá desligar.
+
+Com isso, fica obvio qual modo nós gostaríamos de ter, certo? Para habilitar o modo graceful, utilize:
 
 ```text
 server.shutdown=graceful
@@ -80,107 +242,198 @@ apenas altere o valor e durma bem as próximas noites.
 
 :::
 
-### Configuração básica do prometheus
+### Virtual Threads
 
-Vamos também habilitar alguns endpoints para melhorar a observabilidade da aplicação:
+Um excelente recurso que chegou no Spring Boot 3+ são os **virtual threads**. Além de melhorar o desempenho da aplicação, 
+também temos um melhor aproveitamento do uso dos threads, diminuição de context switches e blocks.
+
+Problemas vistos sem virtual threads:
+![virtual threads problem](./imgs/virtual-threads-001.png)
+![virtual threads problem](./imgs/virtual-threads-002.png)
+![virtual threads problem](./imgs/virtual-threads-004.png)
+
+Habilitando os virtual threads:
+![virtual threads problem](./imgs/virtual-threads-003.png)
+![virtual threads problem](./imgs/virtual-threads-005.png)
+
+
+:::warning Cuidado: Pinning de CPU
+
+Pinning de CPU é um problema que ocorre quando o virtual thread monopoliza o thread de plataforma (carrier). Há algumas 
+causas comuns para esse problema: o uso de synchronized e métodos nativos (JNI). Caso não tenha notado nenhum benéficio 
+ao habilitar os virtual threads, confira se você não está sofrendo com esse problema.
+
+:::
+
+### Configurando observabilidade
+
+Nosso principal aliada na missão de atingir uma boa observabilidade será o actuator, então já prepara sua dependência:
+````text
+implementation("org.springframework.boot:spring-boot-starter-actuator")
+````
+
+Eu também configurei os seguintes componentes para nosso ambiente de teste:
+- Otel Collector
+- Prometheus - como servidor de métricas
+- Zipkin - como servidor de tracing
+
+Utilizarei o exporters do micrometer para enviar esses dados diretamente para o Otel Collector:
 
 ```text
-management.endpoints.web.exposure.include=health,info,prometheus
+implementation("io.micrometer:micrometer-registry-otlp")
 ```
 
-## Configurando o Dockerfile com o Class Data Sharing
+E no arquivo de properties vamos adicionar as seguintes propriedades:
+```text
+management.otlp.metrics.export.url=${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/metrics
+```
+- OTEL_EXPORTER_OTLP_ENDPOINT: url do Otel Collector, no meu caso estarei utilizando o localhost
 
-Vou utilizar
-a [documentação oficial do spring sobre imagens docker](https://docs.spring.io/spring-boot/reference/packaging/container-images/dockerfiles.html#packaging.container-images.dockerfiles.cds)
-para configurar nosso Dockerfile com o cache CDS(Class
-Data Sharing) habilitado, isso vai ajudar a termos mais desempenho na inicialização da aplicação. O resultado fica
-mais ou menos assim:
+:::tip Outra alternativa: OpenTelemetry Agent
 
-```dockerfile
-FROM gradle AS builder
-WORKDIR /builder
-COPY . .
-RUN gradle build --no-daemon
+Utilizar o exporter do micrometer é uma das formas de garantir a comunicação com o Otel Collector, mas você também pode
+optar por utilizar o OpenTelemetry Agent.
 
-FROM bellsoft/liberica-openjre-debian:24-cds AS builder-cds
-WORKDIR /builder
-COPY --from=builder /builder/build/libs/ultimoguia-1.0.jar application.jar
-RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted
+Ele possui suporte nativo ao Actuator/Micrometer, basta adicionar a propriedade no seu ENTRYPOINT:
 
-FROM bellsoft/liberica-openjre-debian:24-cds
-WORKDIR /application
-
-COPY --from=builder-cds /builder/extracted/dependencies/ ./
-COPY --from=builder-cds /builder/extracted/spring-boot-loader/ ./
-COPY --from=builder-cds /builder/extracted/snapshot-dependencies/ ./
-COPY --from=builder-cds /builder/extracted/application/ ./
-
-RUN java -XX:ArchiveClassesAtExit=application.jsa -Dspring.context.exit=onRefresh -jar application.jar
-ENTRYPOINT ["java", "-XX:SharedArchiveFile=application.jsa", "-jar", "application.jar"]
+```text
+-Dotel.instrumentation.micrometer.enabled=true
 ```
 
-:::info BENCHMARK: com e sem CDS
-
-| Tentativas | Sem CDS | Com CDS |
-|------------|---------|---------|
-| Primeira   | 1.265s  | 0.803s  |
-| Segunda    | 1.351s  | 0.859s  |
-| Terceira   | 1.438s  | 0.895s  |
-
-Temos um ganho médio de mais ou menos 58% nesses casos.
+Que ele automaticamente irá injetar uma implementação da classe MeterRegistry no seu projeto. Nenhuma outra configuração
+será necessária e nem será preciso utilizar dependências "exporters".
 
 :::
 
-:::warning EXPERIMENTO: CDS + Lazy inicialization 
+#### healthcheck
+Podemos habilitar o endpoint de healthcheck com a seguinte propriedade:
+```text
+management.endpoints.web.exposure.include=health
+```
 
-Também testei como funciona o lazy mode do spring (spring.main.lazy-initialization=true), porém o resultado não mudou
-muito, girando em torno de 906ms para inicializar completamente (chegar no estado READY). Sem CDS e com lazy ele chegou 
-a 1.405s.
+E caso esteja utilizando o Kubernetes ou algum mecanismo que utilize os probes [liveness e readiness](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/), podemos habilitar esses
+probes com a propriedade:
+```text
+management.endpoint.health.probes.enabled=true
+```
 
-Na teoria esse modo deveria melhorar considerávelmente a inicialização da aplicação, mas nos meus testes essa mudança não
-foi notada. Voltarei a analisar com mais profundidade este ponto.
-
-:::
-
-## Configurando o Kubernetes
-
-### Configurando probes: liveness e readiness
-
-Como dito anteriormente, separamos os pobres em dois endpoints: readiness e liveness. Mas agora precisamos fazer com que
-o Kubernetes os identifique. Para isso vamos adicionar os seguintes probes do arquivo .yaml da nossa aplicação:
+Agora é só alterar o manifesto do kubernetes para utilizar os probes:
 ```yaml
-livenessProbe:                                   
-  httpGet:                                       
-    port: 8080                                   
-    path: "/actuator/health/liveness"            
-  initialDelaySeconds: 1                         
-  failureThreshold: 3                            
-  periodSeconds: 3                               
-  timeoutSeconds: 3                              
-readinessProbe:                                  
-  httpGet:                                       
-    port: 8080                                   
-    path: "/actuator/health/readiness"           
-  initialDelaySeconds: 1                         
-  failureThreshold: 3                            
-  periodSeconds: 1                               
-  timeoutSeconds: 1                              
+livenessProbe:
+  httpGet:
+    port: 8080
+    path: "/actuator/health/liveness"
+readinessProbe:
+  httpGet:
+    port: 8080
+    path: "/actuator/health/readiness"                              
 ```
 
-## Configurando a JVM e otimizando a aplicação
-### Configurando ambiente de benchmark
-### Otimizando o uso de memoria
-### Utilizando NUMA
-### Utilizando o HugePages
-### Otimizando o coletor de lixo e fine-tuning
-### Otimizando a serialização com Jackson Afterburner
-### Spring com e sem virtual threads
-### Spring com e sem Callable Dispatch
-### Testando a otimização de latência com HTTP/2
-### Testando outros servidores, bye bye Tomcat
-### Criando nossa propria JVM com Jlink
+#### métricas
 
-## Testando a AzulJDK e seu coletor C4
-## Testando a AzulJDK Prime
-## Testando o modo nativo
-### Otimizando ainda mais com o PGO
+Por padrão o actuator já exporta uma tonelada de métricas relacionada a aplicações que você pode conferir [aqui](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.supported).
+Você também pode visualizar as métricas sendo consumidas no prometheus acessando a url: http://localhost:9090 (três pontinhos na barra de pesquisa -> explore metrics).
+
+Também podemos criar métricas personalizadas utilizando o MeterRegistry:
+```kotlin
+// realize a injeção do MeterRegistry, algo como:
+@Autowired
+lateinit var meterRegistry: MeterRegistry
+
+// e então a utilize:
+meterRegistry.counter("notas_salvas").increment()
+```
+
+#### tracing
+
+Aqui vamos precisar de mais dependências:
+```text
+implementation("io.micrometer:micrometer-tracing")
+implementation("io.micrometer:micrometer-tracing-bridge-otel")
+implementation("io.opentelemetry:opentelemetry-exporter-otlp")
+```
+
+Nos properties, configuramos a url do tracing:
+```text
+management.otlp.tracing.endpoint=${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/traces
+```
+
+Com esses dois pontos configurados a aplicação já deve exportar os dados para o Otel Collector. Você pode conferir a API
+do [micrometer tracing para mais detalhes](https://docs.micrometer.io/tracing/reference/) (recomendo dar uma olhada na api orientada a aspecto).
+
+#### logs
+
+O primeiro passo para trabalharmos bem com os logs é estrutura-los com algum padrão, o spring possui suporte integrado a
+três:
+- elastic Common Schema (ECS)
+- graylog Extended Log Format (GELF)
+- logstash
+
+Podemos adicionar valores fixos ao logs utilizando:
+```text
+logging.structured.json.add.application=${spring.application.name}
+```
+
+Alguns atributos serão incluídos automaticamente nos logs, exemplo:
+- valores do MDC.
+- traceId, caso utilize o Micrometer.
+- e spanId, caso utilize o Micrometer.
+
+#### auditoria
+
+Também temos um mecanismo de [auditoria integrado no spring](https://docs.spring.io/spring-boot/reference/actuator/auditing.html).
+Ele será usado por padrão quando utilizarmos o Spring Data Auditing e o Spring Security.
+
+Mas nesse caso precisamos realizar a implementação da interface AuditEventRepository, caso contrário ele irá utilizar o 
+InMemoryAuditEventRepository que é bastante limitado.
+
+Aqui um exemplo de uma implementação irreal (normalmente você irá desejar armazenar essas informações em um banco de dados):
+```kotlin
+@Component
+class AuditEventRepositoryImpl : AuditEventRepository {
+    companion object {
+        private val log: Logger = LoggerFactory.getLogger(this::class.java)
+    }
+    class NotaAuditEvent(type: String) : AuditEvent("", type, mapOf<String, Any>())
+
+    override fun add(event: AuditEvent) {
+        log.info("Adding audit event: $event")
+    }
+
+    override fun find(
+        principal: String?,
+        after: Instant?,
+        type: String?
+    ): List<AuditEvent?>? {
+        log.info("Finding audit events for principal: $principal, after: $after, type: $type")
+        return listOf(NotaAuditEvent(type ?: "NOTA_SALVA"))
+    }
+}
+```
+
+### Otimizando a serialização com Jackson BlackBird
+
+Jackson esconde alguns segredos (e eu n[liveness e readiness](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)ão entendo o pq), adiciona o blackbird no projeto, descemos o tempo de conclusão
+de
+1.9s para fixos 1.6s segundos, a taxa de respostas reportadas pelo K6 também são animadoras:
+sem o blackbird: iterações: 53792
+com o blackbird: iterações: 58294
+
+gradle.txt
+
+```text
+implementation("com.fasterxml.jackson.module:jackson-module-blackbird")
+```
+
+classe de configuração:
+
+````kotlin
+@Configuration
+class ObjectMapperConfigCustomizer : Jackson2ObjectMapperBuilderCustomizer {
+
+    override fun customize(jacksonObjectMapperBuilder: Jackson2ObjectMapperBuilder) {
+        jacksonObjectMapperBuilder.modulesToInstall(BlackbirdModule())
+    }
+
+}
+````
