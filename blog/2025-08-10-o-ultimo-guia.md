@@ -7,14 +7,15 @@ hide_table_of_contents: false
 
 Cansado de pesquisar em vários lugares, em várias documentações, em vídeos, em becos e vielas, sobre como eu deveria 
 configurar minhas aplicações e, no final, esquecendo de tudo que aprendi, forçando a repetir o mesmo enfadonho caminho,
-tal qual Sisífio.
+tal qual Sisífio. Aqui estou eu, escrevendo esse blog, para ser o local do absoluto conhecimento para dar fim
+a essa lástima.
 
-Por esse motivo eu escrevo esse blog com o objetivo se ser o local absoluto do conhecimento, e aqui o foco é:
-
+Meu objetivo aqui é:
 - Criar uma aplicação Spring MVC que esteja pronta para produção.
 - Utilizar os melhores recursos disponíveis na JVM.
 - Utilizar os melhores recursos disponíveis do Spring.
 - Utilizar os melhores recursos disponíveis do Kubernetes e Docker.
+- Não utilizar nada macabro, nada mirabolante, nada que você não veria em uma aplicação em produção.
 
 Espero que goste!
 
