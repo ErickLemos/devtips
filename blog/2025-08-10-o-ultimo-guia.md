@@ -5,16 +5,18 @@ tags: [ ]
 hide_table_of_contents: false
 ---
 
-Este guia tem como função ser a minha e a sua principal fonte de verdade para futuras configurações que você precise
-trabalhar.
+Cansado de pesquisar em vários lugares, em várias documentações, em vídeos, em becos e vielas, sobre como eu deveria 
+configurar minhas aplicações e, no final, esquecendo de tudo que aprendi, forçando a repetir o mesmo enfadonho caminho,
+tal qual Sisífio.
 
-O foco deste tutorial é:
+Por esse motivo eu escrevo esse blog com o objetivo se ser o local absoluto do conhecimento, e aqui o foco é:
 
-- Utilizar os melhores recursos disponíveis na JVM, em geral(GC Fine-tuning, NUMA, CDS, etc).
+- Criar uma aplicação Spring MVC que esteja pronta para produção.
+- Utilizar os melhores recursos disponíveis na JVM.
 - Utilizar os melhores recursos disponíveis do Spring.
 - Utilizar os melhores recursos disponíveis do Kubernetes e Docker.
-- Ter um bom nível de observabilidade, com foco em ambientes de produção.
-- Ter um bom desempenho (resultado dos testes inclusos).
+
+Espero que goste!
 
 <!-- truncate -->
 
