@@ -40,6 +40,19 @@ configurações:
 - Dependências do Spring: DevTools, Configuration processor, Actuator, Web, Prometheus (apenas uma preferência minha) e
   Validation.
 
+As especificações do container serão:
+- cpu: 2.0 cores (pinados/fixados)
+- memória: 2GB
+
+:::tip SEMPRE ACIMA DE DOIS CORE!
+
+Java se benefícia bastante com o uso de múltiplos cores. Busque aumentar os recursos de um container antes de adicionar 
+um novo container fixo para lidar com o aumento de carga. 
+
+Uma excelente palestra sobre o assunto: [JVM - Bruno Borges](https://www.youtube.com/watch?v=uGt1WKZK__0)
+
+:::
+
 O código é bem simples, temos um controller que aceita um body e retorna o mesmo objeto alterando o valor do titulo.
 No meio dessa operação temos um log que serializa e exibe o valor do body recebido.
 
