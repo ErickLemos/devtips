@@ -46,8 +46,10 @@ As especificações do container serão:
 
 :::tip SEMPRE ACIMA DE DOIS CORE!
 
-Java se benefícia bastante com o uso de múltiplos cores. Busque aumentar os recursos de um container antes de adicionar 
-um novo container fixo para lidar com o aumento de carga. 
+Java se benefícia bastante com o uso de múltiplos cores, é melhor ter dois containers com três core do que seis containers
+cada um com um único core. Busque aumentar os recursos de um container antes de adicionar um novo container fixo para 
+lidar com o aumento de carga. Pense que aumentar a quantidade de container mais está relacionado com problemas de disponibilidade
+do que com problemas de desempenho.
 
 Uma excelente palestra sobre o assunto: [JVM - Bruno Borges](https://www.youtube.com/watch?v=uGt1WKZK__0)
 
