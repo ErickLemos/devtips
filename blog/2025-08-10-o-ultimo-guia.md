@@ -287,11 +287,12 @@ ao habilitar os virtual threads, confira se você não está sofrendo com esse p
 
 ### Otimizando a serialização com Jackson BlackBird
 
-Jackson esconde alguns segredos (e eu n[liveness e readiness](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)ão entendo o pq), adiciona o blackbird no projeto, descemos o tempo de conclusão
-de
-1.9s para fixos 1.6s segundos, a taxa de respostas reportadas pelo K6 também são animadoras:
-sem o blackbird: iterações: 53792
-com o blackbird: iterações: 58294
+Um projeto pouco conhecido é o Jackson BlackBird, que visa reduzir o uso de reflection no processo de serialização,
+com isso aumento o desempenho da aplicação nesses pontos:
+
+| Default      | com BlackBird |
+|--------------|---------------|
+| req ~53000/s | req ~58000/s  |
 
 gradle.txt
 
@@ -299,8 +300,7 @@ gradle.txt
 implementation("com.fasterxml.jackson.module:jackson-module-blackbird")
 ```
 
-classe de configuração:
-
+para configurar, utilizamos:
 ````kotlin
 @Configuration
 class ObjectMapperConfigCustomizer : Jackson2ObjectMapperBuilderCustomizer {
