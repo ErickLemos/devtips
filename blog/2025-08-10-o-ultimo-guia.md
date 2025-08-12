@@ -26,7 +26,7 @@ Meu objetivo aqui é:
 - Intellij IDEA
 - Docker
 - Kubernetes (k3s, distro local)
-- JMC (Java Mission Control)
+- JFR e JMC (Java Mission Control)
 - Grafana K6 (para testes de carga)
 
 ### A aplicação
@@ -44,22 +44,25 @@ As especificações do container serão:
 - cpu: 2.0 cores (pinados/fixados)
 - memória: 2GB
 
-:::tip SEMPRE ACIMA DE DOIS CORE!
+:::tip SEMPRE ACIMA DE DOIS CORES!
 
-Java se benefícia bastante com o uso de múltiplos cores, é melhor ter dois containers com três core do que seis containers
-cada um com um único core. Busque aumentar os recursos de um container antes de adicionar um novo container fixo para 
-lidar com o aumento de carga. Pense que aumentar a quantidade de container mais está relacionado com problemas de disponibilidade
-do que com problemas de desempenho.
+Opte pela escalabilidade vertical antes da horizontal quando estiver usando Java, o aumento de cpu e memória é mais
+beneficial do que adicionar um novo container/pod ao seu sistema. Você pode ver um [excelente estudo feito pelo Bruno 
+Borges sobre esse assunto](https://www.youtube.com/watch?v=uGt1WKZK__0).
 
-Uma excelente palestra sobre o assunto: [JVM - Bruno Borges](https://www.youtube.com/watch?v=uGt1WKZK__0)
+Em um cenário onde temos seis cores, é preferível você separar eles em:
+- dois pods, cada um com três cores.
+- três pods, cada um com dois cores.
+- dois pods, cada um com dois cores (sim, com dois cores a menos).
+Do que separar eles em seis pods, cada um com um core.
+
+Veja também que os melhores cenários são os que possuem dois pods e três cores e três pods com dois cores, qual nós 
+deveríamos escolher? É bem simples, você deseja disponibilidade ou desempenho? Respondendo essa pergunta a escolha fica
+bem simples.
 
 :::
 
-O código é bem simples, temos um controller que aceita um body e retorna o mesmo objeto alterando o valor do titulo.
-No meio dessa operação temos um log que serializa e exibe o valor do body recebido.
-
-Este projeto tem um repositório próprio onde você poderá consultar o resultado e
-testá-lo: [link do repo](https://github.com/ErickLemos/ultimoguia).
+Este projeto tem um [repositório próprio](https://github.com/ErickLemos/ultimoguia).
 
 ### Teste de carga utilizado
 
@@ -173,8 +176,8 @@ A partir do Java 24+ teremos novo cache, o AOT Cache! Fica de olho nessa próxim
 
 :::tip Lazy Initialization
 
-Você também pode habilitar o modo lazy do spring para carregar os beans de forma preguiçosa, pode ser útil em grandes
-projetos:
+Você também pode habilitar o modo lazy do spring para carregar os beans de forma preguiçosa, pode ser útil em
+projetos grandes:
 ```text
 spring.main.lazy-initialization=true
 ```
@@ -458,11 +461,32 @@ class AuditEventRepositoryImpl : AuditEventRepository {
 }
 ```
 
-## Banco de dados
-
-Em desenvolvimento...
-
 ## Segurança
+
+Para segurança utilizarei o framework Oauth2 junto ao Keycloak, para integrar isso a aplicação utilizarei o Spring Security
+Resource Server.
+
+De dependência temos:
+```text
+implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
+```
+
+E para conectar ao keycloak já configurado, usamos o modelo com discovery para simplificar a nossa configuração:
+```text
+spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8081/realms/app
+```
+
+Aqui já temos nossa aplicação validando nossas requisições. Veja também que a nossa implementação do AuditEventRepository
+já começou a reportar os eventos de autenticação realizada com sucesso ou falha.
+
+:::tip OUTROS SERVIÇOS
+
+A grande maioria dos servidores de autorização que temos no mercado disponibilizam a uri com discovery automático, basta
+alterar a uri e sua aplicação já estará utilizando o novo serviço.
+
+:::
+
+## Banco de dados
 
 Em desenvolvimento...
 
