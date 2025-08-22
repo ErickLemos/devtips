@@ -44,7 +44,7 @@ As especificações do container serão:
 - cpu: 2.0 cores (pinados/fixados)
 - memória: 2GB
 
-:::tip SEMPRE ACIMA DE DOIS CORES!
+:::tip CONSIDERE DOIS CORES OU MAIS!
 
 Opte pela escalabilidade vertical antes da horizontal quando estiver usando Java, o aumento de cpu e memória é mais
 beneficial do que adicionar um novo container/pod ao seu sistema. Você pode ver um [excelente estudo feito pelo Bruno 
@@ -488,7 +488,30 @@ alterar a uri e sua aplicação já estará utilizando o novo serviço.
 
 ## Banco de dados
 
-Em desenvolvimento...
+Como banco de dados vou utilizar o MongoDB, isso pode diferenciar bastante no processo de configuração com outras soluções
+como o JPA (principalmente na configuração do pool do HikariCP, felizmente o [autor já mostra como você deve configurá-lo](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing)).
+
+Dependências:
+```text
+implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+```
+
+E para utilizar:
+```kotlin
+@Document(collection = "notas")
+class NotaEntity(
+    @Id val id: ObjectId?,
+    val titulo: String,
+    val conteudo: String,
+    @CreatedBy val criador: String? = null,
+    @LastModifiedBy val modificador: String? = null,
+    @CreatedDate val criadoEm: Instant? = null,
+    @LastModifiedDate val modificadoEm: Instant? = null
+)
+
+// e o repository
+interface NotaRepository: MongoRepository<NotaEntity, ObjectId>
+```
 
 ## Filas
 
@@ -504,8 +527,6 @@ Em desenvolvimento...
 Em desenvolvimento...
 
 ## Comunicação entre serviços
-
-### Wiremock
 ### Http Interfaces
 
 ## Resiliência
@@ -516,6 +537,11 @@ Em desenvolvimento...
 ### Retry
 ### Time Limiting e Time Out
 ### Fallback
+
+## Testes e documentação
+### TestContainers
+### Wiremock
+## Compilação nativa com GraalVM
 
 ## Experimentando
 
